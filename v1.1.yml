@@ -1,14 +1,8 @@
 swagger: '2.0'
 info:
-  title: sis-wag
-  description: Serves sis-data
-  # when changing the version here, make sure to
-  # 1. re-run `make generate` to generate clients and server
-  # 2. commit the new clients, and tag the commit with the version:
-  #    git tag -a vX.Y.Z -m "vX.Y.Z"
-  #    git push origin --tags
-  version: 1.2.0
-  x-npm-package: "@clever/sis-api"
+  title: clever-api
+  description: Serves the CLever API
+  version: 1.1.0
 schemes:
   - https
 produces:
@@ -59,7 +53,8 @@ paths:
   /contacts/{id}:
     get:
       description: Returns a specific student contact
-      operationId: 
+      operationId: getContact
+      parameters:
       - in: path
         name: id
         required: true
@@ -395,7 +390,7 @@ paths:
         type: string
       - in: query
         name: limit
-        type: int
+        type: integer
       - in: query
         name: starting_after
         type: string
@@ -570,7 +565,7 @@ paths:
   /sections:
     get:
       description: Returns a list of sections
-      operationId: getSection
+      operationId: getSections
       parameters:
       - in: query
         name: limit
@@ -1025,6 +1020,8 @@ securityDefinitions:
   oauth:
     type: oauth2
     flow: accessCode
+    authorizationUrl: https://clever.com/oauth/authorize
+    tokenUrl: https://clever.com/oauth/tokens
 
 definitions:
   NotFound:
