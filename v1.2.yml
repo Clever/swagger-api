@@ -50,6 +50,7 @@ paths:
           schema:
             $ref: '#/definitions/StudentContactsResponse'
       summary: Gets a list of student contacts you have access to.
+
   /contacts/{id}:
     get:
       description: Returns a specific student contact
@@ -67,6 +68,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Get only a specific studentcontact's information.
+
   /contacts/{id}/district:
     get:
       description: Returns the district for a student contact
@@ -84,6 +86,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves the district for a contact.
+
   /contacts/{id}/student:
     get:
       description: Returns the student for a student contact
@@ -101,6 +104,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves the student for a contact.
+
   /district_admins:
     get:
       description: Returns a list of district admins
@@ -121,6 +125,7 @@ paths:
           schema:
             $ref: '#/definitions/DistrictAdminsResponse'
       summary: Retrieves all users with admin access to a district.
+
   /district_admins/{id}:
     get:
       description: Returns a specific district admin
@@ -138,16 +143,28 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a district admin
+
   /districts:
     get:
       description: Returns a list of districts
       operationId: getDistricts
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
       responses:
         '200':
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictsResponse'
       summary: Gets a list of districts you have access to.
+
   /districts/{id}:
     get:
       description: Returns a specific district
@@ -219,6 +236,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of schools you have access to for a specific district.
+
   /districts/{id}/sections:
     get:
       description: Returns the sections for a district
@@ -251,6 +269,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of sections you have access to for a specific district.
+
   /districts/{id}/status:
     get:
       description: Returns the status of the district
@@ -268,6 +287,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves the status of a district accessible via your API key.
+
   /districts/{id}/students:
     get:
       description: Returns the students for a district
@@ -300,6 +320,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of students you have access to for a specific district.
+
   /districts/{id}/teachers:
     get:
       description: Returns the teachers for a district
@@ -332,6 +353,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of teachers you have access to for a specific district.
+
   /school_admins:
     get:
       description: Returns a list of school admins
@@ -358,6 +380,7 @@ paths:
           schema:
             $ref: '#/definitions/SchoolAdminsResponse'
       summary: Gets a list of school_admins you have access to.
+
   /school_admins/{id}:
     get:
       description: Returns a specific school admin
@@ -405,6 +428,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves all schools for a school admin.
+
   /schools:
     get:
       description: Returns a list of schools
@@ -431,6 +455,7 @@ paths:
           schema:
             $ref: '#/definitions/SchoolsResponse'
       summary: Gets a list of schools you have access to.
+
   /schools/{id}:
     get:
       description: Returns a specific school
@@ -448,6 +473,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Get only a specific school's information.
+
   /schools/{id}/district:
     get:
       description: Returns the district for a school
@@ -498,6 +524,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of all sections for a specific school.
+
   /schools/{id}/students:
     get:
       description: Returns the students for a school
@@ -530,6 +557,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of all students for a specific school.
+
   /schools/{id}/teachers:
     get:
       description: Returns the teachers for a school
@@ -562,6 +590,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of all teachers for a specific school.
+
   /sections:
     get:
       description: Returns a list of sections
@@ -588,6 +617,7 @@ paths:
           schema:
             $ref: '#/definitions/SectionsResponse'
       summary: Gets a list of sections you have access to.
+
   /sections/{id}:
     get:
       description: Returns a specific section
@@ -640,7 +670,8 @@ paths:
             $ref: '#/definitions/SchoolResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves information about the school for a section
+      summary: Retrieves information about the school for a section.
+
   /sections/{id}/students:
     get:
       description: Returns the students for a section
@@ -667,6 +698,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of all the section's students.
+
   /sections/{id}/teacher:
     get:
       description: Returns the primary teacher for a section
@@ -684,6 +716,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves information about the primary teacher of a section.
+
   /sections/{id}/teachers:
     get:
       description: Returns the teachers for a section
@@ -710,6 +743,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of all the section's teachers.
+
   /students:
     get:
       description: Returns a list of students
@@ -736,6 +770,7 @@ paths:
           schema:
             $ref: '#/definitions/StudentsResponse'
       summary: Gets a list of students you have access to.
+
   /students/{id}:
     get:
       description: Returns a specific student
@@ -756,6 +791,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Get only a specific student's information.
+
   /students/{id}/contacts:
     get:
       description: Returns the contacts for a student
@@ -776,6 +812,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves all contacts for a student.
+
   /students/{id}/district:
     get:
       description: Returns the district for a student
@@ -811,6 +848,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves information about the school for a student
+
   /students/{id}/sections:
     get:
       description: Returns the sections for a student
@@ -837,6 +875,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of all sections for a student.
+
   /students/{id}/teachers:
     get:
       description: Returns the teachers for a student
@@ -863,6 +902,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves all teachers for a student.
+
   /teachers:
     get:
       description: Returns a list of teachers
@@ -889,6 +929,7 @@ paths:
           schema:
             $ref: '#/definitions/TeachersResponse'
       summary: Gets a list of teachers you have access to.
+
   /teachers/{id}:
     get:
       description: Returns a specific teacher
@@ -909,6 +950,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Get only a specific teacher's information.
+
   /teachers/{id}/district:
     get:
       description: Returns the district for a teacher
@@ -989,6 +1031,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieves a list of all sections for a teacher.
+
   /teachers/{id}/students:
     get:
       description: Returns the students for a teacher
@@ -1029,11 +1072,13 @@ definitions:
     properties:
       message:
         type: string
+
   InternalError:
     type: object
     properties:
       message:
         type: string
+
   BadRequest:
     type: object
     properties:
@@ -1474,7 +1519,6 @@ definitions:
         items:
           type: string
 
-  # TOD: Add x-nullable to this and district admins???
   District:
     type: object
     properties:
