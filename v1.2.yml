@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: clever-api
-  description: Serves the CLever API
+  description: Serves the Clever API
   version: 1.2.0
 schemes:
   - https
@@ -1232,10 +1232,6 @@ definitions:
       email:
         type: string
         x-nullable: true
-      emails:
-        type: array
-        items:
-          type: string
       fcat_reading_level:
         type: string
         x-nullable: true
@@ -1304,8 +1300,6 @@ definitions:
       student_number:
         type: string
         x-nullable: true
-      school_name:
-        type: string
 
   StudentContact:
     type: object
@@ -1349,10 +1343,6 @@ definitions:
       email:
         type: string
         x-nullable: true
-      emails:
-        type: array
-        items:
-          type: string
       last_modified:
         type: string
         format: datetime
@@ -1377,8 +1367,6 @@ definitions:
       title:
         type: string
         x-nullable: true
-      school_name:
-        type: string
 
   Section:
     type: object
@@ -1440,10 +1428,6 @@ definitions:
           type: string
       term:
         $ref: "#/definitions/Term"
-      teacher_name:
-        $ref: "#/definitions/Name"
-      school_name:
-        type: string
 
   School:
     type: object
@@ -1514,10 +1498,6 @@ definitions:
       title:
         type: string
         x-nullable: true
-      school_names:
-        type: array
-        items:
-          type: string
 
   District:
     type: object
