@@ -72,7 +72,7 @@ paths:
   /contacts/{id}/district:
     get:
       description: Returns the district for a student contact
-      operationId: getDistrictContacts
+      operationId: getDistrictForStudentContact
       parameters:
       - in: path
         name: id
@@ -1258,9 +1258,6 @@ definitions:
         $ref: "#/definitions/Location"
       name:
         $ref: "#/definitions/Name"
-      native_language:
-        type: string
-        x-nullable: true
       race:
         type: string
         x-nullable: true
