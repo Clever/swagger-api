@@ -1838,7 +1838,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: StudentObject
+            $ref: "#/definitions/StudentObject"
           previous_attributes:
             additionalProperties:
               type: object
@@ -1849,7 +1849,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: StudentObject 
+            $ref: "#/definitions/StudentObject"
 
   students.deleted:
     allOf:
@@ -1857,7 +1857,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: StudentObject 
+            $ref: "#/definitions/StudentObject"
 
   teachers.updated:
     allOf:
@@ -1865,7 +1865,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: TeacherObject
+            $ref: "#/definitions/TeacherObject"
           previous_attributes:
             additionalProperties:
               type: object
@@ -1876,7 +1876,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: TeacherObject 
+            $ref: "#/definitions/TeacherObject" 
 
   teachers.deleted:
     allOf:
@@ -1884,7 +1884,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: TeacherObject
+            $ref: "#/definitions/TeacherObject"
 
   sections.updated:
     allOf:
@@ -1892,7 +1892,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SectionObject
+            $ref: "#/definitions/SectionObject"
           previous_attributes:
             additionalProperties:
               type: object
@@ -1903,7 +1903,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SectionObject 
+            $ref: "#/definitions/SectionObject" 
 
   sections.deleted:
     allOf:
@@ -1911,7 +1911,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SectionObject
+            $ref: "#/definitions/SectionObject"
 
   schools.updated:
     allOf:
@@ -1919,7 +1919,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SchoolObject
+            $ref: "#/definitions/SchoolObject"
           previous_attributes:
             additionalProperties:
               type: object
@@ -1930,7 +1930,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SchoolObject 
+            $ref: "#/definitions/SchoolObject" 
 
   schools.deleted:
     allOf:
@@ -1938,7 +1938,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SchoolObject
+            $ref: "#/definitions/SchoolObject"
 
   schooladmins.updated:
     allOf:
@@ -1946,7 +1946,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SchoolAdminObject
+            $ref: "#/definitions/SchoolAdminObject"
           previous_attributes:
             additionalProperties:
               type: object
@@ -1957,7 +1957,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SchoolAdminObject 
+            $ref: "#/definitions/SchoolAdminObject" 
 
   schooladmins.deleted:
     allOf:
@@ -1965,7 +1965,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SchoolAdminObject
+            $ref: "#/definitions/SchoolAdminObject"
 
   studentcontacts.updated:
     allOf:
@@ -1973,7 +1973,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: StudentContactObject
+            $ref: "#/definitions/StudentContactObject"
           previous_attributes:
             additionalProperties:
               type: object
@@ -1984,7 +1984,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: StudentContactObject 
+            $ref: "#/definitions/StudentContactObject" 
 
   studentcontacts.deleted:
     allOf:
@@ -1992,7 +1992,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: StudentContactObject
+            $ref: "#/definitions/StudentContactObject"
 
   districts.updated:
     allOf:
@@ -2000,7 +2000,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: DistrictObject
+            $ref: "#/definitions/DistrictObject"
           previous_attributes:
             additionalProperties:
               type: object
@@ -2011,7 +2011,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: DistrictObject 
+            $ref: "#/definitions/DistrictObject" 
 
   districts.deleted:
     allOf:
@@ -2019,4 +2019,4 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: DistrictObject
+            $ref: "#/definitions/DistrictObject"
