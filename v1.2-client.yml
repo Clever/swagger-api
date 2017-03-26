@@ -277,6 +277,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Get only a specific school's information.
+
   /schools/{id}/district:
     get:
       description: Returns the district for a school
