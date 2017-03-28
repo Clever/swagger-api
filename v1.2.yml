@@ -223,9 +223,6 @@ paths:
         name: ending_before
         type: string
       - in: query
-        name: count
-        type: boolean
-      - in: query
         name: where
         type: string
       responses:
@@ -255,9 +252,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: count
-        type: boolean
       - in: query
         name: where
         type: string
@@ -307,9 +301,6 @@ paths:
         name: ending_before
         type: string
       - in: query
-        name: count
-        type: boolean
-      - in: query
         name: where
         type: string
       responses:
@@ -340,9 +331,6 @@ paths:
         name: ending_before
         type: string
       - in: query
-        name: count
-        type: boolean
-      - in: query
         name: where
         type: string
       responses:
@@ -371,9 +359,6 @@ paths:
       - in: query
         name: where
         type: string
-      - in: query
-        name: count
-        type: boolean
       responses:
         '200':
           description: OK Response
@@ -446,9 +431,6 @@ paths:
       - in: query
         name: where
         type: string
-      - in: query
-        name: count
-        type: boolean
       responses:
         '200':
           description: OK Response
@@ -511,9 +493,6 @@ paths:
         name: ending_before
         type: string
       - in: query
-        name: count
-        type: boolean
-      - in: query
         name: where
         type: string
       responses:
@@ -543,9 +522,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: count
-        type: boolean
       - in: query
         name: where
         type: string
@@ -577,9 +553,6 @@ paths:
         name: ending_before
         type: string
       - in: query
-        name: count
-        type: boolean
-      - in: query
         name: where
         type: string
       responses:
@@ -608,9 +581,6 @@ paths:
       - in: query
         name: where
         type: string
-      - in: query
-        name: count
-        type: boolean
       responses:
         '200':
           description: OK Response
@@ -761,9 +731,6 @@ paths:
       - in: query
         name: where
         type: string
-      - in: query
-        name: count
-        type: boolean
       responses:
         '200':
           description: OK Response
@@ -920,9 +887,6 @@ paths:
       - in: query
         name: where
         type: string
-      - in: query
-        name: count
-        type: boolean
       responses:
         '200':
           description: OK Response
