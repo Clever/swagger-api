@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
-  title: clever-api
-  description: Serves the Clever API
+  title: Data API
+  description: Serves the Clever Data API
   version: 1.2.0
 schemes:
   - https
@@ -116,8 +116,8 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query    
-        name: show_links   
+      - in: query
+        name: show_links
         type: string
       responses:
         '200':
@@ -174,8 +174,8 @@ paths:
         name: id
         required: true
         type: string
-      - in: query    
-        name: include    
+      - in: query
+        name: include
         type: string
       responses:
         '200':
@@ -375,8 +375,8 @@ paths:
         name: id
         required: true
         type: string
-      - in: query    
-        name: include    
+      - in: query
+        name: include
         type: string
       responses:
         '200':
@@ -1023,182 +1023,6 @@ paths:
           $ref: '#/responses/NotFound'
       summary: Retrieves all students that a teacher has in their sections.
 
-  /events:
-    get:
-      description: Returns a list of events
-      operationId: getEvents
-      parameters:
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves all events
-
-  /school_admins/{id}/events:
-    get:
-      description: Returns a list of events for a school admin
-      operationId: getEventsForSchoolAdmin
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for school_admins.
-
-  /schools/{id}/events:
-    get:
-      description: Returns a list of events for a school
-      operationId: getEventsForSchool
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for schools.
-
-  /sections/{id}/events:
-    get:
-      description: Returns a list of events for a section
-      operationId: getEventsForSection
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for sections.
-
-  /students/{id}/events:
-    get:
-      description: Returns a list of events for a student
-      operationId: getEventsForStudent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for students.
-
-  /teachers/{id}/events:
-    get:
-      description: Returns a list of events for a teacher
-      operationId: getEventsForTeacher
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for teachers.
-
-  /events/{id}:
-    get:
-      description: Returns the specific event
-      operationId: getEvent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves a single event.
-
 securityDefinitions:
   oauth:
     type: oauth2
@@ -1224,7 +1048,7 @@ definitions:
     properties:
       message:
         type: string
-  
+
   StudentsResponse:
     type: object
     properties:
@@ -1327,7 +1151,7 @@ definitions:
     type: object
     properties:
       data:
-        $ref: "#/definitions/DistrictStatus" 
+        $ref: "#/definitions/DistrictStatus"
 
   GradeLevelsResponse:
     type: object
@@ -1745,259 +1569,3 @@ definitions:
       email:
         type: string
         x-nullable: true
-
-  StudentObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/Student"
-
-  TeacherObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/Teacher"
-
-  SchoolAdminObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/SchoolAdmin"
-
-  SectionObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/Section"
-
-  StudentContactObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/StudentContact"
-
-  SchoolObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/School" 
-
-  DistrictObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/District"
-
-  EventsResponse:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: "#/definitions/EventResponse"
-
-  EventResponse:
-    type: object
-    properties:
-      data:
-        $ref: "#/definitions/Event"
-
-  Event:
-    type: object
-    discriminator: type
-    properties:
-      type:
-        type: string
-      id:
-        type: string
-    required:
-    - type
-
-  students.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  students.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentObject"
-
-  students.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentObject"
-
-  teachers.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/TeacherObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  teachers.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/TeacherObject" 
-
-  teachers.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/TeacherObject"
-
-  sections.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SectionObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  sections.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SectionObject" 
-
-  sections.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SectionObject"
-
-  schools.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  schools.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolObject" 
-
-  schools.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolObject"
-
-  schooladmins.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolAdminObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  schooladmins.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolAdminObject" 
-
-  schooladmins.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolAdminObject"
-
-  studentcontacts.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentContactObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  studentcontacts.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentContactObject" 
-
-  studentcontacts.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentContactObject"
-
-  districts.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/DistrictObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  districts.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/DistrictObject" 
-
-  districts.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/DistrictObject"
