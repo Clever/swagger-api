@@ -51,7 +51,6 @@ paths:
             $ref: '#/definitions/EventsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves all events
 
   /school_admins/{id}/events:
     get:
@@ -78,7 +77,6 @@ paths:
             $ref: '#/definitions/EventsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves events for school_admins.
 
   /schools/{id}/events:
     get:
@@ -105,7 +103,6 @@ paths:
             $ref: '#/definitions/EventsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves events for schools.
 
   /sections/{id}/events:
     get:
@@ -132,7 +129,6 @@ paths:
             $ref: '#/definitions/EventsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves events for sections.
 
   /students/{id}/events:
     get:
@@ -159,7 +155,6 @@ paths:
             $ref: '#/definitions/EventsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves events for students.
 
   /teachers/{id}/events:
     get:
@@ -186,7 +181,6 @@ paths:
             $ref: '#/definitions/EventsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves events for teachers.
 
   /events/{id}:
     get:
@@ -204,7 +198,6 @@ paths:
             $ref: '#/definitions/EventResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves a single event.
 
 securityDefinitions:
   oauth:
