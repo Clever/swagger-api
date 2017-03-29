@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
-  title: clever-api
-  description: Serves the Clever API
+  title: Data API
+  description: Serves the Clever Data API
   version: 1.1.0
 schemes:
   - https
@@ -30,122 +30,9 @@ security:
   - oauth: []
 
 paths:
-  /contacts:
-    get:
-      description: Returns a list of student contacts
-      operationId: getContacts
-      parameters:
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/StudentContactsResponse'
-      summary: Gets a list of student contacts you have access to.
-
-  /contacts/{id}:
-    get:
-      description: Returns a specific student contact
-      operationId: getContact
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/StudentContactResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Get only a specific studentcontact's information.
-
-  /contacts/{id}/district:
-    get:
-      description: Returns the district for a student contact
-      operationId: getDistrictForStudentContact
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves the district for a contact.
-
-  /contacts/{id}/student:
-    get:
-      description: Returns the student for a student contact
-      operationId: getStudentForContact
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/StudentResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves the student for a contact.
-
-  /district_admins:
-    get:
-      description: Returns a list of district admins
-      operationId: getDistrictAdmins
-      parameters:
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      - in: query    
-        name: show_links   
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/DistrictAdminsResponse'
-      summary: Retrieves all users with admin access to a district.
-
-  /district_admins/{id}:
-    get:
-      description: Returns a specific district admin
-      operationId: getDistrictAdmin
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/DistrictAdminResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves a district admin
-
   /districts:
     get:
+      tags: ["Districts"]
       description: Returns a list of districts
       operationId: getDistricts
       parameters:
@@ -163,10 +50,10 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictsResponse'
-      summary: Gets a list of districts you have access to.
 
   /districts/{id}:
     get:
+      tags: ["Districts"]
       description: Returns a specific district
       operationId: getDistrict
       parameters:
@@ -174,8 +61,8 @@ paths:
         name: id
         required: true
         type: string
-      - in: query    
-        name: include    
+      - in: query
+        name: include
         type: string
       responses:
         '200':
@@ -184,10 +71,10 @@ paths:
             $ref: '#/definitions/DistrictResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Get only a specific district's information.
 
   /districts/{id}/admins:
     get:
+      tags: ["Districts"]
       description: Returns the admins for a district
       operationId: getAdminsForDistrict
       parameters:
@@ -202,10 +89,10 @@ paths:
             $ref: '#/definitions/DistrictAdminsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves all the users with admin access to a district.
 
   /districts/{id}/schools:
     get:
+      tags: ["Districts"]
       description: Returns the schools for a district
       operationId: getSchoolsForDistrict
       parameters:
@@ -232,10 +119,10 @@ paths:
             $ref: '#/definitions/SchoolsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves a list of schools you have access to for a specific district.
 
   /districts/{id}/sections:
     get:
+      tags: ["Districts"]
       description: Returns the sections for a district
       operationId: getSectionsForDistrict
       parameters:
@@ -262,10 +149,10 @@ paths:
             $ref: '#/definitions/SectionsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves a list of sections you have access to for a specific district.
 
   /districts/{id}/status:
     get:
+      tags: ["Districts"]
       description: Returns the status of the district
       operationId: getDistrictStatus
       parameters:
@@ -280,10 +167,10 @@ paths:
             $ref: '#/definitions/DistrictStatusResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves the status of a district accessible via your API key.
 
   /districts/{id}/students:
     get:
+      tags: ["Districts"]
       description: Returns the students for a district
       operationId: getStudentsForDistrict
       parameters:
@@ -310,10 +197,10 @@ paths:
             $ref: '#/definitions/StudentsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves a list of students you have access to for a specific district.
 
   /districts/{id}/teachers:
     get:
+      tags: ["Districts"]
       description: Returns the teachers for a district
       operationId: getTeachersForDistrict
       parameters:
@@ -340,12 +227,12 @@ paths:
             $ref: '#/definitions/TeachersResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves a list of teachers you have access to for a specific district.
 
-  /school_admins:
+  /teachers:
     get:
-      description: Returns a list of school admins
-      operationId: getSchoolAdmins
+      tags: ["Teachers"]
+      description: Returns a list of teachers
+      operationId: getTeachers
       parameters:
       - in: query
         name: limit
@@ -363,34 +250,88 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolAdminsResponse'
-      summary: Gets a list of school_admins you have access to.
+            $ref: '#/definitions/TeachersResponse'
 
-  /school_admins/{id}:
+  /teachers/{id}:
     get:
-      description: Returns a specific school admin
-      operationId: getSchoolAdmin
+      tags: ["Teachers"]
+      description: Returns a specific teacher
+      operationId: getTeacher
       parameters:
       - in: path
         name: id
         required: true
         type: string
-      - in: query    
-        name: include    
+      - in: query
+        name: include
         type: string
       responses:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolAdminResponse'
+            $ref: '#/definitions/TeacherResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Get only a specific schooladmin's information.
 
-  /school_admins/{id}/schools:
+  /teachers/{id}/district:
     get:
-      description: Returns the schools for a school admin
-      operationId: getSchoolsForSchoolAdmin
+      tags: ["Teachers"]
+      description: Returns the district for a teacher
+      operationId: getDistrictForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /teachers/{id}/grade_levels:
+    get:
+      tags: ["Teachers"]
+      description: Returns the grade levels for sections a teacher teaches
+      operationId: getGradeLevelsForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/GradeLevelsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /teachers/{id}/school:
+    get:
+      tags: ["Teachers"]
+      description: Retrieves school info for a teacher.
+      operationId: getSchoolForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /teachers/{id}/sections:
+    get:
+      tags: ["Teachers"]
+      description: Returns the sections for a teacher
+      operationId: getSectionsForTeacher
       parameters:
       - in: path
         name: id
@@ -409,13 +350,346 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolsResponse'
+            $ref: '#/definitions/SectionsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves all schools for a school admin.
+
+  /teachers/{id}/students:
+    get:
+      tags: ["Teachers"]
+      description: Returns the students for a teacher
+      operationId: getStudentsForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students:
+    get:
+      tags: ["Students"]
+      description: Returns a list of students
+      operationId: getStudents
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      - in: query
+        name: where
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentsResponse'
+
+  /students/{id}:
+    get:
+      tags: ["Students"]
+      description: Returns a specific student
+      operationId: getStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: include
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/contacts:
+    get:
+      tags: ["Students"]
+      description: Returns the contacts for a student
+      operationId: getContactsForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentContactsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/district:
+    get:
+      tags: ["Students"]
+      description: Returns the district for a student
+      operationId: getDistrictForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/school:
+    get:
+      tags: ["Students"]
+      description: Returns the primary school for a student
+      operationId: getSchoolForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/sections:
+    get:
+      tags: ["Students"]
+      description: Returns the sections for a student
+      operationId: getSectionsForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/teachers:
+    get:
+      tags: ["Students"]
+      description: Returns the teachers for a student
+      operationId: getTeachersForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TeachersResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections:
+    get:
+      tags: ["Sections"]
+      description: Returns a list of sections
+      operationId: getSections
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      - in: query
+        name: where
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+
+  /sections/{id}:
+    get:
+      tags: ["Sections"]
+      description: Returns a specific section
+      operationId: getSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/district:
+    get:
+      tags: ["Sections"]
+      description: Returns the district for a section
+      operationId: getDistrictForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/school:
+    get:
+      tags: ["Sections"]
+      description: Returns the school for a section
+      operationId: getSchoolForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/students:
+    get:
+      tags: ["Sections"]
+      description: Returns the students for a section
+      operationId: getStudentsForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/teacher:
+    get:
+      tags: ["Sections"]
+      description: Returns the primary teacher for a section
+      operationId: getTeacherForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TeacherResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/teachers:
+    get:
+      tags: ["Sections"]
+      description: Returns the teachers for a section
+      operationId: getTeachersForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TeachersResponse'
+        '404':
+          $ref: '#/responses/NotFound'
 
   /schools:
     get:
+      tags: ["Schools"]
       description: Returns a list of schools
       operationId: getSchools
       parameters:
@@ -436,10 +710,10 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolsResponse'
-      summary: Gets a list of schools you have access to.
 
   /schools/{id}:
     get:
+      tags: ["Schools"]
       description: Returns a specific school
       operationId: getSchool
       parameters:
@@ -454,10 +728,10 @@ paths:
             $ref: '#/definitions/SchoolResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Get only a specific school's information.
 
   /schools/{id}/district:
     get:
+      tags: ["Schools"]
       description: Returns the district for a school
       operationId: getDistrictForSchool
       parameters:
@@ -472,10 +746,10 @@ paths:
             $ref: '#/definitions/DistrictResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves district information for a school.
 
   /schools/{id}/sections:
     get:
+      tags: ["Schools"]
       description: Returns the sections for a school
       operationId: getSectionsForSchool
       parameters:
@@ -502,10 +776,10 @@ paths:
             $ref: '#/definitions/SectionsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves a list of all sections for a specific school.
 
   /schools/{id}/students:
     get:
+      tags: ["Schools"]
       description: Returns the students for a school
       operationId: getStudentsForSchool
       parameters:
@@ -532,10 +806,10 @@ paths:
             $ref: '#/definitions/StudentsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves a list of all students for a specific school.
 
   /schools/{id}/teachers:
     get:
+      tags: ["Schools"]
       description: Returns the teachers for a school
       operationId: getTeachersForSchool
       parameters:
@@ -562,12 +836,12 @@ paths:
             $ref: '#/definitions/TeachersResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves a list of all teachers for a specific school.
 
-  /sections:
+  /contacts:
     get:
-      description: Returns a list of sections
-      operationId: getSections
+      tags: ["Contacts"]
+      description: Returns a list of student contacts
+      operationId: getContacts
       parameters:
       - in: query
         name: limit
@@ -578,20 +852,17 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: where
-        type: string
       responses:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionsResponse'
-      summary: Gets a list of sections you have access to.
+            $ref: '#/definitions/StudentContactsResponse'
 
-  /sections/{id}:
+  /contacts/{id}:
     get:
-      description: Returns a specific section
-      operationId: getSection
+      tags: ["Contacts"]
+      description: Returns a specific student contact
+      operationId: getContact
       parameters:
       - in: path
         name: id
@@ -601,15 +872,15 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionResponse'
+            $ref: '#/definitions/StudentContactResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Get only a specific section's information.
 
-  /sections/{id}/district:
+  /contacts/{id}/district:
     get:
-      description: Returns the district for a section
-      operationId: getDistrictForSection
+      tags: ["Contacts"]
+      description: Returns the district for a student contact
+      operationId: getDistrictForStudentContact
       parameters:
       - in: path
         name: id
@@ -622,133 +893,16 @@ paths:
             $ref: '#/definitions/DistrictResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves district information for a section.
 
-  /sections/{id}/school:
+  /contacts/{id}/student:
     get:
-      description: Returns the school for a section
-      operationId: getSchoolForSection
+      tags: ["Contacts"]
+      description: Returns the student for a student contact
+      operationId: getStudentForContact
       parameters:
       - in: path
         name: id
         required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/SchoolResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves information about the school for a section.
-
-  /sections/{id}/students:
-    get:
-      description: Returns the students for a section
-      operationId: getStudentsForSection
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/StudentsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves a list of all the section's students.
-
-  /sections/{id}/teacher:
-    get:
-      description: Returns the primary teacher for a section
-      operationId: getTeacherForSection
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/TeacherResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves information about the primary teacher of a section.
-
-  /sections/{id}/teachers:
-    get:
-      description: Returns the teachers for a section
-      operationId: getTeachersForSection
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/TeachersResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves a list of all the section's teachers.
-
-  /students:
-    get:
-      description: Returns a list of students
-      operationId: getStudents
-      parameters:
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      - in: query
-        name: where
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/StudentsResponse'
-      summary: Gets a list of students you have access to.
-
-  /students/{id}:
-    get:
-      description: Returns a specific student
-      operationId: getStudent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: include
         type: string
       responses:
         '200':
@@ -757,123 +911,51 @@ paths:
             $ref: '#/definitions/StudentResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Get only a specific student's information.
 
-  /students/{id}/contacts:
+  /district_admins:
     get:
-      description: Returns the contacts for a student
-      operationId: getContactsForStudent
+      tags: ["District Admins"]
+      description: Returns a list of district admins
+      operationId: getDistrictAdmins
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/StudentContactsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves all contacts for a student.
-
-  /students/{id}/district:
-    get:
-      description: Returns the district for a student
-      operationId: getDistrictForStudent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves district information for a student.
-
-  /students/{id}/school:
-    get:
-      description: Returns the primary school for a student
-      operationId: getSchoolForStudent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/SchoolResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves information about the school for a student
-
-  /students/{id}/sections:
-    get:
-      description: Returns the sections for a student
-      operationId: getSectionsForStudent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
       - in: query
         name: starting_after
         type: string
       - in: query
         name: ending_before
         type: string
+      - in: query
+        name: show_links
+        type: string
       responses:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves a list of all sections for a student.
+            $ref: '#/definitions/DistrictAdminsResponse'
 
-  /students/{id}/teachers:
+  /district_admins/{id}:
     get:
-      description: Returns the teachers for a student
-      operationId: getTeachersForStudent
+      tags: ["District Admins"]
+      description: Returns a specific district admin
+      operationId: getDistrictAdmin
       parameters:
       - in: path
         name: id
         required: true
         type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
       responses:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/TeachersResponse'
+            $ref: '#/definitions/DistrictAdminResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves all teachers for a student.
 
-  /teachers:
+  /school_admins:
     get:
-      description: Returns a list of teachers
-      operationId: getTeachers
+      tags: ["School Admins"]
+      description: Returns a list of school admins
+      operationId: getSchoolAdmins
       parameters:
       - in: query
         name: limit
@@ -891,13 +973,13 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/TeachersResponse'
-      summary: Gets a list of teachers you have access to.
+            $ref: '#/definitions/SchoolAdminsResponse'
 
-  /teachers/{id}:
+  /school_admins/{id}:
     get:
-      description: Returns a specific teacher
-      operationId: getTeacher
+      tags: ["School Admins"]
+      description: Returns a specific school admin
+      operationId: getSchoolAdmin
       parameters:
       - in: path
         name: id
@@ -910,69 +992,15 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/TeacherResponse'
+            $ref: '#/definitions/SchoolAdminResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Get only a specific teacher's information.
 
-  /teachers/{id}/district:
+  /school_admins/{id}/schools:
     get:
-      description: Returns the district for a teacher
-      operationId: getDistrictForTeacher
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves district information for a teacher.
-
-  /teachers/{id}/grade_levels:
-    get:
-      description: Returns the grade levels for sections a teacher teaches
-      operationId: getGradeLevelsForTeacher
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/GradeLevelsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves a list of all grade levels taught by a specific teacher.
-
-  /teachers/{id}/school:
-    get:
-      description: Retrieves school info for a teacher.
-      operationId: getSchoolForTeacher
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/SchoolResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves information about the school for a teacher
-
-  /teachers/{id}/sections:
-    get:
-      description: Returns the sections for a teacher
-      operationId: getSectionsForTeacher
+      tags: ["School Admins"]
+      description: Returns the schools for a school admin
+      operationId: getSchoolsForSchoolAdmin
       parameters:
       - in: path
         name: id
@@ -991,213 +1019,9 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionsResponse'
+            $ref: '#/definitions/SchoolsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieves a list of all sections for a teacher.
-
-  /teachers/{id}/students:
-    get:
-      description: Returns the students for a teacher
-      operationId: getStudentsForTeacher
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/StudentsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves all students that a teacher has in their sections.
-
-  /events:
-    get:
-      description: Returns a list of events
-      operationId: getEvents
-      parameters:
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves all events
-
-  /school_admins/{id}/events:
-    get:
-      description: Returns a list of events for a school admin
-      operationId: getEventsForSchoolAdmin
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for school_admins.
-
-  /schools/{id}/events:
-    get:
-      description: Returns a list of events for a school
-      operationId: getEventsForSchool
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for schools.
-
-  /sections/{id}/events:
-    get:
-      description: Returns a list of events for a section
-      operationId: getEventsForSection
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for sections.
-
-  /students/{id}/events:
-    get:
-      description: Returns a list of events for a student
-      operationId: getEventsForStudent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for students.
-
-  /teachers/{id}/events:
-    get:
-      description: Returns a list of events for a teacher
-      operationId: getEventsForTeacher
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves events for teachers.
-
-  /events/{id}:
-    get:
-      description: Returns the specific event
-      operationId: getEvent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieves a single event.
 
 securityDefinitions:
   oauth:
@@ -1224,7 +1048,7 @@ definitions:
     properties:
       message:
         type: string
-  
+
   StudentsResponse:
     type: object
     properties:
@@ -1327,7 +1151,7 @@ definitions:
     type: object
     properties:
       data:
-        $ref: "#/definitions/DistrictStatus" 
+        $ref: "#/definitions/DistrictStatus"
 
   GradeLevelsResponse:
     type: object
@@ -1728,259 +1552,3 @@ definitions:
       email:
         type: string
         x-nullable: true
-
-  StudentObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/Student"
-
-  TeacherObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/Teacher"
-
-  SchoolAdminObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/SchoolAdmin"
-
-  SectionObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/Section"
-
-  StudentContactObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/StudentContact"
-
-  SchoolObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/School" 
-
-  DistrictObject:
-    type: object
-    properties:
-      object:
-        $ref: "#/definitions/District"
-
-  EventsResponse:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: "#/definitions/EventResponse"
-
-  EventResponse:
-    type: object
-    properties:
-      data:
-        $ref: "#/definitions/Event"
-
-  Event:
-    type: object
-    discriminator: type
-    properties:
-      type:
-        type: string
-      id:
-        type: string
-    required:
-    - type
-
-  students.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  students.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentObject"
-
-  students.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentObject"
-
-  teachers.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/TeacherObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  teachers.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/TeacherObject" 
-
-  teachers.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/TeacherObject"
-
-  sections.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SectionObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  sections.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SectionObject" 
-
-  sections.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SectionObject"
-
-  schools.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  schools.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolObject" 
-
-  schools.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolObject"
-
-  schooladmins.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolAdminObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  schooladmins.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolAdminObject" 
-
-  schooladmins.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/SchoolAdminObject"
-
-  studentcontacts.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentContactObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  studentcontacts.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentContactObject" 
-
-  studentcontacts.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/StudentContactObject"
-
-  districts.updated:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/DistrictObject"
-          previous_attributes:
-            additionalProperties:
-              type: object
-
-  districts.created:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/DistrictObject" 
-
-  districts.deleted:
-    allOf:
-      - $ref: "#/definitions/Event"
-      - type: object
-        properties:
-          data:
-            $ref: "#/definitions/DistrictObject"
