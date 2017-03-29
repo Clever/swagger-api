@@ -32,6 +32,7 @@ security:
 paths:
   /events:
     get:
+      tags: ["Events"]
       description: Returns a list of events
       operationId: getEvents
       parameters:
@@ -52,112 +53,27 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
-  /school_admins/{id}/events:
+  /events/{id}:
     get:
-      description: Returns a list of events for a school admin
-      operationId: getEventsForSchoolAdmin
+      tags: ["Events"]
+      description: Returns the specific event
+      operationId: getEvent
       parameters:
       - in: path
         name: id
         required: true
         type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
       responses:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  /schools/{id}/events:
-    get:
-      description: Returns a list of events for a school
-      operationId: getEventsForSchool
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  /sections/{id}/events:
-    get:
-      description: Returns a list of events for a section
-      operationId: getEventsForSection
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  /students/{id}/events:
-    get:
-      description: Returns a list of events for a student
-      operationId: getEventsForStudent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
+            $ref: '#/definitions/EventResponse'
         '404':
           $ref: '#/responses/NotFound'
 
   /teachers/{id}/events:
     get:
+      tags: ["Record-specific Events"]
       description: Returns a list of events for a teacher
       operationId: getEventsForTeacher
       parameters:
@@ -182,23 +98,114 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
-  /events/{id}:
+  /students/{id}/events:
     get:
-      description: Returns the specific event
-      operationId: getEvent
+      tags: ["Record-specific Events"]
+      description: Returns a list of events for a student
+      operationId: getEventsForStudent
       parameters:
       - in: path
         name: id
         required: true
         type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
       responses:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/EventResponse'
+            $ref: '#/definitions/EventsResponse'
         '404':
           $ref: '#/responses/NotFound'
-      
+
+  /sections/{id}/events:
+    get:
+      tags: ["Record-specific Events"]
+      description: Returns a list of events for a section
+      operationId: getEventsForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/EventsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /schools/{id}/events:
+    get:
+      tags: ["Record-specific Events"]
+      description: Returns a list of events for a school
+      operationId: getEventsForSchool
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/EventsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /school_admins/{id}/events:
+    get:
+      tags: ["Record-specific Events"]
+      description: Returns a list of events for a school admin
+      operationId: getEventsForSchoolAdmin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/EventsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
 securityDefinitions:
   oauth:
     type: oauth2
