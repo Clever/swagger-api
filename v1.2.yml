@@ -1367,9 +1367,6 @@ definitions:
       section_number:
         type: string
         x-nullable: true
-      section_group:
-        type: string
-        x-nullable: true
       sis_id:
         type: string
         x-nullable: true
