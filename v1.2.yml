@@ -10,6 +10,16 @@ produces:
 host: api.clever.com
 basePath: /v1.2
 
+x-samples-languages: [
+    "curl",
+    "node",
+    "ruby",
+    "python",
+    "php",
+    "java",
+    "go"
+  ]
+
 responses:
   BadRequest:
     description: Bad Request
