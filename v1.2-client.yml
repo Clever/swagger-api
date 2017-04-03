@@ -1018,7 +1018,7 @@ definitions:
     properties:
       message:
         type: string
-  
+
   StudentsResponse:
     type: object
     properties:
@@ -1121,7 +1121,7 @@ definitions:
     type: object
     properties:
       data:
-        $ref: "#/definitions/DistrictStatus" 
+        $ref: "#/definitions/DistrictStatus"
 
   GradeLevelsResponse:
     type: object
@@ -1166,9 +1166,6 @@ definitions:
       email:
         type: string
         x-nullable: true
-      fcat_reading_level:
-        type: string
-        x-nullable: true
       frl_status:
         type: string
         x-nullable: true
@@ -1193,27 +1190,6 @@ definitions:
       name:
         $ref: "#/definitions/Name"
       race:
-        type: string
-        x-nullable: true
-      rti_behavior:
-        type: string
-        x-nullable: true
-      rti_communication:
-        type: string
-        x-nullable: true
-      rti_ela:
-        type: string
-        x-nullable: true
-      rti_gifted:
-        type: string
-        x-nullable: true
-      rti_health:
-        type: string
-        x-nullable: true
-      rti_math:
-        type: string
-        x-nullable: true
-      rti_social:
         type: string
         x-nullable: true
       school:
@@ -1335,9 +1311,6 @@ definitions:
       school:
         type: string
       section_number:
-        type: string
-        x-nullable: true
-      section_group:
         type: string
         x-nullable: true
       sis_id:
@@ -1574,7 +1547,7 @@ definitions:
     type: object
     properties:
       object:
-        $ref: "#/definitions/School" 
+        $ref: "#/definitions/School"
 
   DistrictObject:
     type: object
@@ -1625,7 +1598,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: StudentObject 
+            $ref: StudentObject
 
   students.deleted:
     allOf:
@@ -1633,7 +1606,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: StudentObject 
+            $ref: StudentObject
 
   teachers.updated:
     allOf:
@@ -1652,7 +1625,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: TeacherObject 
+            $ref: TeacherObject
 
   teachers.deleted:
     allOf:
@@ -1679,7 +1652,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SectionObject 
+            $ref: SectionObject
 
   sections.deleted:
     allOf:
@@ -1706,7 +1679,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SchoolObject 
+            $ref: SchoolObject
 
   schools.deleted:
     allOf:
@@ -1733,7 +1706,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: SchoolAdminObject 
+            $ref: SchoolAdminObject
 
   schooladmins.deleted:
     allOf:
@@ -1760,7 +1733,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: StudentContactObject 
+            $ref: StudentContactObject
 
   studentcontacts.deleted:
     allOf:
@@ -1787,7 +1760,7 @@ definitions:
       - type: object
         properties:
           data:
-            $ref: DistrictObject 
+            $ref: DistrictObject
 
   districts.deleted:
     allOf:

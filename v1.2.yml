@@ -10,6 +10,16 @@ produces:
 host: api.clever.com
 basePath: /v1.2
 
+x-samples-languages: [
+    "curl",
+    "node",
+    "ruby",
+    "python",
+    "php",
+    "java",
+    "go"
+  ]
+
 responses:
   BadRequest:
     description: Bad Request
@@ -835,7 +845,7 @@ paths:
           schema:
             $ref: '#/definitions/TeachersResponse'
         '404':
-          $ref: '#/responses/NotFound'          
+          $ref: '#/responses/NotFound'
 
   /contacts:
     get:
@@ -1190,16 +1200,7 @@ definitions:
         type: string
         format: datetime
         x-nullable: true
-      ell_status:
-        type: string
-        x-nullable: true
       email:
-        type: string
-        x-nullable: true
-      fcat_reading_level:
-        type: string
-        x-nullable: true
-      frl_status:
         type: string
         x-nullable: true
       gender:
@@ -1211,9 +1212,6 @@ definitions:
       hispanic_ethnicity:
         type: string
         x-nullable: true
-      iep_status:
-        type: string
-        x-nullable: true
       last_modified:
         type: string
         format: datetime
@@ -1223,27 +1221,6 @@ definitions:
       name:
         $ref: "#/definitions/Name"
       race:
-        type: string
-        x-nullable: true
-      rti_behavior:
-        type: string
-        x-nullable: true
-      rti_communication:
-        type: string
-        x-nullable: true
-      rti_ela:
-        type: string
-        x-nullable: true
-      rti_gifted:
-        type: string
-        x-nullable: true
-      rti_health:
-        type: string
-        x-nullable: true
-      rti_math:
-        type: string
-        x-nullable: true
-      rti_social:
         type: string
         x-nullable: true
       school:
@@ -1365,9 +1342,6 @@ definitions:
       school:
         type: string
       section_number:
-        type: string
-        x-nullable: true
-      section_group:
         type: string
         x-nullable: true
       sis_id:
