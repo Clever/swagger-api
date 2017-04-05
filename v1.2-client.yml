@@ -35,6 +35,7 @@ paths:
     get:
       description: Returns a list of student contacts
       operationId: getContacts
+      tags: ["Data"]
       parameters:
       - in: query
         name: limit
@@ -55,6 +56,7 @@ paths:
     get:
       description: Returns a specific student contact
       operationId: getContact
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -72,6 +74,7 @@ paths:
     get:
       description: Returns the district for a student contact
       operationId: getDistrictForStudentContact
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -89,6 +92,7 @@ paths:
     get:
       description: Returns the student for a student contact
       operationId: getStudentForContact
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -106,6 +110,7 @@ paths:
     get:
       description: Returns a list of district admins
       operationId: getDistrictAdmins
+      tags: ["Data"]
       parameters:
       - in: query
         name: starting_after
@@ -123,6 +128,7 @@ paths:
     get:
       description: Returns a specific district admin
       operationId: getDistrictAdmin
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -141,6 +147,7 @@ paths:
     get:
       description: Returns a list of districts
       operationId: getDistricts
+      tags: ["Data"]
       parameters:
       - in: query
         name: limit
@@ -162,6 +169,7 @@ paths:
     get:
       description: Returns a specific district
       operationId: getDistrict
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -180,6 +188,7 @@ paths:
     get:
       description: Returns a list of school admins
       operationId: getSchoolAdmins
+      tags: ["Data"]
       parameters:
       - in: query
         name: limit
@@ -200,6 +209,7 @@ paths:
     get:
       description: Returns a specific school admin
       operationId: getSchoolAdmin
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -218,6 +228,7 @@ paths:
     get:
       description: Returns the schools for a school admin
       operationId: getSchoolsForSchoolAdmin
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -244,6 +255,7 @@ paths:
     get:
       description: Returns a list of schools
       operationId: getSchools
+      tags: ["Data"]
       parameters:
       - in: query
         name: limit
@@ -264,6 +276,7 @@ paths:
     get:
       description: Returns a specific school
       operationId: getSchool
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -282,6 +295,7 @@ paths:
     get:
       description: Returns the district for a school
       operationId: getDistrictForSchool
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -300,6 +314,7 @@ paths:
     get:
       description: Returns the sections for a school
       operationId: getSectionsForSchool
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -326,6 +341,7 @@ paths:
     get:
       description: Returns the students for a school
       operationId: getStudentsForSchool
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -352,6 +368,7 @@ paths:
     get:
       description: Returns the teachers for a school
       operationId: getTeachersForSchool
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -378,6 +395,7 @@ paths:
     get:
       description: Returns a list of sections
       operationId: getSections
+      tags: ["Data"]
       parameters:
       - in: query
         name: limit
@@ -398,6 +416,7 @@ paths:
     get:
       description: Returns a specific section
       operationId: getSection
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -416,6 +435,7 @@ paths:
     get:
       description: Returns the district for a section
       operationId: getDistrictForSection
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -434,6 +454,7 @@ paths:
     get:
       description: Returns the school for a section
       operationId: getSchoolForSection
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -452,6 +473,7 @@ paths:
     get:
       description: Returns the students for a section
       operationId: getStudentsForSection
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -479,6 +501,7 @@ paths:
     get:
       description: Returns the primary teacher for a section
       operationId: getTeacherForSection
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -497,6 +520,7 @@ paths:
     get:
       description: Returns the teachers for a section
       operationId: getTeachersForSection
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -524,6 +548,7 @@ paths:
     get:
       description: Returns a list of students
       operationId: getStudents
+      tags: ["Data"]
       parameters:
       - in: query
         name: limit
@@ -545,6 +570,7 @@ paths:
     get:
       description: Returns a specific student
       operationId: getStudent
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -563,6 +589,7 @@ paths:
     get:
       description: Returns the contacts for a student
       operationId: getContactsForStudent
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -584,6 +611,7 @@ paths:
     get:
       description: Returns the district for a student
       operationId: getDistrictForStudent
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -602,6 +630,7 @@ paths:
     get:
       description: Returns the primary school for a student
       operationId: getSchoolForStudent
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -620,6 +649,7 @@ paths:
     get:
       description: Returns the sections for a student
       operationId: getSectionsForStudent
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -647,6 +677,7 @@ paths:
     get:
       description: Returns the teachers for a student
       operationId: getTeachersForStudent
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -674,6 +705,7 @@ paths:
     get:
       description: Returns a list of teachers
       operationId: getTeachers
+      tags: ["Data"]
       parameters:
       - in: query
         name: limit
@@ -695,6 +727,7 @@ paths:
     get:
       description: Returns a specific teacher
       operationId: getTeacher
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -713,6 +746,7 @@ paths:
     get:
       description: Returns the district for a teacher
       operationId: getDistrictForTeacher
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -731,6 +765,7 @@ paths:
     get:
       description: Returns the grade levels for sections a teacher teaches
       operationId: getGradeLevelsForTeacher
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -749,6 +784,7 @@ paths:
     get:
       description: Retrieves school info for a teacher.
       operationId: getSchoolForTeacher
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -767,6 +803,7 @@ paths:
     get:
       description: Returns the sections for a teacher
       operationId: getSectionsForTeacher
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -794,6 +831,7 @@ paths:
     get:
       description: Returns the students for a teacher
       operationId: getStudentsForTeacher
+      tags: ["Data"]
       parameters:
       - in: path
         name: id
@@ -821,6 +859,7 @@ paths:
     get:
       description: Returns a list of events
       operationId: getEvents
+      tags: ["Events"]
       parameters:
       - in: query
         name: limit
@@ -844,6 +883,7 @@ paths:
     get:
       description: Returns a list of events for a school admin
       operationId: getEventsForSchoolAdmin
+      tags: ["Events"]
       parameters:
       - in: path
         name: id
@@ -871,6 +911,7 @@ paths:
     get:
       description: Returns a list of events for a school
       operationId: getEventsForSchool
+      tags: ["Events"]
       parameters:
       - in: path
         name: id
@@ -898,6 +939,7 @@ paths:
     get:
       description: Returns a list of events for a section
       operationId: getEventsForSection
+      tags: ["Events"]
       parameters:
       - in: path
         name: id
@@ -925,6 +967,7 @@ paths:
     get:
       description: Returns a list of events for a student
       operationId: getEventsForStudent
+      tags: ["Events"]
       parameters:
       - in: path
         name: id
@@ -952,6 +995,7 @@ paths:
     get:
       description: Returns a list of events for a teacher
       operationId: getEventsForTeacher
+      tags: ["Events"]
       parameters:
       - in: path
         name: id
@@ -979,6 +1023,7 @@ paths:
     get:
       description: Returns the specific event
       operationId: getEvent
+      tags: ["Events"]
       parameters:
       - in: path
         name: id
