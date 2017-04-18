@@ -1195,21 +1195,25 @@ definitions:
     properties:
       id:
         type: string
+        x-validation: true
       created:
         type: string
         format: datetime
-        x-nullable: true
+        x-validation: true
       credentials:
         $ref: "#/definitions/Credentials"
       district:
         type: string
+        x-validation: true
       dob:
         type: string
         format: datetime
         x-nullable: true
+        x-validation: true
       ell_status:
         type: string
         x-nullable: true
+        x-validation: true
         enum:
         - "Y"
         - "N"
@@ -1229,9 +1233,11 @@ definitions:
         - ""
       google_apps:
         $ref: "#/definitions/GoogleApps"
+        x-nullable: true
       grade:
         type: string
         x-nullable: true
+        x-validation: true
         enum:
         - "1"
         - "2"
@@ -1259,9 +1265,10 @@ definitions:
       last_modified:
         type: string
         format: datetime
-        x-nullable: true
+        x-validation: true
       location:
         $ref: "#/definitions/Location"
+        x-nullable: true
       name:
         $ref: "#/definitions/Name"
       race:
@@ -1278,13 +1285,14 @@ definitions:
         - ""
       school:
         type: string
+        x-validation: true
       schools:
         type: array
+        x-validation: true
         items:
           type: string
       sis_id:
         type: string
-        x-nullable: true
       state_id:
         type: string
         x-nullable: true
@@ -1297,6 +1305,7 @@ definitions:
     properties:
       id:
         type: string
+        x-validation: true
       district:
         type: string
       email:
@@ -1304,7 +1313,6 @@ definitions:
         x-nullable: true
       name:
         type: string
-        x-nullable: true
       phone:
         type: string
         x-nullable: true
@@ -1316,32 +1324,36 @@ definitions:
         x-nullable: true
       student:
         type: string
+        x-validation: true
       type:
         type: string
-        x-nullable: true
 
   Teacher:
     type: object
     properties:
       id:
         type: string
+        x-validation: true
       created:
         type: string
         format: datetime
-        x-nullable: true
+        x-validation: true
       credentials:
         $ref: "#/definitions/Credentials"
+        x-nullable: true
       district:
         type: string
+        x-validation: true
       email:
         type: string
         x-nullable: true
       google_apps:
         $ref: "#/definitions/GoogleApps"
+        x-nullable: true
       last_modified:
         type: string
         format: datetime
-        x-nullable: true
+        x-validation: true
       name:
         $ref: "#/definitions/Name"
       school:
@@ -1368,6 +1380,7 @@ definitions:
     properties:
       id:
         type: string
+        x-validation: true
       course_description:
         type: string
         x-nullable: true
@@ -1380,12 +1393,14 @@ definitions:
       created:
         type: string
         format: datetime
-        x-nullable: true
+        x-validation: true
       district:
         type: string
+        x-validation: true
       grade:
         type: string
         x-nullable: true
+        x-validation: true
         enum:
         - "1"
         - "2"
@@ -1406,28 +1421,28 @@ definitions:
       last_modified:
         type: string
         format: datetime
-        x-nullable: true
+        x-validation: true
       name:
         type: string
-        x-nullable: true
       period:
         type: string
         x-nullable: true
       school:
         type: string
+        x-validation: true
       section_number:
         type: string
         x-nullable: true
       sis_id:
         type: string
-        x-nullable: true
       students:
         type: array
+        x-validation: true
         items:
           type: string
       subject:
         type: string
-        x-nullable: true
+        x-validation: true
         enum:
         - "english/language arts"
         - "math"
@@ -1443,27 +1458,33 @@ definitions:
       teacher:
         type: string
         x-nullable: true
+        x-validation: true
       teachers:
         type: array
+        x-validation: true
         items:
           type: string
       term:
         $ref: "#/definitions/Term"
+        x-nullable: true
 
   School:
     type: object
     properties:
       id:
         type: string
+        x-validation: true
       created:
         type: string
         format: datetime
-        x-nullable: true
+        x-validation: true
       district:
         type: string
+        x-validation: true
       high_grade:
         type: string
         x-nullable: true
+        x-validation: true
         enum:
         - "1"
         - "2"
@@ -1484,12 +1505,13 @@ definitions:
       last_modified:
         type: string
         format: datetime
-        x-nullable: true
+        x-validation: true
       location:
         $ref: "#/definitions/Location"
       low_grade:
         type: string
         x-nullable: true
+        x-validation: true
         enum:
         - "1"
         - "2"
@@ -1509,7 +1531,6 @@ definitions:
         - "Other"
       name:
         type: string
-        x-nullable: true
       nces_id:
         type: string
         x-nullable: true
@@ -1523,7 +1544,6 @@ definitions:
         x-nullable: true
       sis_id:
         type: string
-        x-nullable: true
       state_id:
         type: string
         x-nullable: true
@@ -1536,22 +1556,24 @@ definitions:
     properties:
       id:
         type: string
+        x-validation: true
       credentials:
         $ref: "#/definitions/Credentials"
       district:
         type: string
+        x-validation: true
       email:
         type: string
-        x-nullable: true
       name:
         $ref: "#/definitions/Name"
       schools:
         type: array
+        x-validation: true
         items:
           type: string
       staff_id:
         type: string
-        x-nullable: true
+        x-validation: true
       title:
         type: string
         x-nullable: true
@@ -1572,14 +1594,19 @@ definitions:
     properties:
       id:
         type: string
+        x-validation: true
       name:
         $ref: "#/definitions/Name"
+        x-nullable: true
       email:
         type: string
+        x-validation: true
       title:
         type: string
+        x-nullable: true
       district:
         type: string
+        x-validation: true
 
   DistrictStatus:
     type: object
@@ -1615,13 +1642,11 @@ definitions:
     properties:
       first:
         type: string
-        x-nullable: true
       middle:
         type: string
         x-nullable: true
       last:
         type: string
-        x-nullable: true
 
   Location:
     type: object
@@ -1746,8 +1771,10 @@ definitions:
     properties:
       type:
         type: string
+        x-validation: true
       id:
         type: string
+        x-validation: true
     required:
     - type
 

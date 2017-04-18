@@ -262,8 +262,10 @@ definitions:
     properties:
       type:
         type: string
+        x-validation: true
       id:
         type: string
+        x-validation: true
     required:
     - type
 
