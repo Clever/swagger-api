@@ -1208,12 +1208,37 @@ definitions:
       gender:
         type: string
         x-nullable: true
+        enum:
+        - "M"
+        - "F"
+        - ""
       grade:
         type: string
         x-nullable: true
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "PreKindergarten"
+        - "Kindergarten"
+        - "PostGraduate"
+        - "Other"
       hispanic_ethnicity:
         type: string
         x-nullable: true
+        enum:
+        - "Y"
+        - "N"
+        - ""
       last_modified:
         type: string
         format: datetime
@@ -1225,6 +1250,15 @@ definitions:
       race:
         type: string
         x-nullable: true
+        enum:
+        - "Caucasian"
+        - "Asian"
+        - "Black or African American"
+        - "American Indian"
+        - "Hawaiian or Other Pacific Islander"
+        - "Two or More Races"
+        - "Unknown"
+        - ""
       school:
         type: string
       schools:
@@ -1333,6 +1367,23 @@ definitions:
       grade:
         type: string
         x-nullable: true
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "PreKindergarten"
+        - "Kindergarten"
+        - "PostGraduate"
+        - "Other"
       last_modified:
         type: string
         format: datetime
@@ -1358,6 +1409,18 @@ definitions:
       subject:
         type: string
         x-nullable: true
+        enum:
+        - "english/language arts"
+        - "math"
+        - "science"
+        - "social studies"
+        - "language"
+        - "homeroom/advisory"
+        - "interventions/online learning"
+        - "technology and engineering"
+        - "PE and health"
+        - "arts and music"
+        - "other"
       teacher:
         type: string
         x-nullable: true
@@ -1382,6 +1445,23 @@ definitions:
       high_grade:
         type: string
         x-nullable: true
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "PreKindergarten"
+        - "Kindergarten"
+        - "PostGraduate"
+        - "Other"
       last_modified:
         type: string
         format: datetime
@@ -1391,6 +1471,23 @@ definitions:
       low_grade:
         type: string
         x-nullable: true
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "PreKindergarten"
+        - "Kindergarten"
+        - "PostGraduate"
+        - "Other"
       name:
         type: string
         x-nullable: true
@@ -1475,6 +1572,10 @@ definitions:
         type: string
       state:
         type: string
+        enum:
+        - "running"
+        - "pending"
+        - "error"
       last_sync:
         type: string
         format: datetime
