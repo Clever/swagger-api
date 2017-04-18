@@ -1212,6 +1212,8 @@ definitions:
         - "M"
         - "F"
         - ""
+      google_apps:
+        $ref: "#/definitions/GoogleApps"
       grade:
         type: string
         x-nullable: true
@@ -1319,6 +1321,8 @@ definitions:
       email:
         type: string
         x-nullable: true
+      google_apps:
+        $ref: "#/definitions/GoogleApps"
       last_modified:
         type: string
         format: datetime
@@ -1657,3 +1661,9 @@ definitions:
       email:
         type: string
         x-nullable: true
+
+  GoogleApps:
+    type: object
+    properties:
+      email:
+        type: string
