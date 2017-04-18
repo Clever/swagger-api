@@ -1199,6 +1199,8 @@ definitions:
         type: string
         format: datetime
         x-nullable: true
+      credentials:
+        $ref: "#/definitions/Credentials"
       district:
         type: string
       dob:
@@ -1290,6 +1292,8 @@ definitions:
         type: string
         format: datetime
         x-nullable: true
+      credentials:
+        $ref: "#/definitions/Credentials"
       district:
         type: string
       email:
@@ -1430,6 +1434,8 @@ definitions:
     properties:
       id:
         type: string
+      credentials:
+        $ref: "#/definitions/Credentials"
       district:
         type: string
       email:
@@ -1546,6 +1552,13 @@ definitions:
       end_date:
         type: string
         format: datetime
+        x-nullable: true
+
+  Credentials:
+    type: object
+    properties:
+      district_username:
+        type: string
         x-nullable: true
 
   Principal:
