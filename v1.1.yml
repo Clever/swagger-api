@@ -1211,6 +1211,7 @@ definitions:
       gender:
         type: string
         x-nullable: true
+        x-validation: true
         enum:
         - "M"
         - "F"
@@ -1242,6 +1243,7 @@ definitions:
       hispanic_ethnicity:
         type: string
         x-nullable: true
+        x-validation: true
         enum:
         - "Y"
         - "N"
@@ -1592,14 +1594,17 @@ definitions:
       # Purposely leaving out instant_login since it's always true now
       sis_type:
         type: string
+        x-validation: true
       state:
         type: string
+        x-validation: true
         enum:
         - "running"
         - "pending"
         - "error"
       last_sync:
         type: string
+        x-validation: true
         format: datetime
       error:
         type: string
