@@ -44,16 +44,6 @@ paths:
       tags: ["Districts"]
       description: Returns a list of districts
       operationId: getDistricts
-      parameters:
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
       responses:
         '200':
           description: OK Response
@@ -1399,9 +1389,6 @@ definitions:
         - "M"
         - "F"
         - ""
-      google_apps:
-        $ref: "#/definitions/GoogleApps"
-        x-nullable: true
       grade:
         type: string
         x-nullable: true
@@ -1443,6 +1430,7 @@ definitions:
       race:
         type: string
         x-nullable: true
+        x-validation: true
         enum:
         - "Caucasian"
         - "Asian"
@@ -1477,6 +1465,7 @@ definitions:
         x-validation: true
       district:
         type: string
+        x-validation: true
       email:
         type: string
         x-nullable: true
@@ -1516,9 +1505,6 @@ definitions:
       email:
         type: string
         x-nullable: true
-      google_apps:
-        $ref: "#/definitions/GoogleApps"
-        x-nullable: true
       last_modified:
         type: string
         format: datetime
@@ -1527,13 +1513,14 @@ definitions:
         $ref: "#/definitions/Name"
       school:
         type: string
+        x-validation: true
       schools:
         type: array
+        x-validation: true
         items:
           type: string
       sis_id:
         type: string
-        x-nullable: true
       state_id:
         type: string
         x-nullable: true
@@ -1710,7 +1697,6 @@ definitions:
         $ref: "#/definitions/Principal"
       school_number:
         type: string
-        x-nullable: true
       sis_id:
         type: string
       state_id:
@@ -1742,7 +1728,6 @@ definitions:
           type: string
       staff_id:
         type: string
-        x-validation: true
       title:
         type: string
         x-nullable: true
@@ -1769,7 +1754,6 @@ definitions:
         x-nullable: true
       email:
         type: string
-        x-validation: true
       title:
         type: string
         x-nullable: true
@@ -1796,16 +1780,19 @@ definitions:
       last_sync:
         type: string
         x-validation: true
+        x-nullable: true
         format: datetime
       error:
         type: string
       pause_start:
         type: string
         x-validation: true
+        x-nullable: true
         format: datetime
       pause_end:
         type: string
         x-validation: true
+        x-nullable: true
         format: datetime
       launch_date:
         type: string
@@ -1857,17 +1844,18 @@ definitions:
         type: string
         format: datetime
         x-nullable: true
+        x-validation: true
       end_date:
         type: string
         format: datetime
         x-nullable: true
+        x-validation: true
 
   Credentials:
     type: object
     properties:
       district_username:
         type: string
-        x-nullable: true
 
   Principal:
     type: object
@@ -1878,12 +1866,6 @@ definitions:
       email:
         type: string
         x-nullable: true
-
-  GoogleApps:
-    type: object
-    properties:
-      email:
-        type: string
 
   StudentObject:
     type: object
@@ -1932,6 +1914,7 @@ definitions:
     properties:
       data:
         type: array
+        x-nullable: false
         items:
           $ref: "#/definitions/EventResponse"
 
@@ -1951,6 +1934,10 @@ definitions:
       id:
         type: string
         x-validation: true
+      created:
+        type: string
+        x-validation: true
+        format: datetime
     required:
     - type
 
