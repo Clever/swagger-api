@@ -2,6 +2,10 @@
 
 A Swagger Definition for the Clever API
 
+
+## Generate Files
+Update the source yml (full.yml) and run `make generate`
+
 ## Custom Swagger Extensions
 
 x-samples-languages: controls the sample languges in the Clever API explorer

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"strings"
@@ -16,7 +15,7 @@ func main() {
 		log.Fatalf("Error reading full.yml: %s", err)
 	}
 
-	var swagger map[string]interface{}
+	var swagger map[interface{}]interface{}
 	if err := yaml.Unmarshal(fullBytes, &swagger); err != nil {
 		log.Fatalf("Error unmarshaling swagger yml: %s", err)
 	}
@@ -25,31 +24,74 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error generating client yml: %s", err)
 	}
-	fmt.Println(string(clientBytes))
+	if err := ioutil.WriteFile("temp-client-v1.2.yml", clientBytes, 0644); err != nil {
+		log.Fatalf("Error writing data v1.1 API: %s", err)
+	}
+
+	dataV11, err := generateDataApiYml(swagger, "v1.1")
+	if err != nil {
+		log.Fatalf("Error generating data v1.1 API: %s", err)
+	}
+	if err := ioutil.WriteFile("temp-data-v1.1.yml", dataV11, 0644); err != nil {
+		log.Fatalf("Error writing data v1.1 API: %s", err)
+	}
+
+	dataV12, err := generateDataApiYml(swagger, "v1.2")
+	if err != nil {
+		log.Fatalf("Error generating data v1.2 API: %s", err)
+	}
+	if err := ioutil.WriteFile("temp-data-v1.2.yml", dataV12, 0644); err != nil {
+		log.Fatalf("Error writing data v1.2 API: %s", err)
+	}
+
 }
 
-func modifyDefinitionForV11(name string, def map[interface{}]interface{}) map[interface{}]interface{} {
-	// TODO: implement me!!
-	return def
+// modifyDefinitions removes fields that don't apply to the particular version / client
+// combination. For example, it remove students.schools from v1.1.
+func modifyDefinitions(version string, isClient bool, name string, def map[interface{}]interface{}) {
+
+	properties := def["properties"].(map[interface{}]interface{})
+
+	switch name {
+	case "Student":
+		if version == "v1.1" {
+			delete(properties, "schools")
+		}
+		if !isClient {
+			delete(properties, "iep_status")
+		}
+	case "Teacher":
+		if version == "v1.1" {
+			delete(properties, "schools")
+		}
+	case "DistrictStatus":
+		if version == "v1.1" {
+			delete(properties, "pause_start")
+			delete(properties, "pause_end")
+			delete(properties, "launch_date")
+			// TODO: add in enum modifications
+		}
+	default:
+	}
 }
 
-func generateDataApiYml(i map[string]interface{}, version string) ([]byte, error) {
+func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, error) {
 	m := deepCopyMap(i)
 
-	info := m["info"].(map[interface{}]interface{})
-	m["basePath"] = version
+	m["basePath"] = "/" + version
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path := range paths {
-		if strings.Contains(path.(string), "/events") && !path.(string) == "/districts/{id}/status" {
+		if strings.Contains(path.(string), "/events") && path.(string) != "/districts/{id}/status" {
 			delete(paths, path)
 			continue
 		}
 	}
 
 	definitions := m["definitions"].(map[interface{}]interface{})
-	for name, definition := range definitions {
+	for nameInterface, definition := range definitions {
 
+		name := nameInterface.(string)
 		if strings.HasSuffix(name, ".created") ||
 			strings.HasSuffix(name, ".updated") ||
 			strings.HasSuffix(name, ".deleted") ||
@@ -63,9 +105,7 @@ func generateDataApiYml(i map[string]interface{}, version string) ([]byte, error
 			continue
 		}
 
-		if version == "/v1.1" {
-			definitions[name] = modifyDefinitionForV11(name, definition)
-		}
+		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
 	}
 
 	return yaml.Marshal(m)
@@ -76,7 +116,7 @@ func generateEventApiYml() error {
 	return nil
 }
 
-func generateClientYml(i map[string]interface{}) ([]byte, error) {
+func generateClientYml(i map[interface{}]interface{}) ([]byte, error) {
 	m := deepCopyMap(i)
 
 	delete(m, "x-sample-languages")
@@ -88,7 +128,7 @@ func generateClientYml(i map[string]interface{}) ([]byte, error) {
 	paths := m["paths"].(map[interface{}]interface{})
 	for path, methodOp := range paths {
 
-		if strings.HasPrefix(path.(string), "/districts/{id}/") && !path.(string) == "/districts/{id}/status" {
+		if strings.HasPrefix(path.(string), "/districts/{id}/") && path.(string) != "/districts/{id}/status" {
 			delete(paths, path)
 			continue
 		}
@@ -124,17 +164,15 @@ func generateClientYml(i map[string]interface{}) ([]byte, error) {
 		}
 	}
 
-	// TODO: remove x-validated??? do we even need to???
-
 	return yaml.Marshal(m)
 }
 
-// note that this doesn't handle arrays or other data types (which don't matter)
-func deepCopyMap(m map[string]interface{}) map[string]interface{} {
-	ret := make(map[string]interface{})
+// deepCopyMap makes a copy of all the maps in the
+func deepCopyMap(m map[interface{}]interface{}) map[interface{}]interface{} {
+	ret := make(map[interface{}]interface{})
 
 	for k, v := range m {
-		subMap, isMap := v.(map[string]interface{})
+		subMap, isMap := v.(map[interface{}]interface{})
 		if isMap {
 			ret[k] = deepCopyMap(subMap)
 		} else {
