@@ -1418,6 +1418,9 @@ definitions:
         - "Y"
         - "N"
         - ""
+      iep_status:
+        type: string
+        x-nullable: true
       last_modified:
         type: string
         format: datetime
@@ -1777,6 +1780,7 @@ definitions:
         - "running"
         - "pending"
         - "error"
+        - "pause"
       last_sync:
         type: string
         x-validation: true
