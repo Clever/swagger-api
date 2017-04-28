@@ -14,6 +14,7 @@ definitions:
     properties:
       id:
         type: string
+        x-validation: true
       mdr_number:
         type: string
         x-nullable: true
@@ -60,6 +61,9 @@ definitions:
         type: string
       id:
         type: string
+        x-validation: true
+      instant_login:
+        type: boolean
       last_sync:
         format: datetime
         type: string
@@ -201,6 +205,7 @@ definitions:
         x-validation: true
       location:
         $ref: '#/definitions/Location'
+        x-nullable: true
       low_grade:
         enum:
         - "1"

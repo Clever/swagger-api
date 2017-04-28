@@ -94,6 +94,10 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			state := properties["state"].(map[interface{}]interface{})
 			state["enum"] = []interface{}{"running", "pending", "error"}
 		}
+		if isClient {
+			// instant_login is always true now, so let's just leave it out of the clients
+			delete(properties, "instant_login")
+		}
 	default:
 	}
 }
@@ -230,6 +234,11 @@ func generateClientYml(i map[interface{}]interface{}) ([]byte, error) {
 			}
 			operation["parameters"] = paramsForClient
 		}
+	}
+
+	definitions := m["definitions"].(map[interface{}]interface{})
+	for name, definition := range definitions {
+		modifyDefinitions("v1.2", true, name.(string), definition.(map[interface{}]interface{}))
 	}
 
 	return yaml.Marshal(m)

@@ -1667,6 +1667,7 @@ definitions:
         x-validation: true
       location:
         $ref: "#/definitions/Location"
+        x-nullable: true
       low_grade:
         type: string
         x-nullable: true
@@ -1740,6 +1741,7 @@ definitions:
     properties:
       id:
         type: string
+        x-validation: true
       name:
         type: string
       mdr_number:
@@ -1769,7 +1771,9 @@ definitions:
     properties:
       id:
         type: string
-      # Purposely leaving out instant_login since it's always true now
+        x-validation: true
+      instant_login:
+        type: boolean
       sis_type:
         type: string
         x-validation: true
@@ -1918,7 +1922,6 @@ definitions:
     properties:
       data:
         type: array
-        x-nullable: false
         items:
           $ref: "#/definitions/EventResponse"
 
