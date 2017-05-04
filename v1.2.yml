@@ -633,8 +633,8 @@ definitions:
     type: object
 host: api.clever.com
 info:
-  description: The Clever Events API
-  title: Events API
+  description: Serves the Clever Data API
+  title: Data API
   version: 1.2.0
 paths:
   /contacts:
