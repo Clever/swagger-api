@@ -828,8 +828,8 @@ definitions:
       type: object
 host: api.clever.com
 info:
-  description: Serves the Clever Data API
-  title: Data API
+  description: The Clever Events API
+  title: Events API
   version: 1.2.0
 paths:
   /events:

@@ -608,9 +608,9 @@ definitions:
     type: object
 host: api.clever.com
 info:
-  description: The Clever Events API
-  title: Events API
-  version: 1.2.0
+  description: Serves the Clever Data API
+  title: Data API
+  version: 1.1.0
 paths:
   /contacts:
     get:

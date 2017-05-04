@@ -109,8 +109,7 @@ func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, 
 
 	m["basePath"] = "/" + version
 	info := m["info"].(map[interface{}]interface{})
-	info["title"] = "Events API"
-	info["description"] = "The Clever Events API"
+	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path := range paths {
@@ -150,6 +149,10 @@ func generateEventsApiYml(i map[interface{}]interface{}, version string) ([]byte
 	m := deepCopyMap(i)
 
 	m["basePath"] = "/" + version
+	info := m["info"].(map[interface{}]interface{})
+	info["title"] = "Events API"
+	info["description"] = "The Clever Events API"
+	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path := range paths {
