@@ -76,9 +76,20 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 	case "Student":
 		if version == "v1.1" {
 			delete(properties, "schools")
+			delete(properties, "home_language")
+			delete(properties, "unweighted_gpa")
+			delete(properties, "weighted_gpa")
+			delete(properties, "graduation_year")
 		}
 		if !isClient {
 			delete(properties, "iep_status")
+			delete(properties, "home_language")
+			delete(properties, "unweighted_gpa")
+			delete(properties, "weighted_gpa")
+		}
+	case "StudentContact":
+		if version == "v1.1" {
+			delete(properties, "sis_id")
 		}
 	case "Teacher":
 		if version == "v1.1" {
