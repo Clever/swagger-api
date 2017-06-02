@@ -503,11 +503,67 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
+      graduation_year:
+        type: string
+        x-nullable: true
+        x-validation: true
       hispanic_ethnicity:
         enum:
         - "Y"
         - "N"
         - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      home_language:
+        enum:
+        - English
+        - Albanian
+        - Amharic
+        - Arabic
+        - Bengali
+        - Bosnian
+        - Burmese
+        - Cantonese
+        - Chinese
+        - Dutch
+        - Farsi
+        - French
+        - German
+        - Hebrew
+        - Hindi
+        - Hmong
+        - Ilocano
+        - Japanese
+        - Javanese
+        - Karen
+        - Khmer
+        - Korean
+        - Laotian
+        - Latvian
+        - Malay
+        - Mandarin
+        - Nepali
+        - Oromo
+        - Polish
+        - Portuguese
+        - Punjabi
+        - Romanian
+        - Russian
+        - Samoan
+        - Serbian
+        - Somali
+        - Spanish
+        - Swahili
+        - Tagalog
+        - Tamil
+        - Telegu
+        - Thai
+        - Tigrinya
+        - Turkish
+        - Ukrainian
+        - Urdu
+        - Vietnamese
         type: string
         x-nullable: true
         x-validation: true
@@ -555,6 +611,12 @@ definitions:
       student_number:
         type: string
         x-nullable: true
+      unweighted_gpa:
+        type: string
+        x-nullable: true
+      weighted_gpa:
+        type: string
+        x-nullable: true
     type: object
   StudentContact:
     properties:
@@ -576,6 +638,9 @@ definitions:
         type: string
         x-nullable: true
       relationship:
+        type: string
+        x-nullable: true
+      sis_id:
         type: string
         x-nullable: true
       student:

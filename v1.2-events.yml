@@ -469,6 +469,10 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
+      graduation_year:
+        type: string
+        x-nullable: true
+        x-validation: true
       hispanic_ethnicity:
         enum:
         - "Y"
@@ -539,6 +543,9 @@ definitions:
         type: string
         x-nullable: true
       relationship:
+        type: string
+        x-nullable: true
+      sis_id:
         type: string
         x-nullable: true
       student:
