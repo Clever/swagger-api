@@ -100,6 +100,13 @@ definitions:
       data:
         $ref: '#/definitions/DistrictStatus'
     type: object
+  DistrictStatusResponses:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/DistrictStatusResponse'
+        type: array
+    type: object
   DistrictsResponse:
     properties:
       data:
@@ -881,7 +888,7 @@ paths:
         "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictStatusResponse'
+            $ref: '#/definitions/DistrictStatusResponses'
         "404":
           $ref: '#/responses/NotFound'
       tags:

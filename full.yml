@@ -163,7 +163,7 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictStatusResponse'
+            $ref: '#/definitions/DistrictStatusResponses'
         '404':
           $ref: '#/responses/NotFound'
 
@@ -1321,6 +1321,14 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/District"
+
+  DistrictStatusResponses:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/DistrictStatusResponse"
 
   DistrictStatusResponse:
     type: object

@@ -76,6 +76,13 @@ definitions:
       data:
         $ref: '#/definitions/DistrictStatus'
     type: object
+  DistrictStatusResponses:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/DistrictStatusResponse'
+        type: array
+    type: object
   DistrictsResponse:
     properties:
       data:
