@@ -554,6 +554,13 @@ definitions:
       data:
         $ref: '#/definitions/StudentContact'
     type: object
+  StudentContactsByStudentResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/StudentContact'
+        type: array
+    type: object
   StudentContactsResponse:
     properties:
       data:
@@ -1386,7 +1393,7 @@ paths:
         "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactsResponse'
+            $ref: '#/definitions/StudentContactsByStudentResponse'
         "404":
           $ref: '#/responses/NotFound'
       tags:
