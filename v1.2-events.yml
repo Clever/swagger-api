@@ -571,7 +571,7 @@ definitions:
       data:
         $ref: '#/definitions/StudentContact'
     type: object
-  StudentContactsByStudentResponse:
+  StudentContactsForStudentResponse:
     properties:
       data:
         items:

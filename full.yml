@@ -442,7 +442,7 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactsByStudentResponse'
+            $ref: '#/definitions/StudentContactsForStudentResponse'
         '404':
           $ref: '#/responses/NotFound'
 
@@ -1253,7 +1253,7 @@ definitions:
       data:
         $ref: "#/definitions/StudentContact"
 
-  StudentContactsByStudentResponse:
+  StudentContactsForStudentResponse:
     type: object
     properties:
       data:
