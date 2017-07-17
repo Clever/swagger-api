@@ -544,6 +544,13 @@ definitions:
       data:
         $ref: '#/definitions/StudentContact'
     type: object
+  StudentContactsForStudentResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/StudentContact'
+        type: array
+    type: object
   StudentContactsResponse:
     properties:
       data:
