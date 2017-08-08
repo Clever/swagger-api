@@ -94,7 +94,7 @@ definitions:
         - running
         - pending
         - error
-        - pause
+        - paused
         type: string
         x-validation: true
     type: object
