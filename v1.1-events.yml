@@ -1022,7 +1022,7 @@ securityDefinitions:
     flow: accessCode
     tokenUrl: https://clever.com/oauth/tokens
     type: oauth2
-    x-default: DEMO_TOKEN
+    x-default: DEMO_EVENTS_TOKEN
 swagger: "2.0"
 x-samples-languages:
 - curl
