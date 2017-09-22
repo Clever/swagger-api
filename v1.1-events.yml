@@ -60,12 +60,6 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/DistrictStatus'
-      links:
-        items:
-          $ref: '#/definitions/Link'
-        type: Array
-      paging:
-        $ref: '#/definitions/Paging'
     type: object
   DistrictStatusResponses:
     properties:
@@ -83,7 +77,7 @@ definitions:
       links:
         items:
           $ref: '#/definitions/Link'
-        type: Array
+        type: array
       paging:
         $ref: '#/definitions/Paging'
     type: object
@@ -117,7 +111,7 @@ definitions:
       links:
         items:
           $ref: '#/definitions/Link'
-        type: Array
+        type: array
       paging:
         $ref: '#/definitions/Paging'
     type: object
@@ -315,7 +309,7 @@ definitions:
       links:
         items:
           $ref: '#/definitions/Link'
-        type: Array
+        type: array
       paging:
         $ref: '#/definitions/Paging'
     type: object
@@ -338,7 +332,7 @@ definitions:
       links:
         items:
           $ref: '#/definitions/Link'
-        type: Array
+        type: array
       paging:
         $ref: '#/definitions/Paging'
     type: object
@@ -453,7 +447,7 @@ definitions:
       links:
         items:
           $ref: '#/definitions/Link'
-        type: Array
+        type: array
       paging:
         $ref: '#/definitions/Paging'
     type: object
@@ -612,7 +606,7 @@ definitions:
       links:
         items:
           $ref: '#/definitions/Link'
-        type: Array
+        type: array
       paging:
         $ref: '#/definitions/Paging'
     type: object
@@ -635,7 +629,7 @@ definitions:
       links:
         items:
           $ref: '#/definitions/Link'
-        type: Array
+        type: array
       paging:
         $ref: '#/definitions/Paging'
     type: object
@@ -697,7 +691,7 @@ definitions:
       links:
         items:
           $ref: '#/definitions/Link'
-        type: Array
+        type: array
       paging:
         $ref: '#/definitions/Paging'
     type: object

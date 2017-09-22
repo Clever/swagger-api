@@ -1247,7 +1247,7 @@ definitions:
     type: object
     properties:
       links:
-        type: Array
+        type: array
         items:
           $ref: "#/definitions/Link"
       paging:
@@ -1267,7 +1267,7 @@ definitions:
     type: object
     properties:
       links:
-        type: Array
+        type: array
         items:
           $ref: "#/definitions/Link"
       paging:
@@ -1295,7 +1295,7 @@ definitions:
     type: object
     properties:
       links:
-        type: Array
+        type: array
         items:
           $ref: "#/definitions/Link"
       paging:
@@ -1315,7 +1315,7 @@ definitions:
     type: object
     properties:
       links:
-        type: Array
+        type: array
         items:
           $ref: "#/definitions/Link"
       paging:
@@ -1335,7 +1335,7 @@ definitions:
     type: object
     properties:
       links:
-        type: Array
+        type: array
         items:
           $ref: "#/definitions/Link"
       paging:
@@ -1355,7 +1355,7 @@ definitions:
     type: object
     properties:
       links:
-        type: Array
+        type: array
         items:
           $ref: "#/definitions/Link"
       paging:
@@ -1375,7 +1375,7 @@ definitions:
     type: object
     properties:
       links:
-        type: Array
+        type: array
         items:
           $ref: "#/definitions/Link"
       paging:
@@ -1402,12 +1402,6 @@ definitions:
   DistrictStatusResponse:
     type: object
     properties:
-      links:
-        type: Array
-        items:
-          $ref: "#/definitions/Link"
-      paging:
-        $ref: "#/definitions/Paging"
       data:
         $ref: "#/definitions/DistrictStatus"
 
@@ -1415,7 +1409,7 @@ definitions:
     type: object
     properties:
       links:
-        type: Array
+        type: array
         items:
           $ref: "#/definitions/Link"
       paging:
@@ -1428,12 +1422,12 @@ definitions:
   DistrictAdminsResponse:
     type: object
     properties:
-    links:
-      type: Array
-      items:
-        $ref: "#/definitions/Link"
-    paging:
-      $ref: "#/definitions/Paging"
+      links:
+        type: array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -2081,7 +2075,7 @@ definitions:
     type: object
     properties:
       links:
-        type: Array
+        type: array
         items:
           $ref: "#/definitions/Link"
       paging:
