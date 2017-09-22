@@ -1225,9 +1225,33 @@ definitions:
       message:
         type: string
 
+  Link:
+    type: object
+    properties:
+      rel:
+        type: string
+      uri:
+        type: string
+
+  Paging:
+    type: object
+    properties:
+      current:
+        type: integer
+      total:
+        type: integer
+      count:
+        type: integer
+
   StudentsResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -1242,6 +1266,12 @@ definitions:
   StudentContactsResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -1264,6 +1294,12 @@ definitions:
   TeachersResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -1278,6 +1314,12 @@ definitions:
   SectionsResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -1292,6 +1334,12 @@ definitions:
   SchoolsResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -1306,6 +1354,12 @@ definitions:
   SchoolAdminsResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -1320,6 +1374,12 @@ definitions:
   DistrictsResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -1342,12 +1402,24 @@ definitions:
   DistrictStatusResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         $ref: "#/definitions/DistrictStatus"
 
   GradeLevelsResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -1356,6 +1428,12 @@ definitions:
   DistrictAdminsResponse:
     type: object
     properties:
+    links:
+      type: Array
+      items:
+        $ref: "#/definitions/Link"
+    paging:
+      $ref: "#/definitions/Paging"
       data:
         type: array
         items:
@@ -2002,6 +2080,12 @@ definitions:
   EventsResponse:
     type: object
     properties:
+      links:
+        type: Array
+        items:
+          $ref: "#/definitions/Link"
+      paging:
+        $ref: "#/definitions/Paging"
       data:
         type: array
         items:

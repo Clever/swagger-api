@@ -6,3 +6,7 @@
 *~
 \#*\#
 .\#*
+
+# packages
+src/gopkg.in
+pkg

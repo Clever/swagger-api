@@ -44,11 +44,17 @@ definitions:
         $ref: '#/definitions/DistrictAdmin'
     type: object
   DistrictAdminsResponse:
-    properties:
+    links:
+      items:
+        $ref: '#/definitions/Link'
+      type: Array
+    paging:
+      $ref: '#/definitions/Paging'
       data:
         items:
           $ref: '#/definitions/DistrictAdmin'
         type: array
+    properties: null
     type: object
   DistrictResponse:
     properties:
@@ -99,6 +105,12 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/DistrictStatus'
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: Array
+      paging:
+        $ref: '#/definitions/Paging'
     type: object
   DistrictStatusResponses:
     properties:
@@ -113,6 +125,12 @@ definitions:
         items:
           $ref: '#/definitions/DistrictResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: Array
+      paging:
+        $ref: '#/definitions/Paging'
     type: object
   GradeLevelsResponse:
     properties:
@@ -120,10 +138,23 @@ definitions:
         items:
           type: string
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: Array
+      paging:
+        $ref: '#/definitions/Paging'
     type: object
   InternalError:
     properties:
       message:
+        type: string
+    type: object
+  Link:
+    properties:
+      rel:
+        type: string
+      uri:
         type: string
     type: object
   Location:
@@ -163,6 +194,15 @@ definitions:
     properties:
       message:
         type: string
+    type: object
+  Paging:
+    properties:
+      count:
+        type: integer
+      current:
+        type: integer
+      total:
+        type: integer
     type: object
   Principal:
     properties:
@@ -291,6 +331,12 @@ definitions:
         items:
           $ref: '#/definitions/SchoolAdminResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: Array
+      paging:
+        $ref: '#/definitions/Paging'
     type: object
   SchoolResponse:
     properties:
@@ -303,6 +349,12 @@ definitions:
         items:
           $ref: '#/definitions/SchoolResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: Array
+      paging:
+        $ref: '#/definitions/Paging'
     type: object
   Section:
     properties:
@@ -407,6 +459,12 @@ definitions:
         items:
           $ref: '#/definitions/SectionResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: Array
+      paging:
+        $ref: '#/definitions/Paging'
     type: object
   Student:
     properties:
@@ -567,6 +625,12 @@ definitions:
         items:
           $ref: '#/definitions/StudentContactResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: Array
+      paging:
+        $ref: '#/definitions/Paging'
     type: object
   StudentResponse:
     properties:
@@ -579,6 +643,12 @@ definitions:
         items:
           $ref: '#/definitions/StudentResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: Array
+      paging:
+        $ref: '#/definitions/Paging'
     type: object
   Teacher:
     properties:
@@ -635,6 +705,12 @@ definitions:
         items:
           $ref: '#/definitions/TeacherResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: Array
+      paging:
+        $ref: '#/definitions/Paging'
     type: object
   Term:
     properties:

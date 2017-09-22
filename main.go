@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"gopkg.in/v1/yaml"
+	"gopkg.in/yaml.v1"
 )
 
 func main() {
