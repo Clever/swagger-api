@@ -268,7 +268,7 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactsForStudentResponse'
+            $ref: '#/definitions/StudentContactsResponse'
         '404':
           $ref: '#/responses/NotFound'
 
@@ -943,14 +943,6 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/StudentContact"
-
-  StudentContactsForStudentResponse:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-           $ref: "#/definitions/StudentContact"
 
   TeachersResponse:
     type: object
