@@ -134,24 +134,6 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
-  /teachers/{id}/grade_levels:
-    get:
-      tags: ["Teachers"]
-      description: Returns the grade levels for sections a teacher teaches
-      operationId: getGradeLevelsForTeacher
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/GradeLevelsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-
   /teachers/{id}/school:
     get:
       tags: ["Teachers"]
@@ -1039,14 +1021,6 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/District"
-
-  GradeLevelsResponse:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          type: string
 
   DistrictAdminsResponse:
     type: object
