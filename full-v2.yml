@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Data API
   description: Serves the Clever Data API
-  version: 1.2.0
+  version: 2.0.0
 schemes:
   - https
 produces:
@@ -68,162 +68,6 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  /districts/{id}/admins:
-    get:
-      tags: ["Districts"]
-      description: Returns the admins for a district
-      operationId: getAdminsForDistrict
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/DistrictAdminsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  /districts/{id}/schools:
-    get:
-      tags: ["Districts"]
-      description: Returns the schools for a district
-      operationId: getSchoolsForDistrict
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      - in: query
-        name: where
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/SchoolsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  /districts/{id}/sections:
-    get:
-      tags: ["Districts"]
-      description: Returns the sections for a district
-      operationId: getSectionsForDistrict
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      - in: query
-        name: where
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/SectionsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  /districts/{id}/status:
-    get:
-      tags: ["Districts"]
-      description: Returns the status of the district
-      operationId: getDistrictStatus
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/DistrictStatusResponses'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  /districts/{id}/students:
-    get:
-      tags: ["Districts"]
-      description: Returns the students for a district
-      operationId: getStudentsForDistrict
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      - in: query
-        name: where
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/StudentsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  /districts/{id}/teachers:
-    get:
-      tags: ["Districts"]
-      description: Returns the teachers for a district
-      operationId: getTeachersForDistrict
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      - in: query
-        name: where
-        type: string
-      responses:
-        '200':
-          description: OK Response
-          schema:
-            $ref: '#/definitions/TeachersResponse'
         '404':
           $ref: '#/responses/NotFound'
 
@@ -1331,20 +1175,6 @@ definitions:
       data:
         $ref: "#/definitions/District"
 
-  DistrictStatusResponses:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: "#/definitions/DistrictStatusResponse"
-
-  DistrictStatusResponse:
-    type: object
-    properties:
-      data:
-        $ref: "#/definitions/DistrictStatus"
-
   GradeLevelsResponse:
     type: object
     properties:
@@ -1829,33 +1659,6 @@ definitions:
       mdr_number:
         type: string
         x-nullable: true
-
-  DistrictAdmin:
-    type: object
-    properties:
-      id:
-        type: string
-        x-validation: true
-      name:
-        $ref: "#/definitions/Name"
-        x-nullable: true
-      email:
-        type: string
-      title:
-        type: string
-        x-nullable: true
-      district:
-        type: string
-        x-validation: true
-
-  DistrictStatus:
-    type: object
-    properties:
-      id:
-        type: string
-        x-validation: true
-      instant_login:
-        type: boolean
       sis_type:
         type: string
         x-validation: true
@@ -1888,6 +1691,24 @@ definitions:
         type: string
         x-validation: true
         format: datetime
+
+  DistrictAdmin:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      name:
+        $ref: "#/definitions/Name"
+        x-nullable: true
+      email:
+        type: string
+      title:
+        type: string
+        x-nullable: true
+      district:
+        type: string
+        x-validation: true
 
   Name:
     type: object
