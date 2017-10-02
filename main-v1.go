@@ -10,9 +10,9 @@ import (
 
 func main() {
 
-	fullBytes, err := ioutil.ReadFile("./full.yml")
+	fullBytes, err := ioutil.ReadFile("./full-v1.yml")
 	if err != nil {
-		log.Fatalf("Error reading full.yml: %s", err)
+		log.Fatalf("Error reading full-v1.yml: %s", err)
 	}
 
 	var swagger map[interface{}]interface{}
