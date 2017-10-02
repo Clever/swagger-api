@@ -1189,7 +1189,7 @@ definitions:
       data:
         type: array
         items:
-           $ref: "#/definitions/DistrictAdmin"
+           $ref: "#/definitions/DistrictAdminResponse"
 
   DistrictAdminResponse:
     type: object
