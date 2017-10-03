@@ -893,6 +893,51 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
+  /courses:
+    get:
+      tags: ["Courses"]
+      description: Returns a list of courses
+      operationId: getCourses
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      - in: query
+        name: where
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/CoursesResponse'
+
+  /courses/{id}:
+    get:
+      tags: ["Courses"]
+      description: Returns a specific course
+      operationId: getCourse
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: include
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/CourseResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
   /events:
     get:
       tags: ["Events"]
@@ -1058,6 +1103,20 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/Term"
+
+  CoursesResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/CourseResponse"
+
+  CourseResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Course"
 
   DistrictsResponse:
     type: object
@@ -1350,6 +1409,10 @@ definitions:
         x-nullable: true
       course_number:
         type: string
+        x-nullable: true
+      course:
+        type: string
+        x-validation: true
         x-nullable: true
       created:
         type: string
@@ -1655,6 +1718,19 @@ definitions:
         format: datetime
         x-nullable: true
         x-validation: true
+
+  Course:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      name:
+        type: string
+        x-nullable: true
+      number:
+        type: string
+        x-nullable: true
 
   Credentials:
     type: object
