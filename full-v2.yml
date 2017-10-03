@@ -848,6 +848,51 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
+  /terms:
+    get:
+      tags: ["Terms"]
+      description: Returns a list of terms
+      operationId: getTerms
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      - in: query
+        name: where
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TermsResponse'
+
+  /terms/{id}:
+    get:
+      tags: ["Terms"]
+      description: Returns a specific term
+      operationId: getTerm
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: include
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TermResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
   /events:
     get:
       tags: ["Events"]
@@ -999,6 +1044,20 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/SchoolAdmin"
+
+  TermsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/TermResponse"
+
+  TermResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Term"
 
   DistrictsResponse:
     type: object
@@ -1579,6 +1638,9 @@ definitions:
   Term:
     type: object
     properties:
+      id:
+        type: string
+        x-validation: true
       name:
         type: string
         x-nullable: true
