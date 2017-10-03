@@ -1425,8 +1425,9 @@ definitions:
         x-validation: true
         items:
           type: string
-      term:
-        $ref: "#/definitions/Term"
+      term_id:
+        type: string
+        x-validation: true
         x-nullable: true
 
   School:
