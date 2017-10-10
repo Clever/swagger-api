@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	fullBytes, err := ioutil.ReadFile("./full-v1.yml")
+	fullBytes, err := ioutil.ReadFile("./full-v2.yml")
 	if err != nil {
 		log.Fatalf("Error reading full-v1.yml: %s", err)
 	}
@@ -24,40 +24,24 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error generating client yml: %s", err)
 	}
-	if err := ioutil.WriteFile("v1.2-client.yml", clientBytes, 0644); err != nil {
-		log.Fatalf("Error writing data v1.1 API: %s", err)
+	if err := ioutil.WriteFile("v2.0-client.yml", clientBytes, 0644); err != nil {
+		log.Fatalf("Error writing client v2.0 API: %s", err)
 	}
 
-	dataV11, err := generateDataApiYml(swagger, "v1.1")
+	dataV20, err := generateDataApiYml(swagger, "v2.0")
 	if err != nil {
-		log.Fatalf("Error generating data v1.1 API: %s", err)
+		log.Fatalf("Error generating data v2.0 API: %s", err)
 	}
-	if err := ioutil.WriteFile("v1.1.yml", dataV11, 0644); err != nil {
-		log.Fatalf("Error writing data v1.1 API: %s", err)
+	if err := ioutil.WriteFile("v2.0.yml", dataV20, 0644); err != nil {
+		log.Fatalf("Error writing data v2.0 API: %s", err)
 	}
 
-	dataV12, err := generateDataApiYml(swagger, "v1.2")
+	eventsV20, err := generateEventsApiYml(swagger, "v2.0")
 	if err != nil {
-		log.Fatalf("Error generating data v1.2 API: %s", err)
+		log.Fatalf("Error generating events v2.0 API: %s", err)
 	}
-	if err := ioutil.WriteFile("v1.2.yml", dataV12, 0644); err != nil {
-		log.Fatalf("Error writing data v1.2 API: %s", err)
-	}
-
-	eventsV11, err := generateEventsApiYml(swagger, "v1.1")
-	if err != nil {
-		log.Fatalf("Error generating events v1.1 API: %s", err)
-	}
-	if err := ioutil.WriteFile("v1.1-events.yml", eventsV11, 0644); err != nil {
-		log.Fatalf("Error writing events v1.1 API: %s", err)
-	}
-
-	eventsV12, err := generateEventsApiYml(swagger, "v1.2")
-	if err != nil {
-		log.Fatalf("Error generating events v1.2 API: %s", err)
-	}
-	if err := ioutil.WriteFile("v1.2-events.yml", eventsV12, 0644); err != nil {
-		log.Fatalf("Error writing events v1.2 API: %s", err)
+	if err := ioutil.WriteFile("v2.0-events.yml", eventsV20, 0644); err != nil {
+		log.Fatalf("Error writing events v2.0 API: %s", err)
 	}
 
 }
@@ -74,40 +58,11 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 
 	switch name {
 	case "Student":
-		if version == "v1.1" {
-			delete(properties, "schools")
-			delete(properties, "home_language")
-			delete(properties, "unweighted_gpa")
-			delete(properties, "weighted_gpa")
-			delete(properties, "graduation_year")
-		}
 		if !isClient {
 			delete(properties, "iep_status")
 			delete(properties, "home_language")
 			delete(properties, "unweighted_gpa")
 			delete(properties, "weighted_gpa")
-		}
-	case "StudentContact":
-		if version == "v1.1" {
-			delete(properties, "sis_id")
-		}
-	case "Teacher":
-		if version == "v1.1" {
-			delete(properties, "schools")
-		}
-	case "DistrictStatus":
-		if version == "v1.1" {
-			delete(properties, "pause_start")
-			delete(properties, "pause_end")
-			delete(properties, "launch_date")
-
-			// The state enum doesn't have "pause" in v1.1
-			state := properties["state"].(map[interface{}]interface{})
-			state["enum"] = []interface{}{"running", "pending", "error"}
-		}
-		if isClient {
-			// instant_login is always true now, so let's just leave it out of the clients
-			delete(properties, "instant_login")
 		}
 	default:
 	}
@@ -177,17 +132,7 @@ func generateEventsApiYml(i map[interface{}]interface{}, version string) ([]byte
 	// The events API needs most of
 	definitions := m["definitions"].(map[interface{}]interface{})
 	for nameInterface, definition := range definitions {
-
 		name := nameInterface.(string)
-		if strings.HasPrefix(name, "DistrictAdmin") {
-			delete(definitions, nameInterface)
-			continue
-		}
-		if name == "GradeLevelsResponse" {
-			delete(definitions, nameInterface)
-			continue
-		}
-
 		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
 	}
 
@@ -203,19 +148,10 @@ func generateClientYml(i map[interface{}]interface{}) ([]byte, error) {
 	info := m["info"].(map[interface{}]interface{})
 	info["title"] = "Clever API"
 	info["description"] = "The Clever API"
-	m["basePath"] = "/v1.2"
+	m["basePath"] = "/v2.0"
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path, methodOp := range paths {
-
-		// The /districts/{id}/collection endpoints are redundant because you can just use
-		// /collection so let's remove them
-		if strings.HasPrefix(path.(string), "/districts/{id}/") &&
-			path.(string) != "/districts/{id}/status" {
-			delete(paths, path)
-			continue
-		}
-
 		for _, o := range methodOp.(map[interface{}]interface{}) {
 			operation := o.(map[interface{}]interface{})
 
@@ -225,35 +161,12 @@ func generateClientYml(i map[interface{}]interface{}) ([]byte, error) {
 			} else {
 				operation["tags"] = []string{"Data"}
 			}
-
-			// Remove the parameters we don't want in the client library
-			params, ok := operation["parameters"].([]interface{})
-			if !ok {
-				continue
-			}
-			paramsForClient := make([]map[interface{}]interface{}, 0)
-			for _, p := range params {
-				param := p.(map[interface{}]interface{})
-				include := true
-				for key, value := range param {
-					if key.(string) == "name" {
-						if value.(string) == "show_links" || value.(string) == "include" ||
-							value.(string) == "where" {
-							include = false
-						}
-					}
-				}
-				if include {
-					paramsForClient = append(paramsForClient, param)
-				}
-			}
-			operation["parameters"] = paramsForClient
 		}
 	}
 
 	definitions := m["definitions"].(map[interface{}]interface{})
 	for name, definition := range definitions {
-		modifyDefinitions("v1.2", true, name.(string), definition.(map[interface{}]interface{}))
+		modifyDefinitions("v2.0", true, name.(string), definition.(map[interface{}]interface{}))
 	}
 
 	return yaml.Marshal(m)
