@@ -60,9 +60,6 @@ paths:
         name: id
         required: true
         type: string
-      - in: query
-        name: include
-        type: string
       responses:
         '200':
           description: OK Response
@@ -104,9 +101,6 @@ paths:
       - in: path
         name: id
         required: true
-        type: string
-      - in: query
-        name: include
         type: string
       responses:
         '200':
@@ -239,9 +233,6 @@ paths:
       - in: path
         name: id
         required: true
-        type: string
-      - in: query
-        name: include
         type: string
       responses:
         '200':
@@ -810,9 +801,6 @@ paths:
         name: id
         required: true
         type: string
-      - in: query
-        name: include
-        type: string
       responses:
         '200':
           description: OK Response
@@ -881,9 +869,6 @@ paths:
       - in: path
         name: id
         required: true
-        type: string
-      - in: query
-        name: include
         type: string
       responses:
         '200':
