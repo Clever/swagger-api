@@ -83,9 +83,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: where
-        type: string
       responses:
         '200':
           description: OK Response
@@ -241,9 +238,6 @@ paths:
         type: string
       - in: query
         name: ending_before
-        type: string
-      - in: query
-        name: where
         type: string
       responses:
         '200':
@@ -421,9 +415,6 @@ paths:
         type: string
       - in: query
         name: ending_before
-        type: string
-      - in: query
-        name: where
         type: string
       responses:
         '200':
@@ -608,9 +599,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: where
-        type: string
       responses:
         '200':
           description: OK Response
@@ -672,9 +660,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: where
-        type: string
       responses:
         '200':
           description: OK Response
@@ -702,9 +687,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: where
-        type: string
       responses:
         '200':
           description: OK Response
@@ -731,9 +713,6 @@ paths:
         type: string
       - in: query
         name: ending_before
-        type: string
-      - in: query
-        name: where
         type: string
       responses:
         '200':
@@ -897,9 +876,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: where
-        type: string
       responses:
         '200':
           description: OK Response
@@ -984,9 +960,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: where
-        type: string
       responses:
         '200':
           description: OK Response
@@ -1070,9 +1043,6 @@ paths:
         type: string
       - in: query
         name: ending_before
-        type: string
-      - in: query
-        name: where
         type: string
       responses:
         '200':
