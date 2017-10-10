@@ -200,6 +200,33 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
+  /teachers/{id}/schools:
+    get:
+      tags: ["Teachers"]
+      description: Returns the schools for a teacher
+      operationId: getSchoolsForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
   /students:
     get:
       tags: ["Students"]
@@ -350,6 +377,33 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/TeachersResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/schools:
+    get:
+      tags: ["Students"]
+      description: Returns the schools for a student
+      operationId: getSchoolsForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolsResponse'
         '404':
           $ref: '#/responses/NotFound'
 
