@@ -503,6 +503,42 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
+  /sections/{id}/course:
+    get:
+      tags: ["Sections"]
+      description: Returns the course for a section
+      operationId: getCourseForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/CourseResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/term:
+    get:
+      tags: ["Sections"]
+      description: Returns the term for a section
+      operationId: getTermForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TermResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
   /schools:
     get:
       tags: ["Schools"]
@@ -878,6 +914,51 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
+  /terms/{id}/sections:
+    get:
+      tags: ["Terms"]
+      description: Returns the sections for a term
+      operationId: getSectionsForTerm
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /terms/{id}/district:
+    get:
+      tags: ["Terms"]
+      description: Returns the district for a term
+      operationId: getDistrictForTerm
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
   /courses:
     get:
       tags: ["Courses"]
@@ -912,9 +993,6 @@ paths:
         name: id
         required: true
         type: string
-      - in: query
-        name: include
-        type: string
       responses:
         '200':
           description: OK Response
@@ -922,6 +1000,52 @@ paths:
             $ref: '#/definitions/CourseResponse'
         '404':
           $ref: '#/responses/NotFound'
+
+  /courses/{id}/sections:
+    get:
+      tags: ["Courses"]
+      description: Returns the sections for a Courses
+      operationId: getSectionsForCourse
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /courses/{id}/district:
+    get:
+      tags: ["Courses"]
+      description: Returns the district for a course
+      operationId: getDistrictForCourse
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
 
   /events:
     get:
