@@ -1942,6 +1942,12 @@ definitions:
       object:
         $ref: "#/definitions/SchoolAdmin"
 
+  DistrictAdminObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/DistrictAdmin"
+
   SectionObject:
     type: object
     properties:
@@ -1965,6 +1971,18 @@ definitions:
     properties:
       object:
         $ref: "#/definitions/District"
+
+  TermObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/Term"
+
+  CourseObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/Course"
 
   EventsResponse:
     type: object
@@ -2132,32 +2150,32 @@ definitions:
           data:
             $ref: "#/definitions/SchoolAdminObject"
 
-  studentcontacts.updated:
+  contacts.updated:
     allOf:
       - $ref: "#/definitions/Event"
       - type: object
         properties:
           data:
-            $ref: "#/definitions/StudentContactObject"
+            $ref: "#/definitions/ContactObject"
           previous_attributes:
             additionalProperties:
               type: object
 
-  studentcontacts.created:
+  contacts.created:
     allOf:
       - $ref: "#/definitions/Event"
       - type: object
         properties:
           data:
-            $ref: "#/definitions/StudentContactObject"
+            $ref: "#/definitions/ContactObject"
 
-  studentcontacts.deleted:
+  contacts.deleted:
     allOf:
       - $ref: "#/definitions/Event"
       - type: object
         properties:
           data:
-            $ref: "#/definitions/StudentContactObject"
+            $ref: "#/definitions/ContactObject"
 
   districts.updated:
     allOf:
@@ -2185,3 +2203,84 @@ definitions:
         properties:
           data:
             $ref: "#/definitions/DistrictObject"
+
+  terms.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/TermObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  terms.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/TermObject"
+
+  terms.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/TermObject"
+
+  courses.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/CourseObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  courses.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/CourseObject"
+
+  courses.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/CourseObject"
+
+  districtadmins.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/DistrictAdminObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  districtadmins.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/DistrictAdminObject"
+
+  districtadmins.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/DistrictAdminObject"
