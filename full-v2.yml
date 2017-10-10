@@ -800,23 +800,30 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
-  /contacts/{id}/student:
+  /contacts/{id}/students:
     get:
       tags: ["Contacts"]
-      description: Returns the student for a student contact
-      operationId: getStudentForContact
+      description: Returns the students for a student contact
+      operationId: getStudentsForContact
       parameters:
       - in: path
         name: id
         required: true
         type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
       responses:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: '#/definitions/StudentsResponse'
 
   /district_admins:
     get:
