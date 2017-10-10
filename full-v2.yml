@@ -803,6 +803,24 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
+  /district_admins/{id}/district:
+    get:
+      tags: ["District Admins"]
+      description: Returns the district for a district admin
+      operationId: getDistrictForDistrictAdmin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
   /school_admins:
     get:
       tags: ["School Admins"]
@@ -842,6 +860,24 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolAdminResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /school_admins/{id}/district:
+    get:
+      tags: ["School Admins"]
+      description: Returns the district for a school admin
+      operationId: getDistrictForSchoolAdmin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
         '404':
           $ref: '#/responses/NotFound'
 
