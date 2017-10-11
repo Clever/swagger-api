@@ -17,6 +17,11 @@ definitions:
         type: string
         x-nullable: true
     type: object
+  CourseObject:
+    properties:
+      object:
+        $ref: '#/definitions/Course'
+    type: object
   CourseResponse:
     properties:
       data:
@@ -93,6 +98,11 @@ definitions:
       title:
         type: string
         x-nullable: true
+    type: object
+  DistrictAdminObject:
+    properties:
+      object:
+        $ref: '#/definitions/DistrictAdmin'
     type: object
   DistrictAdminResponse:
     properties:
@@ -774,6 +784,11 @@ definitions:
         x-nullable: true
         x-validation: true
     type: object
+  TermObject:
+    properties:
+      object:
+        $ref: '#/definitions/Term'
+    type: object
   TermResponse:
     properties:
       data:
@@ -786,6 +801,78 @@ definitions:
           $ref: '#/definitions/TermResponse'
         type: array
     type: object
+  contacts.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/ContactObject'
+      type: object
+  contacts.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/ContactObject'
+      type: object
+  contacts.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/ContactObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+  courses.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/CourseObject'
+      type: object
+  courses.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/CourseObject'
+      type: object
+  courses.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/CourseObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+  districtadmins.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/DistrictAdminObject'
+      type: object
+  districtadmins.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/DistrictAdminObject'
+      type: object
+  districtadmins.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/DistrictAdminObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
   districts.created:
     allOf:
     - $ref: '#/definitions/Event'
@@ -882,30 +969,6 @@ definitions:
           additionalProperties:
             type: object
       type: object
-  studentcontacts.created:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/StudentContactObject'
-      type: object
-  studentcontacts.deleted:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/StudentContactObject'
-      type: object
-  studentcontacts.updated:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/StudentContactObject'
-        previous_attributes:
-          additionalProperties:
-            type: object
-      type: object
   students.created:
     allOf:
     - $ref: '#/definitions/Event'
@@ -950,6 +1013,30 @@ definitions:
     - properties:
         data:
           $ref: '#/definitions/TeacherObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+  terms.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/TermObject'
+      type: object
+  terms.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/TermObject'
+      type: object
+  terms.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/TermObject'
         previous_attributes:
           additionalProperties:
             type: object
