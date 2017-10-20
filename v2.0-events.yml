@@ -60,6 +60,9 @@ definitions:
         x-nullable: true
       name:
         type: string
+      nces_id:
+        type: string
+        x-nullable: true
       pause_end:
         format: datetime
         type: string

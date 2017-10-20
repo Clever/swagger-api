@@ -1789,6 +1789,9 @@ definitions:
       mdr_number:
         type: string
         x-nullable: true
+      nces_id:
+        type: string
+        x-nullable: true
       sis_type:
         type: string
         x-validation: true
