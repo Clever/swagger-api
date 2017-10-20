@@ -360,15 +360,6 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
-      course_description:
-        type: string
-        x-nullable: true
-      course_name:
-        type: string
-        x-nullable: true
-      course_number:
-        type: string
-        x-nullable: true
       created:
         format: datetime
         type: string
