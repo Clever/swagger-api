@@ -1129,6 +1129,15 @@ paths:
       - in: query
         name: ending_before
         type: string
+      - in: query
+        name: school
+        type: string
+      - in: query
+        name: record_type
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
       responses:
         '200':
           description: OK Response

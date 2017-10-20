@@ -1313,6 +1313,15 @@ paths:
       - in: query
         name: ending_before
         type: string
+      - in: query
+        name: school
+        type: string
+      - collectionFormat: multi
+        in: query
+        items:
+          type: string
+        name: record_type
+        type: array
       responses:
         "200":
           description: OK Response
