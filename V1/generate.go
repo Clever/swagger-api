@@ -1,4 +1,4 @@
-package main
+package V1
 
 import (
 	"io/ioutil"
@@ -8,7 +8,7 @@ import (
 	"gopkg.in/v1/yaml"
 )
 
-func main() {
+func Generate() {
 
 	fullBytes, err := ioutil.ReadFile("./full-v1.yml")
 	if err != nil {
