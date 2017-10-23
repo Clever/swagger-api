@@ -1529,9 +1529,11 @@ definitions:
       sis_id:
         type: string
         x-nullable: true
-      student:
-        type: string
+      students:
+        type: array
         x-validation: true
+        items:
+          type: string
       type:
         type: string
 
