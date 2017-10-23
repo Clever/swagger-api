@@ -280,7 +280,7 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactsResponse'
+            $ref: '#/definitions/ContactsResponse'
         '404':
           $ref: '#/responses/NotFound'
 
@@ -741,7 +741,7 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactsResponse'
+            $ref: '#/definitions/ContactsResponse'
 
   /contacts/{id}:
     get:
@@ -757,7 +757,7 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactResponse'
+            $ref: '#/definitions/ContactResponse'
         '404':
           $ref: '#/responses/NotFound'
 
@@ -765,7 +765,7 @@ paths:
     get:
       tags: ["Contacts"]
       description: Returns the district for a student contact
-      operationId: getDistrictForStudentContact
+      operationId: getDistrictForContact
       parameters:
       - in: path
         name: id
@@ -1205,19 +1205,19 @@ definitions:
       data:
         $ref: "#/definitions/Student"
 
-  StudentContactsResponse:
+  ContactsResponse:
     type: object
     properties:
       data:
         type: array
         items:
-           $ref: "#/definitions/StudentContactResponse"
+           $ref: "#/definitions/ContactResponse"
 
-  StudentContactResponse:
+  ContactResponse:
     type: object
     properties:
       data:
-        $ref: "#/definitions/StudentContact"
+        $ref: "#/definitions/Contact"
 
   TeachersResponse:
     type: object
@@ -1503,7 +1503,7 @@ definitions:
         type: string
         x-nullable: true
 
-  StudentContact:
+  Contact:
     type: object
     properties:
       id:
@@ -1957,11 +1957,11 @@ definitions:
       object:
         $ref: "#/definitions/Section"
 
-  StudentContactObject:
+  ContactObject:
     type: object
     properties:
       object:
-        $ref: "#/definitions/StudentContact"
+        $ref: "#/definitions/Contact"
 
   SchoolObject:
     type: object
