@@ -1526,6 +1526,14 @@ definitions:
       relationship:
         type: string
         x-nullable: true
+        x-validation: true
+        enum:
+        - "Parent"
+        - "Grandparent"
+        - "Self"
+        - "Aunt/Uncle"
+        - "Sibling"
+        - "Other"
       sis_id:
         type: string
         x-nullable: true
@@ -1536,6 +1544,14 @@ definitions:
           type: string
       type:
         type: string
+        x-validation: true
+        enum:
+        - "Parent/Guardian"
+        - "Emergency"
+        - "Primary"
+        - "Secondary"
+        - "Family"
+        - "Other"
 
   Teacher:
     type: object
