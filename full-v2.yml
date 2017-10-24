@@ -1,0 +1,2309 @@
+swagger: '2.0'
+info:
+  title: Data API
+  description: Serves the Clever Data API
+  version: 2.0.0
+schemes:
+  - https
+produces:
+  - application/json
+host: api.clever.com
+
+x-samples-languages: [
+    "curl",
+    "node",
+    "ruby",
+    "python",
+    "php",
+    "java",
+    "go"
+  ]
+
+responses:
+  BadRequest:
+    description: Bad Request
+    schema:
+      $ref: "#/definitions/BadRequest"
+
+  InternalError:
+    description: Internal Error
+    schema:
+      $ref: "#/definitions/InternalError"
+
+  NotFound:
+    description: Entity Not Found
+    schema:
+      $ref: "#/definitions/NotFound"
+
+security:
+  - oauth: []
+
+paths:
+  /districts:
+    get:
+      tags: ["Districts"]
+      description: Returns a list of districts
+      operationId: getDistricts
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictsResponse'
+
+  /districts/{id}:
+    get:
+      tags: ["Districts"]
+      description: Returns a specific district
+      operationId: getDistrict
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /teachers:
+    get:
+      tags: ["Teachers"]
+      description: Returns a list of teachers
+      operationId: getTeachers
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TeachersResponse'
+
+  /teachers/{id}:
+    get:
+      tags: ["Teachers"]
+      description: Returns a specific teacher
+      operationId: getTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TeacherResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /teachers/{id}/district:
+    get:
+      tags: ["Teachers"]
+      description: Returns the district for a teacher
+      operationId: getDistrictForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /teachers/{id}/school:
+    get:
+      tags: ["Teachers"]
+      description: Retrieves school info for a teacher.
+      operationId: getSchoolForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /teachers/{id}/sections:
+    get:
+      tags: ["Teachers"]
+      description: Returns the sections for a teacher
+      operationId: getSectionsForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /teachers/{id}/students:
+    get:
+      tags: ["Teachers"]
+      description: Returns the students for a teacher
+      operationId: getStudentsForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /teachers/{id}/schools:
+    get:
+      tags: ["Teachers"]
+      description: Returns the schools for a teacher
+      operationId: getSchoolsForTeacher
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students:
+    get:
+      tags: ["Students"]
+      description: Returns a list of students
+      operationId: getStudents
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentsResponse'
+
+  /students/{id}:
+    get:
+      tags: ["Students"]
+      description: Returns a specific student
+      operationId: getStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/contacts:
+    get:
+      tags: ["Students"]
+      description: Returns the contacts for a student
+      operationId: getContactsForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/ContactsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/district:
+    get:
+      tags: ["Students"]
+      description: Returns the district for a student
+      operationId: getDistrictForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/school:
+    get:
+      tags: ["Students"]
+      description: Returns the primary school for a student
+      operationId: getSchoolForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/sections:
+    get:
+      tags: ["Students"]
+      description: Returns the sections for a student
+      operationId: getSectionsForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/teachers:
+    get:
+      tags: ["Students"]
+      description: Returns the teachers for a student
+      operationId: getTeachersForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TeachersResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /students/{id}/schools:
+    get:
+      tags: ["Students"]
+      description: Returns the schools for a student
+      operationId: getSchoolsForStudent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections:
+    get:
+      tags: ["Sections"]
+      description: Returns a list of sections
+      operationId: getSections
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+
+  /sections/{id}:
+    get:
+      tags: ["Sections"]
+      description: Returns a specific section
+      operationId: getSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/district:
+    get:
+      tags: ["Sections"]
+      description: Returns the district for a section
+      operationId: getDistrictForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/school:
+    get:
+      tags: ["Sections"]
+      description: Returns the school for a section
+      operationId: getSchoolForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/students:
+    get:
+      tags: ["Sections"]
+      description: Returns the students for a section
+      operationId: getStudentsForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/teacher:
+    get:
+      tags: ["Sections"]
+      description: Returns the primary teacher for a section
+      operationId: getTeacherForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TeacherResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/teachers:
+    get:
+      tags: ["Sections"]
+      description: Returns the teachers for a section
+      operationId: getTeachersForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TeachersResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/course:
+    get:
+      tags: ["Sections"]
+      description: Returns the course for a section
+      operationId: getCourseForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/CourseResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{id}/term:
+    get:
+      tags: ["Sections"]
+      description: Returns the term for a section
+      operationId: getTermForSection
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TermResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /schools:
+    get:
+      tags: ["Schools"]
+      description: Returns a list of schools
+      operationId: getSchools
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolsResponse'
+
+  /schools/{id}:
+    get:
+      tags: ["Schools"]
+      description: Returns a specific school
+      operationId: getSchool
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /schools/{id}/district:
+    get:
+      tags: ["Schools"]
+      description: Returns the district for a school
+      operationId: getDistrictForSchool
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /schools/{id}/sections:
+    get:
+      tags: ["Schools"]
+      description: Returns the sections for a school
+      operationId: getSectionsForSchool
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /schools/{id}/students:
+    get:
+      tags: ["Schools"]
+      description: Returns the students for a school
+      operationId: getStudentsForSchool
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /schools/{id}/teachers:
+    get:
+      tags: ["Schools"]
+      description: Returns the teachers for a school
+      operationId: getTeachersForSchool
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TeachersResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /contacts:
+    get:
+      tags: ["Contacts"]
+      description: Returns a list of student contacts
+      operationId: getContacts
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/ContactsResponse'
+
+  /contacts/{id}:
+    get:
+      tags: ["Contacts"]
+      description: Returns a specific student contact
+      operationId: getContact
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/ContactResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /contacts/{id}/district:
+    get:
+      tags: ["Contacts"]
+      description: Returns the district for a student contact
+      operationId: getDistrictForContact
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /contacts/{id}/students:
+    get:
+      tags: ["Contacts"]
+      description: Returns the students for a student contact
+      operationId: getStudentsForContact
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/StudentsResponse'
+
+  /district_admins:
+    get:
+      tags: ["District Admins"]
+      description: Returns a list of district admins
+      operationId: getDistrictAdmins
+      parameters:
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      - in: query
+        name: show_links
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictAdminsResponse'
+
+  /district_admins/{id}:
+    get:
+      tags: ["District Admins"]
+      description: Returns a specific district admin
+      operationId: getDistrictAdmin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictAdminResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /district_admins/{id}/district:
+    get:
+      tags: ["District Admins"]
+      description: Returns the district for a district admin
+      operationId: getDistrictForDistrictAdmin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /school_admins:
+    get:
+      tags: ["School Admins"]
+      description: Returns a list of school admins
+      operationId: getSchoolAdmins
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolAdminsResponse'
+
+  /school_admins/{id}:
+    get:
+      tags: ["School Admins"]
+      description: Returns a specific school admin
+      operationId: getSchoolAdmin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolAdminResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /school_admins/{id}/district:
+    get:
+      tags: ["School Admins"]
+      description: Returns the district for a school admin
+      operationId: getDistrictForSchoolAdmin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /school_admins/{id}/schools:
+    get:
+      tags: ["School Admins"]
+      description: Returns the schools for a school admin
+      operationId: getSchoolsForSchoolAdmin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SchoolsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /terms:
+    get:
+      tags: ["Terms"]
+      description: Returns a list of terms
+      operationId: getTerms
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TermsResponse'
+
+  /terms/{id}:
+    get:
+      tags: ["Terms"]
+      description: Returns a specific term
+      operationId: getTerm
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/TermResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /terms/{id}/sections:
+    get:
+      tags: ["Terms"]
+      description: Returns the sections for a term
+      operationId: getSectionsForTerm
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /terms/{id}/district:
+    get:
+      tags: ["Terms"]
+      description: Returns the district for a term
+      operationId: getDistrictForTerm
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /courses:
+    get:
+      tags: ["Courses"]
+      description: Returns a list of courses
+      operationId: getCourses
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/CoursesResponse'
+
+  /courses/{id}:
+    get:
+      tags: ["Courses"]
+      description: Returns a specific course
+      operationId: getCourse
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/CourseResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /courses/{id}/sections:
+    get:
+      tags: ["Courses"]
+      description: Returns the sections for a Courses
+      operationId: getSectionsForCourse
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/SectionsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /courses/{id}/district:
+    get:
+      tags: ["Courses"]
+      description: Returns the district for a course
+      operationId: getDistrictForCourse
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/DistrictResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+
+  /events:
+    get:
+      tags: ["Events"]
+      description: Returns a list of events
+      operationId: getEvents
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      - in: query
+        name: school
+        type: string
+      - in: query
+        name: record_type
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/EventsResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /events/{id}:
+    get:
+      tags: ["Events"]
+      description: Returns the specific event
+      operationId: getEvent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/EventResponse'
+        '404':
+          $ref: '#/responses/NotFound'
+
+securityDefinitions:
+  oauth:
+    type: oauth2
+    flow: accessCode
+    authorizationUrl: https://clever.com/oauth/authorize
+    tokenUrl: https://clever.com/oauth/tokens
+    x-default: DEMO_TOKEN
+
+definitions:
+  NotFound:
+    type: object
+    properties:
+      message:
+        type: string
+
+  InternalError:
+    type: object
+    properties:
+      message:
+        type: string
+
+  BadRequest:
+    type: object
+    properties:
+      message:
+        type: string
+
+  StudentsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/StudentResponse"
+
+  StudentResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Student"
+
+  ContactsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/ContactResponse"
+
+  ContactResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Contact"
+
+  TeachersResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/TeacherResponse"
+
+  TeacherResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Teacher"
+
+  SectionsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/SectionResponse"
+
+  SectionResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Section"
+
+  SchoolsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/SchoolResponse"
+
+  SchoolResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/School"
+
+  SchoolAdminsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/SchoolAdminResponse"
+
+  SchoolAdminResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/SchoolAdmin"
+
+  TermsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/TermResponse"
+
+  TermResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Term"
+
+  CoursesResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/CourseResponse"
+
+  CourseResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Course"
+
+  DistrictsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/DistrictResponse"
+
+  DistrictResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/District"
+
+  DistrictAdminsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+           $ref: "#/definitions/DistrictAdminResponse"
+
+  DistrictAdminResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/DistrictAdmin"
+
+  Student:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      created:
+        type: string
+        format: datetime
+        x-validation: true
+      credentials:
+        $ref: "#/definitions/Credentials"
+      district:
+        type: string
+        x-validation: true
+      dob:
+        type: string
+        format: datetime
+        x-nullable: true
+        x-validation: true
+      ell_status:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "Y"
+        - "N"
+        - ""
+      email:
+        type: string
+        x-nullable: true
+      gender:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "M"
+        - "F"
+        - ""
+      graduation_year:
+        type: string
+        x-nullable: true
+        x-validation: true
+      grade:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "PreKindergarten"
+        - "Kindergarten"
+        - "PostGraduate"
+        - "Other"
+      hispanic_ethnicity:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "Y"
+        - "N"
+        - ""
+      home_language:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - English
+        - Albanian
+        - Amharic
+        - Arabic
+        - Bengali
+        - Bosnian
+        - Burmese
+        - Cantonese
+        - Chinese
+        - Dutch
+        - Farsi
+        - French
+        - German
+        - Hebrew
+        - Hindi
+        - Hmong
+        - Ilocano
+        - Japanese
+        - Javanese
+        - Karen
+        - Khmer
+        - Korean
+        - Laotian
+        - Latvian
+        - Malay
+        - Mandarin
+        - Nepali
+        - Oromo
+        - Polish
+        - Portuguese
+        - Punjabi
+        - Romanian
+        - Russian
+        - Samoan
+        - Serbian
+        - Somali
+        - Spanish
+        - Swahili
+        - Tagalog
+        - Tamil
+        - Telegu
+        - Thai
+        - Tigrinya
+        - Turkish
+        - Ukrainian
+        - Urdu
+        - Vietnamese
+      iep_status:
+        type: string
+        x-nullable: true
+      last_modified:
+        type: string
+        format: datetime
+        x-validation: true
+      location:
+        $ref: "#/definitions/Location"
+        x-nullable: true
+      name:
+        $ref: "#/definitions/Name"
+      race:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "Caucasian"
+        - "Asian"
+        - "Black or African American"
+        - "American Indian"
+        - "Hawaiian or Other Pacific Islander"
+        - "Two or More Races"
+        - "Unknown"
+        - ""
+      school:
+        type: string
+        x-validation: true
+      schools:
+        type: array
+        x-validation: true
+        items:
+          type: string
+      sis_id:
+        type: string
+      state_id:
+        type: string
+        x-nullable: true
+      student_number:
+        type: string
+        x-nullable: true
+      unweighted_gpa:
+        type: string
+        x-nullable: true
+      weighted_gpa:
+        type: string
+        x-nullable: true
+
+  Contact:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      district:
+        type: string
+        x-validation: true
+      email:
+        type: string
+        x-nullable: true
+      name:
+        type: string
+      phone:
+        type: string
+        x-nullable: true
+      phone_type:
+        type: string
+        x-nullable: true
+      relationship:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "Parent"
+        - "Grandparent"
+        - "Self"
+        - "Aunt/Uncle"
+        - "Sibling"
+        - "Other"
+        - ""
+      sis_id:
+        type: string
+        x-nullable: true
+      students:
+        type: array
+        x-validation: true
+        items:
+          type: string
+      type:
+        type: string
+        x-validation: true
+        enum:
+        - "Parent/Guardian"
+        - "Emergency"
+        - "Primary"
+        - "Secondary"
+        - "Family"
+        - "Other"
+        - ""
+
+  Teacher:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      created:
+        type: string
+        format: datetime
+        x-validation: true
+      credentials:
+        $ref: "#/definitions/Credentials"
+        x-nullable: true
+      district:
+        type: string
+        x-validation: true
+      email:
+        type: string
+        x-nullable: true
+      last_modified:
+        type: string
+        format: datetime
+        x-validation: true
+      name:
+        $ref: "#/definitions/Name"
+      school:
+        type: string
+        x-validation: true
+      schools:
+        type: array
+        x-validation: true
+        items:
+          type: string
+      sis_id:
+        type: string
+      state_id:
+        type: string
+        x-nullable: true
+      teacher_number:
+        type: string
+        x-nullable: true
+      title:
+        type: string
+        x-nullable: true
+
+  Section:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      course:
+        type: string
+        x-validation: true
+        x-nullable: true
+      created:
+        type: string
+        format: datetime
+        x-validation: true
+      district:
+        type: string
+        x-validation: true
+      grade:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "PreKindergarten"
+        - "Kindergarten"
+        - "PostGraduate"
+        - "Other"
+      last_modified:
+        type: string
+        format: datetime
+        x-validation: true
+      name:
+        type: string
+      period:
+        type: string
+        x-nullable: true
+      school:
+        type: string
+        x-validation: true
+      section_number:
+        type: string
+        x-nullable: true
+      sis_id:
+        type: string
+      students:
+        type: array
+        x-validation: true
+        items:
+          type: string
+      subject:
+        type: string
+        x-validation: true
+        enum:
+        - "english/language arts"
+        - "math"
+        - "science"
+        - "social studies"
+        - "language"
+        - "homeroom/advisory"
+        - "interventions/online learning"
+        - "technology and engineering"
+        - "PE and health"
+        - "arts and music"
+        - "other"
+      teacher:
+        type: string
+        x-nullable: true
+        x-validation: true
+      teachers:
+        type: array
+        x-validation: true
+        items:
+          type: string
+      term_id:
+        type: string
+        x-validation: true
+        x-nullable: true
+
+  School:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      created:
+        type: string
+        format: datetime
+        x-validation: true
+      district:
+        type: string
+        x-validation: true
+      high_grade:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "PreKindergarten"
+        - "Kindergarten"
+        - "PostGraduate"
+        - "Other"
+      last_modified:
+        type: string
+        format: datetime
+        x-validation: true
+      location:
+        $ref: "#/definitions/Location"
+        x-nullable: true
+      low_grade:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "PreKindergarten"
+        - "Kindergarten"
+        - "PostGraduate"
+        - "Other"
+      name:
+        type: string
+      nces_id:
+        type: string
+        x-nullable: true
+      phone:
+        type: string
+        x-nullable: true
+      principal:
+        $ref: "#/definitions/Principal"
+      school_number:
+        type: string
+      sis_id:
+        type: string
+      state_id:
+        type: string
+        x-nullable: true
+      mdr_number:
+        type: string
+        x-nullable: true
+
+  SchoolAdmin:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      credentials:
+        $ref: "#/definitions/Credentials"
+      district:
+        type: string
+        x-validation: true
+      email:
+        type: string
+      name:
+        $ref: "#/definitions/Name"
+      schools:
+        type: array
+        x-validation: true
+        items:
+          type: string
+      staff_id:
+        type: string
+      title:
+        type: string
+        x-nullable: true
+
+  District:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      name:
+        type: string
+      mdr_number:
+        type: string
+        x-nullable: true
+      nces_id:
+        type: string
+        x-nullable: true
+      sis_type:
+        type: string
+        x-validation: true
+      state:
+        type: string
+        x-validation: true
+        enum:
+        - "running"
+        - "pending"
+        - "error"
+        - "paused"
+      last_sync:
+        type: string
+        x-validation: true
+        x-nullable: true
+        format: datetime
+      error:
+        type: string
+      pause_start:
+        type: string
+        x-validation: true
+        x-nullable: true
+        format: datetime
+      pause_end:
+        type: string
+        x-validation: true
+        x-nullable: true
+        format: datetime
+      launch_date:
+        type: string
+        x-validation: true
+        format: datetime
+
+  DistrictAdmin:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      name:
+        $ref: "#/definitions/Name"
+        x-nullable: true
+      email:
+        type: string
+      title:
+        type: string
+        x-nullable: true
+      district:
+        type: string
+        x-validation: true
+
+  Name:
+    type: object
+    properties:
+      first:
+        type: string
+        x-nullable: true
+      middle:
+        type: string
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+
+  Location:
+    type: object
+    properties:
+      address:
+        type: string
+        x-nullable: true
+      city:
+        type: string
+        x-nullable: true
+      state:
+        type: string
+        x-nullable: true
+      zip:
+        type: string
+        x-nullable: true
+      lat:
+        type: string
+        x-nullable: true
+      lon:
+        type: string
+        x-nullable: true
+
+  Term:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      name:
+        type: string
+        x-nullable: true
+      start_date:
+        type: string
+        format: datetime
+        x-nullable: true
+        x-validation: true
+      end_date:
+        type: string
+        format: datetime
+        x-nullable: true
+        x-validation: true
+
+  Course:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      name:
+        type: string
+        x-nullable: true
+      number:
+        type: string
+        x-nullable: true
+
+  Credentials:
+    type: object
+    properties:
+      district_username:
+        type: string
+
+  Principal:
+    type: object
+    properties:
+      name:
+        type: string
+        x-nullable: true
+      email:
+        type: string
+        x-nullable: true
+
+  StudentObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/Student"
+
+  TeacherObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/Teacher"
+
+  SchoolAdminObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/SchoolAdmin"
+
+  DistrictAdminObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/DistrictAdmin"
+
+  SectionObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/Section"
+
+  ContactObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/Contact"
+
+  SchoolObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/School"
+
+  DistrictObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/District"
+
+  TermObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/Term"
+
+  CourseObject:
+    type: object
+    properties:
+      object:
+        $ref: "#/definitions/Course"
+
+  EventsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/EventResponse"
+
+  EventResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Event"
+
+  Event:
+    type: object
+    discriminator: type
+    properties:
+      type:
+        type: string
+        x-validation: true
+      id:
+        type: string
+        x-validation: true
+      created:
+        type: string
+        x-validation: true
+        format: datetime
+    required:
+    - type
+
+  students.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/StudentObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  students.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/StudentObject"
+
+  students.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/StudentObject"
+
+  teachers.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/TeacherObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  teachers.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/TeacherObject"
+
+  teachers.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/TeacherObject"
+
+  sections.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/SectionObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  sections.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/SectionObject"
+
+  sections.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/SectionObject"
+
+  schools.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/SchoolObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  schools.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/SchoolObject"
+
+  schools.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/SchoolObject"
+
+  schooladmins.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/SchoolAdminObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  schooladmins.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/SchoolAdminObject"
+
+  schooladmins.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/SchoolAdminObject"
+
+  contacts.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/ContactObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  contacts.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/ContactObject"
+
+  contacts.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/ContactObject"
+
+  districts.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/DistrictObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  districts.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/DistrictObject"
+
+  districts.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/DistrictObject"
+
+  terms.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/TermObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  terms.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/TermObject"
+
+  terms.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/TermObject"
+
+  courses.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/CourseObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  courses.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/CourseObject"
+
+  courses.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/CourseObject"
+
+  districtadmins.updated:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/DistrictAdminObject"
+          previous_attributes:
+            additionalProperties:
+              type: object
+
+  districtadmins.created:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/DistrictAdminObject"
+
+  districtadmins.deleted:
+    allOf:
+      - $ref: "#/definitions/Event"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/DistrictAdminObject"
