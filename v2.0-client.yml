@@ -5,6 +5,74 @@ definitions:
       message:
         type: string
     type: object
+  Contact:
+    properties:
+      district:
+        type: string
+        x-validation: true
+      email:
+        type: string
+        x-nullable: true
+      id:
+        type: string
+        x-validation: true
+      name:
+        type: string
+      phone:
+        type: string
+        x-nullable: true
+      phone_type:
+        type: string
+        x-nullable: true
+      relationship:
+        enum:
+        - Parent
+        - Grandparent
+        - Self
+        - Aunt/Uncle
+        - Sibling
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      sis_id:
+        type: string
+        x-nullable: true
+      students:
+        items:
+          type: string
+        type: array
+        x-validation: true
+      type:
+        enum:
+        - Parent/Guardian
+        - Emergency
+        - Primary
+        - Secondary
+        - Family
+        - Other
+        - ""
+        type: string
+        x-validation: true
+    type: object
+  ContactObject:
+    properties:
+      object:
+        $ref: '#/definitions/Contact'
+    type: object
+  ContactResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Contact'
+    type: object
+  ContactsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/ContactResponse'
+        type: array
+    type: object
   Course:
     properties:
       id:
@@ -633,54 +701,6 @@ definitions:
         type: string
         x-nullable: true
     type: object
-  StudentContact:
-    properties:
-      district:
-        type: string
-        x-validation: true
-      email:
-        type: string
-        x-nullable: true
-      id:
-        type: string
-        x-validation: true
-      name:
-        type: string
-      phone:
-        type: string
-        x-nullable: true
-      phone_type:
-        type: string
-        x-nullable: true
-      relationship:
-        type: string
-        x-nullable: true
-      sis_id:
-        type: string
-        x-nullable: true
-      student:
-        type: string
-        x-validation: true
-      type:
-        type: string
-    type: object
-  StudentContactObject:
-    properties:
-      object:
-        $ref: '#/definitions/StudentContact'
-    type: object
-  StudentContactResponse:
-    properties:
-      data:
-        $ref: '#/definitions/StudentContact'
-    type: object
-  StudentContactsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/StudentContactResponse'
-        type: array
-    type: object
   StudentObject:
     properties:
       object:
@@ -1059,7 +1079,7 @@ paths:
         "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactsResponse'
+            $ref: '#/definitions/ContactsResponse'
       tags:
       - Data
   /contacts/{id}:
@@ -1075,7 +1095,7 @@ paths:
         "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactResponse'
+            $ref: '#/definitions/ContactResponse'
         "404":
           $ref: '#/responses/NotFound'
       tags:
@@ -1083,7 +1103,7 @@ paths:
   /contacts/{id}/district:
     get:
       description: Returns the district for a student contact
-      operationId: getDistrictForStudentContact
+      operationId: getDistrictForContact
       parameters:
       - in: path
         name: id
@@ -1803,7 +1823,7 @@ paths:
         "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactsResponse'
+            $ref: '#/definitions/ContactsResponse'
         "404":
           $ref: '#/responses/NotFound'
       tags:
