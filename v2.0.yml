@@ -859,9 +859,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
-        name: show_links
-        type: string
       responses:
         "200":
           description: OK Response
