@@ -1390,6 +1390,12 @@ paths:
       - in: query
         name: limit
         type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
       responses:
         "200":
           description: OK Response
