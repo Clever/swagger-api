@@ -854,6 +854,9 @@ paths:
       operationId: getDistrictAdmins
       parameters:
       - in: query
+        name: limit
+        type: integer
+      - in: query
         name: starting_after
         type: string
       - in: query
