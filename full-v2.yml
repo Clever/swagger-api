@@ -1529,6 +1529,13 @@ definitions:
       phone_type:
         type: string
         x-nullable: true
+        x-validation: true
+        enum:
+        - Cell
+        - Home
+        - Work
+        - Other
+        - ""
       relationship:
         type: string
         x-nullable: true

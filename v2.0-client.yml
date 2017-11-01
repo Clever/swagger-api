@@ -22,8 +22,15 @@ definitions:
         type: string
         x-nullable: true
       phone_type:
+        enum:
+        - Cell
+        - Home
+        - Work
+        - Other
+        - ""
         type: string
         x-nullable: true
+        x-validation: true
       relationship:
         enum:
         - Parent
