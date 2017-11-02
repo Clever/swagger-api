@@ -164,7 +164,6 @@ func generateEventsApiYml(i map[interface{}]interface{}, version string) ([]byte
 	info["title"] = "Events API"
 	info["description"] = "The Clever Events API"
 	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
-	m["securityDefinitions"].(map[interface{}]interface{})["oauth"].(map[interface{}]interface{})["x-default"] = "DEMO_EVENTS_TOKEN"
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path := range paths {
