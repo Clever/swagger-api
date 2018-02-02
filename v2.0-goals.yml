@@ -1,0 +1,87 @@
+basePath: /v2.0
+definitions:
+  BadRequest:
+    properties:
+      message:
+        type: string
+    type: object
+  InternalError:
+    properties:
+      message:
+        type: string
+    type: object
+  NotFound:
+    properties:
+      message:
+        type: string
+    type: object
+  PostMetricsRequest:
+    properties:
+      data:
+        $ref: '#/definitions/PostMetricsData'
+  PostMetricsData:
+    properties:
+      students:
+        type: array
+        items:
+          $ref: '#/definitions/StudentMetric'
+  StudentMetric:
+    properties:
+      clever_id:
+        type: string
+        x-validation: true
+      metrics:
+        type: object
+host: api.clever.com
+info:
+  description: The Clever Goals API
+  title: Goals API
+  version: 2.0.0
+paths:
+  /metrics:
+    post:
+      description: Upload a list of student metrics
+      operationId: postMetrics
+      parameters:
+      - name: data
+        in: body
+        schema:
+          $ref: '#/definitions/PostMetricsRequest'
+      responses:
+        "200":
+          description: OK Response
+produces:
+- application/json
+responses:
+  BadRequest:
+    description: Bad Request
+    schema:
+      $ref: '#/definitions/BadRequest'
+  InternalError:
+    description: Internal Error
+    schema:
+      $ref: '#/definitions/InternalError'
+  NotFound:
+    description: Entity Not Found
+    schema:
+      $ref: '#/definitions/NotFound'
+schemes:
+- https
+security:
+- oauth: []
+securityDefinitions:
+  oauth:
+    authorizationUrl: https://clever.com/oauth/authorize
+    flow: accessCode
+    tokenUrl: https://clever.com/oauth/tokens
+    type: oauth2
+    x-default: TEST_TOKEN
+swagger: "2.0"
+x-samples-languages:
+- curl
+- node
+- ruby
+- python
+- php
+- java
+- go
