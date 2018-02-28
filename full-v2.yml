@@ -35,6 +35,11 @@ responses:
     schema:
       $ref: "#/definitions/NotFound"
 
+  Unauthorized:
+    description: Unauthorized
+    schema:
+      $ef: "#/definitions/Unauthorized"
+
 security:
   - oauth: []
 
@@ -1184,6 +1189,19 @@ paths:
         '200':
           description: OK Response
 
+  /me:
+    get:
+      tags: ["Identity"]
+      description: Returns the owner of the user token
+      operationId: getMe
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: '#/definitions/MeResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
+
 securityDefinitions:
   oauth:
     type: oauth2
@@ -1206,6 +1224,12 @@ definitions:
         type: string
 
   BadRequest:
+    type: object
+    properties:
+      message:
+        type: string
+
+  Unauthorized:
     type: object
     properties:
       message:
@@ -2354,3 +2378,22 @@ definitions:
         x-validation: true
       metrics:
         type: object
+
+  MeResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Me"
+
+  Me:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      district:
+        type: string
+        x-validation: true
+      type:
+        type: string
+        x-validation: true
