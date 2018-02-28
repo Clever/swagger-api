@@ -1169,6 +1169,7 @@ paths:
             $ref: '#/definitions/EventResponse'
         '404':
           $ref: '#/responses/NotFound'
+
   /metrics:
     post:
       tags: ["Metrics"]
