@@ -2339,12 +2339,14 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/PostMetricsData'
+
   PostMetricsData:
     properties:
       students:
         type: array
         items:
           $ref: '#/definitions/StudentMetric'
+
   StudentMetric:
     properties:
       clever_id:
