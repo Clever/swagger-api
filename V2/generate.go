@@ -44,6 +44,14 @@ func Generate() {
 		log.Fatalf("Error writing events v2.0 API: %s", err)
 	}
 
+	goalsV20, err := generateGoalsApiYml(swagger, "v2.0")
+	if err != nil {
+		log.Fatalf("Error generating goals v2.0 API: %s", err)
+	}
+	if err := ioutil.WriteFile("v2.0-goals.yml", goalsV20, 0644); err != nil {
+		log.Fatalf("Error writing goals v2.0 API: %s", err)
+	}
+
 }
 
 // modifyDefinitions removes fields that don't apply to the particular version / client
@@ -69,7 +77,7 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 }
 
 // generateDataApiYml generates the data API from the base yml for a specific version. It does
-// this by removing things from the yml, for example the /events endpoints.
+// this by removing things from the yml, for example the /events and /metrics endpoints.
 func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, error) {
 	m := deepCopyMap(i)
 
@@ -79,14 +87,14 @@ func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, 
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path := range paths {
-		if strings.Contains(path.(string), "/events") && path.(string) != "/districts/{id}/status" {
+		if (strings.Contains(path.(string), "/events") || strings.Contains(path.(string), "/metrics")) && path.(string) != "/districts/{id}/status" {
 			delete(paths, path)
 			continue
 		}
 	}
 
 	definitions := m["definitions"].(map[interface{}]interface{})
-	// Remove any definitions that are used only for Events
+	// Remove any definitions that are used only for Events or Goals/Metrics
 	for nameInterface, definition := range definitions {
 
 		name := nameInterface.(string)
@@ -99,6 +107,11 @@ func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, 
 		}
 
 		if strings.HasPrefix(name, "Event") {
+			delete(definitions, nameInterface)
+			continue
+		}
+
+		if strings.Contains(name, "Metric") {
 			delete(definitions, nameInterface)
 			continue
 		}
@@ -128,10 +141,53 @@ func generateEventsApiYml(i map[interface{}]interface{}, version string) ([]byte
 		}
 	}
 
-	// The events API needs most of
+	// The events API needs most of these except Metrics
 	definitions := m["definitions"].(map[interface{}]interface{})
 	for nameInterface, definition := range definitions {
 		name := nameInterface.(string)
+
+		if strings.Contains(name, "Metric") {
+			delete(definitions, nameInterface)
+			continue
+		}
+
+		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
+	}
+
+	return yaml.Marshal(m)
+}
+
+// generateGoalsApiYml generates the Goals API from the base yml for a specific version. It does
+// this by removing things from the yml, for example the non /metrics endpoints.
+func generateGoalsApiYml(i map[interface{}]interface{}, version string) ([]byte, error) {
+	m := deepCopyMap(i)
+
+	m["basePath"] = "/" + version
+	info := m["info"].(map[interface{}]interface{})
+	info["title"] = "Goals API"
+	info["description"] = "The Clever Goals API"
+	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
+
+	paths := m["paths"].(map[interface{}]interface{})
+	for path := range paths {
+		if !strings.Contains(path.(string), "/metrics") {
+			delete(paths, path)
+			continue
+		}
+	}
+
+	// The Goals API only needs Metric definitions and status code response definitions
+	responseDefinitions := map[string]bool{"BadRequest":true, "InternalError":true, "NotFound":true}
+	definitions := m["definitions"].(map[interface{}]interface{})
+	for nameInterface, definition := range definitions {
+		name := nameInterface.(string)
+
+
+		if !strings.Contains(name, "Metric") && !responseDefinitions[name] {
+			delete(definitions, nameInterface)
+			continue
+		}
+
 		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
 	}
 
@@ -157,6 +213,8 @@ func generateClientYml(i map[interface{}]interface{}) ([]byte, error) {
 			// Tweak the tags so they show up correctly in the client libraries
 			if strings.Contains(path.(string), "/events") {
 				operation["tags"] = []string{"Events"}
+			} else if strings.Contains(path.(string), "/metrics") {
+				operation["tags"] = []string{"Goals"}
 			} else {
 				operation["tags"] = []string{"Data"}
 			}

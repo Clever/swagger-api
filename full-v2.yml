@@ -1169,6 +1169,19 @@ paths:
             $ref: '#/definitions/EventResponse'
         '404':
           $ref: '#/responses/NotFound'
+  /metrics:
+    post:
+      tags: ["Metrics"]
+      description: Upload a list of student metrics
+      operationId: postMetrics
+      parameters:
+      - name: data
+        in: body
+        schema:
+          $ref: '#/definitions/PostMetricsRequest'
+      responses:
+        "200":
+          description: OK Response
 
 securityDefinitions:
   oauth:
@@ -2320,3 +2333,21 @@ definitions:
         properties:
           data:
             $ref: "#/definitions/DistrictAdminObject"
+
+  PostMetricsRequest:
+    properties:
+      data:
+        $ref: '#/definitions/PostMetricsData'
+  PostMetricsData:
+    properties:
+      students:
+        type: array
+        items:
+          $ref: '#/definitions/StudentMetric'
+  StudentMetric:
+    properties:
+      clever_id:
+        type: string
+        x-validation: true
+      metrics:
+        type: object

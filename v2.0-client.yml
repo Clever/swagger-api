@@ -282,6 +282,16 @@ definitions:
       message:
         type: string
     type: object
+  PostMetricsData:
+    properties:
+      students:
+        items:
+          $ref: '#/definitions/StudentMetric'
+        type: array
+  PostMetricsRequest:
+    properties:
+      data:
+        $ref: '#/definitions/PostMetricsData'
   Principal:
     properties:
       email:
@@ -708,6 +718,13 @@ definitions:
         type: string
         x-nullable: true
     type: object
+  StudentMetric:
+    properties:
+      clever_id:
+        type: string
+        x-validation: true
+      metrics:
+        type: object
   StudentObject:
     properties:
       object:
@@ -1370,6 +1387,20 @@ paths:
           $ref: '#/responses/NotFound'
       tags:
       - Events
+  /metrics:
+    post:
+      description: Upload a list of student metrics
+      operationId: postMetrics
+      parameters:
+      - in: body
+        name: data
+        schema:
+          $ref: '#/definitions/PostMetricsRequest'
+      responses:
+        "200":
+          description: OK Response
+      tags:
+      - Goals
   /school_admins:
     get:
       description: Returns a list of school admins

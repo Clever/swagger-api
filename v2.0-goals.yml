@@ -15,16 +15,16 @@ definitions:
       message:
         type: string
     type: object
+  PostMetricsData:
+    properties:
+      students:
+        items:
+          $ref: '#/definitions/StudentMetric'
+        type: array
   PostMetricsRequest:
     properties:
       data:
         $ref: '#/definitions/PostMetricsData'
-  PostMetricsData:
-    properties:
-      students:
-        type: array
-        items:
-          $ref: '#/definitions/StudentMetric'
   StudentMetric:
     properties:
       clever_id:
@@ -43,13 +43,15 @@ paths:
       description: Upload a list of student metrics
       operationId: postMetrics
       parameters:
-      - name: data
-        in: body
+      - in: body
+        name: data
         schema:
           $ref: '#/definitions/PostMetricsRequest'
       responses:
         "200":
           description: OK Response
+      tags:
+      - Metrics
 produces:
 - application/json
 responses:
