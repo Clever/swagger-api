@@ -12,7 +12,7 @@ func Generate() {
 
 	fullBytes, err := ioutil.ReadFile("./full-v2.yml")
 	if err != nil {
-		log.Fatalf("Error reading full-v1.yml: %s", err)
+		log.Fatalf("Error reading full-v2.yml: %s", err)
 	}
 
 	var swagger map[interface{}]interface{}
