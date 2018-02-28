@@ -27,6 +27,11 @@ definitions:
       data:
         $ref: '#/definitions/Me'
     type: object
+  NotFound:
+    properties:
+      message:
+        type: string
+    type: object
   Unauthorized:
     properties:
       message:

@@ -222,7 +222,7 @@ func generateIdentityApiYml(i map[interface{}]interface{}, version string) ([]by
 	}
 
 	// The Identity API only needs Me* definitions and status code response definitions
-	responseDefinitions := map[string]bool{"BadRequest":true, "InternalError":true, "Unauthorized":true}
+	responseDefinitions := map[string]bool{"BadRequest":true, "InternalError":true, "NotFound":true, "Unauthorized":true}
 	definitions := m["definitions"].(map[interface{}]interface{})
 	for nameInterface, definition := range definitions {
 		name := nameInterface.(string)
