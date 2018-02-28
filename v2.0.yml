@@ -683,6 +683,11 @@ definitions:
           $ref: '#/definitions/TermResponse'
         type: array
     type: object
+  Unauthorized:
+    properties:
+      message:
+        type: string
+    type: object
 host: api.clever.com
 info:
   description: Serves the Clever Data API
@@ -1784,6 +1789,10 @@ responses:
     description: Entity Not Found
     schema:
       $ref: '#/definitions/NotFound'
+  Unauthorized:
+    description: Unauthorized
+    schema:
+      $ef: '#/definitions/Unauthorized'
 schemes:
 - https
 security:

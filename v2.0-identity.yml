@@ -10,48 +10,47 @@ definitions:
       message:
         type: string
     type: object
-  NotFound:
+  Me:
+    properties:
+      district:
+        type: string
+        x-validation: true
+      id:
+        type: string
+        x-validation: true
+      type:
+        type: string
+        x-validation: true
+    type: object
+  MeResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Me'
+    type: object
+  Unauthorized:
     properties:
       message:
         type: string
     type: object
-  PostMetricsData:
-    properties:
-      students:
-        items:
-          $ref: '#/definitions/StudentMetric'
-        type: array
-  PostMetricsRequest:
-    properties:
-      data:
-        $ref: '#/definitions/PostMetricsData'
-  StudentMetric:
-    properties:
-      clever_id:
-        type: string
-        x-validation: true
-      metrics:
-        type: object
 host: api.clever.com
 info:
-  description: The Clever Goals API
-  title: Goals API
+  description: The Clever Identity API
+  title: Identity API
   version: 2.0.0
 paths:
-  /metrics:
-    post:
-      description: Upload a list of student metrics
-      operationId: postMetrics
-      parameters:
-      - in: body
-        name: data
-        schema:
-          $ref: '#/definitions/PostMetricsRequest'
+  /me:
+    get:
+      description: Returns the owner of the user token
+      operationId: getMe
       responses:
         "200":
           description: OK Response
+          schema:
+            $ref: '#/definitions/MeResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
       tags:
-      - Metrics
+      - Identity
 produces:
 - application/json
 responses:

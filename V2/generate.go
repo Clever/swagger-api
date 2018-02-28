@@ -52,6 +52,14 @@ func Generate() {
 		log.Fatalf("Error writing goals v2.0 API: %s", err)
 	}
 
+	identityV20, err := generateIdentityApiYml(swagger, "v2.0")
+	if err != nil {
+		log.Fatalf("Error generating identity v2.0 API: %s", err)
+	}
+	if err := ioutil.WriteFile("v2.0-identity.yml", identityV20, 0644); err != nil {
+		log.Fatalf("Error writing identity v2.0 API: %s", err)
+	}
+
 }
 
 // modifyDefinitions removes fields that don't apply to the particular version / client
@@ -87,14 +95,14 @@ func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, 
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path := range paths {
-		if (strings.Contains(path.(string), "/events") || strings.Contains(path.(string), "/metrics")) && path.(string) != "/districts/{id}/status" {
+		if (strings.Contains(path.(string), "/events") || strings.Contains(path.(string), "/metrics") || strings.Contains(path.(string), "/me")) && path.(string) != "/districts/{id}/status" {
 			delete(paths, path)
 			continue
 		}
 	}
 
 	definitions := m["definitions"].(map[interface{}]interface{})
-	// Remove any definitions that are used only for Events or Goals/Metrics
+	// Remove any definitions that are used only for Events, Identity or Goals/Metrics
 	for nameInterface, definition := range definitions {
 
 		name := nameInterface.(string)
@@ -106,7 +114,7 @@ func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, 
 			continue
 		}
 
-		if strings.HasPrefix(name, "Event") {
+		if strings.HasPrefix(name, "Event") || strings.HasPrefix(name, "Me") {
 			delete(definitions, nameInterface)
 			continue
 		}
@@ -146,7 +154,7 @@ func generateEventsApiYml(i map[interface{}]interface{}, version string) ([]byte
 	for nameInterface, definition := range definitions {
 		name := nameInterface.(string)
 
-		if strings.Contains(name, "Metric") {
+		if strings.Contains(name, "Metric") || strings.HasPrefix(name, "Me") {
 			delete(definitions, nameInterface)
 			continue
 		}
@@ -194,6 +202,43 @@ func generateGoalsApiYml(i map[interface{}]interface{}, version string) ([]byte,
 	return yaml.Marshal(m)
 }
 
+// generateIdentityApiYml generates the Identity API from the base yml for a specific version. It does
+// this by removing things from the yml, for example the non /metrics endpoints.
+func generateIdentityApiYml(i map[interface{}]interface{}, version string) ([]byte, error) {
+	m := deepCopyMap(i)
+
+	m["basePath"] = "/" + version
+	info := m["info"].(map[interface{}]interface{})
+	info["title"] = "Identity API"
+	info["description"] = "The Clever Identity API"
+	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
+
+	paths := m["paths"].(map[interface{}]interface{})
+	for path := range paths {
+		if !strings.Contains(path.(string), "/me") || strings.Contains(path.(string), "/metrics") {
+			delete(paths, path)
+			continue
+		}
+	}
+
+	// The Identity API only needs Me* definitions and status code response definitions
+	responseDefinitions := map[string]bool{"BadRequest":true, "InternalError":true, "Unauthorized":true}
+	definitions := m["definitions"].(map[interface{}]interface{})
+	for nameInterface, definition := range definitions {
+		name := nameInterface.(string)
+
+
+		if (!strings.HasPrefix(name, "Me") || strings.Contains(name, "Metric")) && !responseDefinitions[name] {
+			delete(definitions, nameInterface)
+			continue
+		}
+
+		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
+	}
+
+	return yaml.Marshal(m)
+}
+
 // generateClientYml generates the yml for the client libraries. It removes things we don't new
 // implementations to use.
 func generateClientYml(i map[interface{}]interface{}) ([]byte, error) {
@@ -215,6 +260,8 @@ func generateClientYml(i map[interface{}]interface{}) ([]byte, error) {
 				operation["tags"] = []string{"Events"}
 			} else if strings.Contains(path.(string), "/metrics") {
 				operation["tags"] = []string{"Goals"}
+			} else if strings.Contains(path.(string), "/me") {
+				operation["tags"] = []string{"Identity"}
 			} else {
 				operation["tags"] = []string{"Data"}
 			}

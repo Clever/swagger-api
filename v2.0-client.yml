@@ -265,6 +265,23 @@ definitions:
         type: string
         x-nullable: true
     type: object
+  Me:
+    properties:
+      district:
+        type: string
+        x-validation: true
+      id:
+        type: string
+        x-validation: true
+      type:
+        type: string
+        x-validation: true
+    type: object
+  MeResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Me'
+    type: object
   Name:
     properties:
       first:
@@ -839,6 +856,11 @@ definitions:
           $ref: '#/definitions/TermResponse'
         type: array
     type: object
+  Unauthorized:
+    properties:
+      message:
+        type: string
+    type: object
   contacts.created:
     allOf:
     - $ref: '#/definitions/Event'
@@ -1387,6 +1409,19 @@ paths:
           $ref: '#/responses/NotFound'
       tags:
       - Events
+  /me:
+    get:
+      description: Returns the owner of the user token
+      operationId: getMe
+      responses:
+        "200":
+          description: OK Response
+          schema:
+            $ref: '#/definitions/MeResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
+      tags:
+      - Identity
   /metrics:
     post:
       description: Upload a list of student metrics
@@ -2244,6 +2279,10 @@ responses:
     description: Entity Not Found
     schema:
       $ref: '#/definitions/NotFound'
+  Unauthorized:
+    description: Unauthorized
+    schema:
+      $ef: '#/definitions/Unauthorized'
 schemes:
 - https
 security:
