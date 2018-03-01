@@ -38,7 +38,7 @@ responses:
   Unauthorized:
     description: Unauthorized
     schema:
-      $ef: "#/definitions/Unauthorized"
+      $ref: "#/definitions/Unauthorized"
 
 security:
   - oauth: []
