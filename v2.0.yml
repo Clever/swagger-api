@@ -1792,7 +1792,7 @@ responses:
   Unauthorized:
     description: Unauthorized
     schema:
-      $ef: '#/definitions/Unauthorized'
+      $ref: '#/definitions/Unauthorized'
 schemes:
 - https
 security:
