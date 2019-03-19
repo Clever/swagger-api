@@ -24,7 +24,7 @@ func Generate() {
 	if err != nil {
 		log.Fatalf("Error generating client yml: %s", err)
 	}
-	if err := ioutil.WriteFile("v2.0-client.yml", clientBytes, 0644); err != nil {
+	if err := ioutil.WriteFile("v2.1-client.yml", clientBytes, 0644); err != nil {
 		log.Fatalf("Error writing client v2.0 API: %s", err)
 	}
 
@@ -44,6 +44,21 @@ func Generate() {
 		log.Fatalf("Error writing events v2.0 API: %s", err)
 	}
 
+	dataV21, err := generateDataApiYml(swagger, "v2.1")
+	if err != nil {
+		log.Fatalf("Error generating data v2.1 API: %s", err)
+	}
+	if err := ioutil.WriteFile("v2.1.yml", dataV21, 0644); err != nil {
+		log.Fatalf("Error writing data v2.1 API: %s", err)
+	}
+
+	eventsV21, err := generateEventsApiYml(swagger, "v2.1")
+	if err != nil {
+		log.Fatalf("Error generating events v2.1 API: %s", err)
+	}
+	if err := ioutil.WriteFile("v2.1-events.yml", eventsV21, 0644); err != nil {
+		log.Fatalf("Error writing events v2.1 API: %s", err)
+	}
 }
 
 // modifyDefinitions removes fields that don't apply to the particular version / client
@@ -58,11 +73,43 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 
 	switch name {
 	case "Student":
+		if version == "v2.0" {
+			delete(properties, "ext")
+			genderProperties := properties["gender"].(map[interface{}]interface{})
+			genderEnums := genderProperties["enum"].([]interface{})
+			newEnums := []interface{}{}
+			for _, enum := range genderEnums {
+				if enum.(string) != "X" {
+					newEnums = append(newEnums, enum)
+				}
+			}
+			genderProperties["enum"] = newEnums
+
+		}
 		if !isClient {
 			delete(properties, "iep_status")
 			delete(properties, "home_language")
 			delete(properties, "unweighted_gpa")
 			delete(properties, "weighted_gpa")
+		}
+	case "Teacher":
+		if version == "v2.0" {
+			delete(properties, "ext")
+		}
+	case "Section":
+		if version == "v2.0" {
+			delete(properties, "ext")
+		}
+	case "School":
+		if version == "v2.0" {
+			delete(properties, "ext")
+		}
+	case "District":
+		if version == "v2.0" {
+			delete(properties, "portal_url")
+			delete(properties, "login_methods")
+			delete(properties, "district_contact")
+			delete(properties, "goals_enabled")
 		}
 	default:
 	}
@@ -147,7 +194,7 @@ func generateClientYml(i map[interface{}]interface{}) ([]byte, error) {
 	info := m["info"].(map[interface{}]interface{})
 	info["title"] = "Clever API"
 	info["description"] = "The Clever API"
-	m["basePath"] = "/v2.0"
+	m["basePath"] = "/v2.1"
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path, methodOp := range paths {
@@ -165,7 +212,7 @@ func generateClientYml(i map[interface{}]interface{}) ([]byte, error) {
 
 	definitions := m["definitions"].(map[interface{}]interface{})
 	for name, definition := range definitions {
-		modifyDefinitions("v2.0", true, name.(string), definition.(map[interface{}]interface{}))
+		modifyDefinitions("v2.1", true, name.(string), definition.(map[interface{}]interface{}))
 	}
 
 	return yaml.Marshal(m)
