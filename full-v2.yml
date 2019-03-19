@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Data API
   description: Serves the Clever Data API
-  version: 2.0.0
+  version: 2.1.0
 schemes:
   - https
 produces:
@@ -1375,6 +1375,7 @@ definitions:
         enum:
         - "M"
         - "F"
+        - "X"
         - ""
       graduation_year:
         type: string
@@ -1857,6 +1858,20 @@ definitions:
         type: string
         x-validation: true
         format: datetime
+      portal_url:
+        type: string
+      login_methods:
+        type: array
+        x-validation: true
+        items:
+          type: string
+      district_contact:
+        $ref: "#/definitions/DistrictAdmin"
+        x-nullable: true
+        x-validation: true
+      goals_enabled:
+        type: string
+        x-validation: true
 
   DistrictAdmin:
     type: object
