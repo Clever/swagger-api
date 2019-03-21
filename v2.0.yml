@@ -916,6 +916,7 @@ paths:
     get:
       description: Returns a list of districts
       operationId: getDistricts
+      parameters: []
       responses:
         "200":
           description: OK Response

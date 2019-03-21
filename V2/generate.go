@@ -125,10 +125,34 @@ func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, 
 	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
 
 	paths := m["paths"].(map[interface{}]interface{})
-	for path := range paths {
+	for path, methodOp := range paths {
 		if strings.Contains(path.(string), "/events") && path.(string) != "/districts/{id}/status" {
 			delete(paths, path)
 			continue
+		}
+
+		for _, o := range methodOp.(map[interface{}]interface{}) {
+			operation := o.(map[interface{}]interface{})
+			params, ok := operation["parameters"].([]interface{})
+			if !ok {
+				continue
+			}
+			paramsForClient := make([]map[interface{}]interface{}, 0)
+			for _, p := range params {
+				param := p.(map[interface{}]interface{})
+				include := true
+				for key, value := range param {
+					if key.(string) == "name" {
+						if version == "v2.0" && value.(string) == "count" {
+							include = false
+						}
+					}
+				}
+				if include {
+					paramsForClient = append(paramsForClient, param)
+				}
+			}
+			operation["parameters"] = paramsForClient
 		}
 	}
 
