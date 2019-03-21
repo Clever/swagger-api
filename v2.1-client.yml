@@ -1269,6 +1269,9 @@ paths:
       - in: query
         name: ending_before
         type: string
+      - in: query
+        name: count
+        type: integer
       responses:
         "200":
           description: OK Response
@@ -1316,6 +1319,10 @@ paths:
     get:
       description: Returns a list of districts
       operationId: getDistricts
+      parameters:
+      - in: query
+        name: count
+        type: integer
       responses:
         "200":
           description: OK Response
