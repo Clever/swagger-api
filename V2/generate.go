@@ -74,6 +74,7 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 	switch name {
 	case "Student":
 		if version == "v2.0" {
+			delete(properties, "enrollments")
 			delete(properties, "ext")
 			genderProperties := properties["gender"].(map[interface{}]interface{})
 			genderEnums := genderProperties["enum"].([]interface{})
@@ -174,6 +175,13 @@ func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, 
 			continue
 		}
 
+		if version == "v2.0" {
+			if name == "SchoolEnrollment" {
+				delete(definitions, nameInterface)
+				continue
+			}
+		}
+
 		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
 	}
 
@@ -203,6 +211,14 @@ func generateEventsApiYml(i map[interface{}]interface{}, version string) ([]byte
 	definitions := m["definitions"].(map[interface{}]interface{})
 	for nameInterface, definition := range definitions {
 		name := nameInterface.(string)
+
+		if version == "v2.0" {
+			if name == "SchoolEnrollment" {
+				delete(definitions, nameInterface)
+				continue
+			}
+		}
+
 		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
 	}
 

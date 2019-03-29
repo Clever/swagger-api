@@ -314,6 +314,8 @@ definitions:
       district:
         type: string
         x-validation: true
+      ext:
+        type: object
       high_grade:
         enum:
         - "1"
@@ -429,6 +431,20 @@ definitions:
           $ref: '#/definitions/SchoolAdminResponse'
         type: array
     type: object
+  SchoolEnrollment:
+    properties:
+      end_date:
+        format: datetime
+        type: string
+        x-validation: true
+      school:
+        type: string
+        x-validation: true
+      start_date:
+        format: datetime
+        type: string
+        x-validation: true
+    type: object
   SchoolObject:
     properties:
       object:
@@ -459,6 +475,8 @@ definitions:
       district:
         type: string
         x-validation: true
+      ext:
+        type: object
       grade:
         enum:
         - "1"
@@ -578,6 +596,13 @@ definitions:
       email:
         type: string
         x-nullable: true
+      enrollments:
+        items:
+          $ref: '#/definitions/SchoolEnrollment'
+        type: array
+        x-validation: true
+      ext:
+        type: object
       gender:
         enum:
         - M
@@ -755,6 +780,8 @@ definitions:
       email:
         type: string
         x-nullable: true
+      ext:
+        type: object
       id:
         type: string
         x-validation: true
