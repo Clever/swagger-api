@@ -1931,6 +1931,10 @@ definitions:
       goals_enabled:
         type: string
         x-validation: true
+        enum:
+        - "Y"
+        - "N"
+        - ""
 
   DistrictAdmin:
     type: object
