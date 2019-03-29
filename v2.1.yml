@@ -113,6 +113,10 @@ definitions:
       error:
         type: string
       goals_enabled:
+        enum:
+        - "Y"
+        - "N"
+        - ""
         type: string
         x-validation: true
       id:
