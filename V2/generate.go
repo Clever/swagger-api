@@ -175,6 +175,13 @@ func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, 
 			continue
 		}
 
+		if version == "v2.0" {
+			if name == "SchoolEnrollment" {
+				delete(definitions, nameInterface)
+				continue
+			}
+		}
+
 		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
 	}
 
@@ -204,6 +211,14 @@ func generateEventsApiYml(i map[interface{}]interface{}, version string) ([]byte
 	definitions := m["definitions"].(map[interface{}]interface{})
 	for nameInterface, definition := range definitions {
 		name := nameInterface.(string)
+
+		if version == "v2.0" {
+			if name == "SchoolEnrollment" {
+				delete(definitions, nameInterface)
+				continue
+			}
+		}
+
 		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
 	}
 
