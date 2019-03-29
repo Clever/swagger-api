@@ -74,6 +74,7 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 	switch name {
 	case "Student":
 		if version == "v2.0" {
+			delete(properties, "enrollments")
 			delete(properties, "ext")
 			genderProperties := properties["gender"].(map[interface{}]interface{})
 			genderEnums := genderProperties["enum"].([]interface{})
