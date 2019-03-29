@@ -1399,6 +1399,11 @@ definitions:
       email:
         type: string
         x-nullable: true
+      enrollments:
+        type: array
+        x-validation: true
+        items:
+          $ref: "#/definitions/SchoolEnrollment"
       gender:
         type: string
         x-nullable: true
@@ -1540,6 +1545,23 @@ definitions:
       weighted_gpa:
         type: string
         x-nullable: true
+      ext:
+        type: object
+
+  SchoolEnrollment:
+    type: object
+    properties:
+      school:
+        type: string
+        x-validation: true
+      start_date:
+        type: string
+        format: datetime
+        x-validation: true
+      end_date:
+        type: string
+        format: datetime
+        x-validation: true
 
   Contact:
     type: object
@@ -1644,6 +1666,8 @@ definitions:
       title:
         type: string
         x-nullable: true
+      ext:
+        type: object
 
   Section:
     type: object
@@ -1733,6 +1757,8 @@ definitions:
         type: string
         x-validation: true
         x-nullable: true
+      ext:
+        type: object
 
   School:
     type: object
@@ -1816,6 +1842,8 @@ definitions:
       mdr_number:
         type: string
         x-nullable: true
+      ext:
+        type: object
 
   SchoolAdmin:
     type: object
