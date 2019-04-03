@@ -61,6 +61,25 @@ func Generate() {
 	}
 }
 
+// removeFieldProperty removes the specified value from a field's properties, if it exists.
+func removeFieldProperty(properties map[interface{}]interface{}, fieldName, propertyName string) {
+	fieldProperties := properties[fieldName].(map[interface{}]interface{})
+	delete(fieldProperties, propertyName)
+}
+
+// removeEnum removes the specified enum from a field's properties, if it exists.
+func removeEnum(properties map[interface{}]interface{}, fieldName, enumName string) {
+	fieldProperties := properties[fieldName].(map[interface{}]interface{})
+	oldEnums := fieldProperties["enum"].([]interface{})
+	newEnums := []interface{}{}
+	for _, enum := range oldEnums {
+		if enum.(string) != enumName {
+			newEnums = append(newEnums, enum)
+		}
+	}
+	fieldProperties["enum"] = newEnums
+}
+
 // modifyDefinitions removes fields that don't apply to the particular version / client
 // combination. For example, it remove students.schools from v1.1.
 func modifyDefinitions(version string, isClient bool, name string, def map[interface{}]interface{}) {
@@ -76,22 +95,19 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 		if version == "v2.0" {
 			delete(properties, "enrollments")
 			delete(properties, "ext")
-			genderProperties := properties["gender"].(map[interface{}]interface{})
-			genderEnums := genderProperties["enum"].([]interface{})
-			newEnums := []interface{}{}
-			for _, enum := range genderEnums {
-				if enum.(string) != "X" {
-					newEnums = append(newEnums, enum)
-				}
-			}
-			genderProperties["enum"] = newEnums
-
+			removeEnum(properties, "gender", "X")
+			removeEnum(properties, "grade", "")
+			removeEnum(properties, "home_language", "")
 		}
 		if !isClient {
 			delete(properties, "iep_status")
 			delete(properties, "home_language")
 			delete(properties, "unweighted_gpa")
 			delete(properties, "weighted_gpa")
+		}
+	case "Contact":
+		if version == "v2.0" {
+			removeFieldProperty(properties, "type", "x-nullable")
 		}
 	case "Teacher":
 		if version == "v2.0" {
@@ -100,10 +116,15 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 	case "Section":
 		if version == "v2.0" {
 			delete(properties, "ext")
+			removeEnum(properties, "grade", "")
+			removeEnum(properties, "subject", "")
+			removeFieldProperty(properties, "subject", "x-nullable")
 		}
 	case "School":
 		if version == "v2.0" {
 			delete(properties, "ext")
+			removeEnum(properties, "high_grade", "")
+			removeEnum(properties, "low_grade", "")
 		}
 	case "District":
 		if version == "v2.0" {
@@ -111,6 +132,8 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			delete(properties, "login_methods")
 			delete(properties, "district_contact")
 			delete(properties, "goals_enabled")
+			removeEnum(properties, "state", "")
+			removeFieldProperty(properties, "state", "x-nullable")
 		}
 	default:
 	}
