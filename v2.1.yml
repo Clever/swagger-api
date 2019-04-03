@@ -61,6 +61,7 @@ definitions:
         - Other
         - ""
         type: string
+        x-nullable: true
         x-validation: true
     type: object
   ContactResponse:
@@ -167,6 +168,7 @@ definitions:
         - paused
         - ""
         type: string
+        x-nullable: true
         x-validation: true
     type: object
   DistrictAdmin:
@@ -488,6 +490,7 @@ definitions:
         - other
         - ""
         type: string
+        x-nullable: true
         x-validation: true
       teacher:
         type: string

@@ -1614,6 +1614,7 @@ definitions:
           type: string
       type:
         type: string
+        x-nullable: true
         x-validation: true
         enum:
         - "Parent/Guardian"
@@ -1734,6 +1735,7 @@ definitions:
           type: string
       subject:
         type: string
+        x-nullable: true
         x-validation: true
         enum:
         - "english/language arts"
@@ -1896,6 +1898,7 @@ definitions:
         x-validation: true
       state:
         type: string
+        x-nullable: true
         x-validation: true
         enum:
         - "running"
