@@ -175,6 +175,7 @@ definitions:
         - pending
         - error
         - paused
+        - ""
         type: string
         x-validation: true
     type: object
@@ -338,6 +339,7 @@ definitions:
         - Kindergarten
         - PostGraduate
         - Other
+        - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -369,6 +371,7 @@ definitions:
         - Kindergarten
         - PostGraduate
         - Other
+        - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -499,6 +502,7 @@ definitions:
         - Kindergarten
         - PostGraduate
         - Other
+        - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -540,6 +544,7 @@ definitions:
         - PE and health
         - arts and music
         - other
+        - ""
         type: string
         x-validation: true
       teacher:
@@ -634,6 +639,7 @@ definitions:
         - Kindergarten
         - PostGraduate
         - Other
+        - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -698,6 +704,7 @@ definitions:
         - Ukrainian
         - Urdu
         - Vietnamese
+        - ""
         type: string
         x-nullable: true
         x-validation: true
