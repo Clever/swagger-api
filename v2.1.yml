@@ -61,6 +61,7 @@ definitions:
         - Other
         - ""
         type: string
+        x-nullable: true
         x-validation: true
     type: object
   ContactResponse:
@@ -165,7 +166,9 @@ definitions:
         - pending
         - error
         - paused
+        - ""
         type: string
+        x-nullable: true
         x-validation: true
     type: object
   DistrictAdmin:
@@ -290,6 +293,7 @@ definitions:
         - Kindergarten
         - PostGraduate
         - Other
+        - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -321,6 +325,7 @@ definitions:
         - Kindergarten
         - PostGraduate
         - Other
+        - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -441,6 +446,7 @@ definitions:
         - Kindergarten
         - PostGraduate
         - Other
+        - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -482,7 +488,9 @@ definitions:
         - PE and health
         - arts and music
         - other
+        - ""
         type: string
+        x-nullable: true
         x-validation: true
       teacher:
         type: string
@@ -571,6 +579,7 @@ definitions:
         - Kindergarten
         - PostGraduate
         - Other
+        - ""
         type: string
         x-nullable: true
         x-validation: true

@@ -1438,6 +1438,7 @@ definitions:
         - "Kindergarten"
         - "PostGraduate"
         - "Other"
+        - ""
       hispanic_ethnicity:
         type: string
         x-nullable: true
@@ -1498,6 +1499,7 @@ definitions:
         - Ukrainian
         - Urdu
         - Vietnamese
+        - ""
       iep_status:
         type: string
         x-nullable: true
@@ -1612,6 +1614,7 @@ definitions:
           type: string
       type:
         type: string
+        x-nullable: true
         x-validation: true
         enum:
         - "Parent/Guardian"
@@ -1707,6 +1710,7 @@ definitions:
         - "Kindergarten"
         - "PostGraduate"
         - "Other"
+        - ""
       last_modified:
         type: string
         format: datetime
@@ -1731,6 +1735,7 @@ definitions:
           type: string
       subject:
         type: string
+        x-nullable: true
         x-validation: true
         enum:
         - "english/language arts"
@@ -1744,6 +1749,7 @@ definitions:
         - "PE and health"
         - "arts and music"
         - "other"
+        - ""
       teacher:
         type: string
         x-nullable: true
@@ -1794,6 +1800,7 @@ definitions:
         - "Kindergarten"
         - "PostGraduate"
         - "Other"
+        - ""
       last_modified:
         type: string
         format: datetime
@@ -1822,6 +1829,7 @@ definitions:
         - "Kindergarten"
         - "PostGraduate"
         - "Other"
+        - ""
       name:
         type: string
       nces_id:
@@ -1890,12 +1898,14 @@ definitions:
         x-validation: true
       state:
         type: string
+        x-nullable: true
         x-validation: true
         enum:
         - "running"
         - "pending"
         - "error"
         - "paused"
+        - ""
       last_sync:
         type: string
         x-validation: true
