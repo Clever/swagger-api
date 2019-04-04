@@ -49,6 +49,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':
@@ -93,6 +94,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':
@@ -254,6 +256,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':
@@ -442,6 +445,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':
@@ -630,6 +634,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':
@@ -773,6 +778,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':
@@ -860,6 +866,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':
@@ -922,6 +929,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':
@@ -1011,6 +1019,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':
@@ -1100,6 +1109,7 @@ paths:
         name: count
         type: string
         enum:
+        - ""
         - "true"
       responses:
         '200':

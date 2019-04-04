@@ -759,6 +759,7 @@ paths:
         name: ending_before
         type: string
       - enum:
+        - ""
         - "true"
         in: query
         name: count
@@ -846,6 +847,7 @@ paths:
         name: ending_before
         type: string
       - enum:
+        - ""
         - "true"
         in: query
         name: count
@@ -935,6 +937,7 @@ paths:
         name: ending_before
         type: string
       - enum:
+        - ""
         - "true"
         in: query
         name: count
@@ -988,6 +991,7 @@ paths:
       operationId: getDistricts
       parameters:
       - enum:
+        - ""
         - "true"
         in: query
         name: count
@@ -1032,6 +1036,7 @@ paths:
         name: ending_before
         type: string
       - enum:
+        - ""
         - "true"
         in: query
         name: count
@@ -1121,6 +1126,7 @@ paths:
         name: ending_before
         type: string
       - enum:
+        - ""
         - "true"
         in: query
         name: count
@@ -1264,6 +1270,7 @@ paths:
         name: ending_before
         type: string
       - enum:
+        - ""
         - "true"
         in: query
         name: count
@@ -1452,6 +1459,7 @@ paths:
         name: ending_before
         type: string
       - enum:
+        - ""
         - "true"
         in: query
         name: count
@@ -1640,6 +1648,7 @@ paths:
         name: ending_before
         type: string
       - enum:
+        - ""
         - "true"
         in: query
         name: count
@@ -1801,6 +1810,7 @@ paths:
         name: ending_before
         type: string
       - enum:
+        - ""
         - "true"
         in: query
         name: count
