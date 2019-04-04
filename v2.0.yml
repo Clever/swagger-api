@@ -254,6 +254,8 @@ definitions:
         x-validation: true
       high_grade:
         enum:
+        - PreKindergarten
+        - Kindergarten
         - "1"
         - "2"
         - "3"
@@ -266,8 +268,6 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - PreKindergarten
-        - Kindergarten
         - PostGraduate
         - Other
         type: string
@@ -285,6 +285,8 @@ definitions:
         x-nullable: true
       low_grade:
         enum:
+        - PreKindergarten
+        - Kindergarten
         - "1"
         - "2"
         - "3"
@@ -297,8 +299,6 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - PreKindergarten
-        - Kindergarten
         - PostGraduate
         - Other
         type: string
@@ -389,6 +389,8 @@ definitions:
         x-validation: true
       grade:
         enum:
+        - PreKindergarten
+        - Kindergarten
         - "1"
         - "2"
         - "3"
@@ -401,8 +403,6 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - PreKindergarten
-        - Kindergarten
         - PostGraduate
         - Other
         type: string
@@ -511,6 +511,8 @@ definitions:
         x-validation: true
       grade:
         enum:
+        - PreKindergarten
+        - Kindergarten
         - "1"
         - "2"
         - "3"
@@ -523,8 +525,6 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - PreKindergarten
-        - Kindergarten
         - PostGraduate
         - Other
         type: string
