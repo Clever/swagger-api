@@ -47,7 +47,9 @@ paths:
       parameters:
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
@@ -89,7 +91,9 @@ paths:
         type: string
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
@@ -248,7 +252,9 @@ paths:
         type: string
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
@@ -434,7 +440,9 @@ paths:
         type: string
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
@@ -620,7 +628,9 @@ paths:
         type: string
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
@@ -761,7 +771,9 @@ paths:
         type: string
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
@@ -846,7 +858,9 @@ paths:
         type: string
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
@@ -906,7 +920,9 @@ paths:
         type: string
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
@@ -993,7 +1009,9 @@ paths:
         type: string
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
@@ -1080,7 +1098,9 @@ paths:
         type: string
       - in: query
         name: count
-        type: integer
+        type: string
+        enum:
+        - "true"
       responses:
         '200':
           description: OK Response
