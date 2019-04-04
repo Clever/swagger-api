@@ -758,9 +758,11 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
@@ -843,9 +845,11 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
@@ -930,9 +934,11 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
@@ -981,9 +987,11 @@ paths:
       description: Returns a list of districts
       operationId: getDistricts
       parameters:
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
@@ -1023,9 +1031,11 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
@@ -1110,9 +1120,11 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
@@ -1251,9 +1263,11 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
@@ -1437,9 +1451,11 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
@@ -1623,9 +1639,11 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
@@ -1782,9 +1800,11 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - "true"
+        in: query
         name: count
-        type: integer
+        type: string
       responses:
         "200":
           description: OK Response
