@@ -1452,6 +1452,11 @@ definitions:
         x-nullable: true
         x-validation: true
         enum:
+        - "InfantToddler"
+        - "Preschool"
+        - "PreKindergarten"
+        - "TransitionalKindergarten"
+        - "Kindergarten"
         - "1"
         - "2"
         - "3"
@@ -1464,9 +1469,9 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - "PreKindergarten"
-        - "Kindergarten"
+        - "13"
         - "PostGraduate"
+        - "Ungraded"
         - "Other"
         - ""
       hispanic_ethnicity:
@@ -1724,6 +1729,11 @@ definitions:
         x-nullable: true
         x-validation: true
         enum:
+        - "InfantToddler"
+        - "Preschool"
+        - "PreKindergarten"
+        - "TransitionalKindergarten"
+        - "Kindergarten"
         - "1"
         - "2"
         - "3"
@@ -1736,9 +1746,9 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - "PreKindergarten"
-        - "Kindergarten"
+        - "13"
         - "PostGraduate"
+        - "Ungraded"
         - "Other"
         - ""
       last_modified:
@@ -1814,6 +1824,11 @@ definitions:
         x-nullable: true
         x-validation: true
         enum:
+        - "InfantToddler"
+        - "Preschool"
+        - "PreKindergarten"
+        - "TransitionalKindergarten"
+        - "Kindergarten"
         - "1"
         - "2"
         - "3"
@@ -1826,9 +1841,9 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - "PreKindergarten"
-        - "Kindergarten"
+        - "13"
         - "PostGraduate"
+        - "Ungraded"
         - "Other"
         - ""
       last_modified:
@@ -1843,6 +1858,11 @@ definitions:
         x-nullable: true
         x-validation: true
         enum:
+        - "InfantToddler"
+        - "Preschool"
+        - "PreKindergarten"
+        - "TransitionalKindergarten"
+        - "Kindergarten"
         - "1"
         - "2"
         - "3"
@@ -1855,9 +1875,9 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - "PreKindergarten"
-        - "Kindergarten"
+        - "13"
         - "PostGraduate"
+        - "Ungraded"
         - "Other"
         - ""
       name:
