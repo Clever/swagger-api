@@ -277,6 +277,11 @@ definitions:
         type: object
       high_grade:
         enum:
+        - InfantToddler
+        - Preschool
+        - PreKindergarten
+        - TransitionalKindergarten
+        - Kindergarten
         - "1"
         - "2"
         - "3"
@@ -289,9 +294,9 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - PreKindergarten
-        - Kindergarten
+        - "13"
         - PostGraduate
+        - Ungraded
         - Other
         - ""
         type: string
@@ -309,6 +314,11 @@ definitions:
         x-nullable: true
       low_grade:
         enum:
+        - InfantToddler
+        - Preschool
+        - PreKindergarten
+        - TransitionalKindergarten
+        - Kindergarten
         - "1"
         - "2"
         - "3"
@@ -321,9 +331,9 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - PreKindergarten
-        - Kindergarten
+        - "13"
         - PostGraduate
+        - Ungraded
         - Other
         - ""
         type: string
@@ -430,6 +440,11 @@ definitions:
         type: object
       grade:
         enum:
+        - InfantToddler
+        - Preschool
+        - PreKindergarten
+        - TransitionalKindergarten
+        - Kindergarten
         - "1"
         - "2"
         - "3"
@@ -442,9 +457,9 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - PreKindergarten
-        - Kindergarten
+        - "13"
         - PostGraduate
+        - Ungraded
         - Other
         - ""
         type: string
@@ -563,6 +578,11 @@ definitions:
         x-validation: true
       grade:
         enum:
+        - InfantToddler
+        - Preschool
+        - PreKindergarten
+        - TransitionalKindergarten
+        - Kindergarten
         - "1"
         - "2"
         - "3"
@@ -575,9 +595,9 @@ definitions:
         - "10"
         - "11"
         - "12"
-        - PreKindergarten
-        - Kindergarten
+        - "13"
         - PostGraduate
+        - Ungraded
         - Other
         - ""
         type: string

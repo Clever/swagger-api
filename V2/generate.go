@@ -68,16 +68,27 @@ func removeFieldProperty(properties map[interface{}]interface{}, fieldName, prop
 }
 
 // removeEnum removes the specified enum from a field's properties, if it exists.
-func removeEnum(properties map[interface{}]interface{}, fieldName, enumName string) {
+func removeEnum(properties map[interface{}]interface{}, fieldName string, enumBlacklist map[string]bool) {
 	fieldProperties := properties[fieldName].(map[interface{}]interface{})
 	oldEnums := fieldProperties["enum"].([]interface{})
 	newEnums := []interface{}{}
 	for _, enum := range oldEnums {
-		if enum.(string) != enumName {
+		if _, ok := enumBlacklist[enum.(string)]; !ok {
 			newEnums = append(newEnums, enum)
 		}
 	}
 	fieldProperties["enum"] = newEnums
+}
+
+func removeV21GradeEnums(properties map[interface{}]interface{}, fieldName string) {
+	removeEnum(properties, fieldName, map[string]bool{
+		"InfantToddler":            true,
+		"Preschool":                true,
+		"TransitionalKindergarten": true,
+		"13":       true,
+		"Ungraded": true,
+		"":         true,
+	})
 }
 
 // modifyDefinitions removes fields that don't apply to the particular version / client
@@ -95,9 +106,9 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 		if version == "v2.0" {
 			delete(properties, "enrollments")
 			delete(properties, "ext")
-			removeEnum(properties, "gender", "X")
-			removeEnum(properties, "grade", "")
-			removeEnum(properties, "home_language", "")
+			removeEnum(properties, "gender", map[string]bool{"X": true})
+			removeEnum(properties, "home_language", map[string]bool{"": true})
+			removeV21GradeEnums(properties, "grade")
 		}
 		if !isClient {
 			delete(properties, "iep_status")
@@ -116,15 +127,15 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 	case "Section":
 		if version == "v2.0" {
 			delete(properties, "ext")
-			removeEnum(properties, "grade", "")
-			removeEnum(properties, "subject", "")
+			removeEnum(properties, "subject", map[string]bool{"": true})
+			removeV21GradeEnums(properties, "grade")
 			removeFieldProperty(properties, "subject", "x-nullable")
 		}
 	case "School":
 		if version == "v2.0" {
 			delete(properties, "ext")
-			removeEnum(properties, "high_grade", "")
-			removeEnum(properties, "low_grade", "")
+			removeV21GradeEnums(properties, "high_grade")
+			removeV21GradeEnums(properties, "low_grade")
 		}
 	case "District":
 		if version == "v2.0" {
@@ -132,7 +143,7 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			delete(properties, "login_methods")
 			delete(properties, "district_contact")
 			delete(properties, "goals_enabled")
-			removeEnum(properties, "state", "")
+			removeEnum(properties, "state", map[string]bool{"": true})
 			removeFieldProperty(properties, "state", "x-nullable")
 		}
 	default:
