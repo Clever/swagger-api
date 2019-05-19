@@ -2068,6 +2068,9 @@ definitions:
         format: datetime
         x-nullable: true
         x-validation: true
+      district:
+        type: string
+        x-validation: true
 
   Course:
     type: object
@@ -2081,6 +2084,9 @@ definitions:
       number:
         type: string
         x-nullable: true
+      district:
+        type: string
+        x-validation: true
 
   Credentials:
     type: object

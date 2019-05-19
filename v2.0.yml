@@ -77,6 +77,9 @@ definitions:
     type: object
   Course:
     properties:
+      district:
+        type: string
+        x-validation: true
       id:
         type: string
         x-validation: true
@@ -654,6 +657,9 @@ definitions:
     type: object
   Term:
     properties:
+      district:
+        type: string
+        x-validation: true
       end_date:
         format: datetime
         type: string
