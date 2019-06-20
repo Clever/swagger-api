@@ -1,13 +1,14 @@
-package V1
+package v1
 
 import (
 	"io/ioutil"
 	"log"
 	"strings"
 
-	"gopkg.in/v1/yaml"
+	"github.com/Clever/yaml"
 )
 
+// Generate generates API v1 source yml.
 func Generate() {
 
 	fullBytes, err := ioutil.ReadFile("./full-v1.yml")
@@ -28,7 +29,7 @@ func Generate() {
 		log.Fatalf("Error writing data v1.1 API: %s", err)
 	}
 
-	dataV11, err := generateDataApiYml(swagger, "v1.1")
+	dataV11, err := generateDataAPIYml(swagger, "v1.1")
 	if err != nil {
 		log.Fatalf("Error generating data v1.1 API: %s", err)
 	}
@@ -36,7 +37,7 @@ func Generate() {
 		log.Fatalf("Error writing data v1.1 API: %s", err)
 	}
 
-	dataV12, err := generateDataApiYml(swagger, "v1.2")
+	dataV12, err := generateDataAPIYml(swagger, "v1.2")
 	if err != nil {
 		log.Fatalf("Error generating data v1.2 API: %s", err)
 	}
@@ -44,7 +45,7 @@ func Generate() {
 		log.Fatalf("Error writing data v1.2 API: %s", err)
 	}
 
-	eventsV11, err := generateEventsApiYml(swagger, "v1.1")
+	eventsV11, err := generateEventsAPIYml(swagger, "v1.1")
 	if err != nil {
 		log.Fatalf("Error generating events v1.1 API: %s", err)
 	}
@@ -52,7 +53,7 @@ func Generate() {
 		log.Fatalf("Error writing events v1.1 API: %s", err)
 	}
 
-	eventsV12, err := generateEventsApiYml(swagger, "v1.2")
+	eventsV12, err := generateEventsAPIYml(swagger, "v1.2")
 	if err != nil {
 		log.Fatalf("Error generating events v1.2 API: %s", err)
 	}
@@ -113,9 +114,9 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 	}
 }
 
-// generateDataApiYml generates the data API from the base yml for a specific version. It does
+// generateDataAPIYml generates the data API from the base yml for a specific version. It does
 // this by removing things from the yml, for example the /events endpoints.
-func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, error) {
+func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, error) {
 	m := deepCopyMap(i)
 
 	m["basePath"] = "/" + version
@@ -154,9 +155,9 @@ func generateDataApiYml(i map[interface{}]interface{}, version string) ([]byte, 
 	return yaml.Marshal(m)
 }
 
-// generateEventsApiYml generates the events API from the base yml for a specific version. It does
+// generateEventsAPIYml generates the events API from the base yml for a specific version. It does
 // this by removing things from the yml, for example the non /events endpoints.
-func generateEventsApiYml(i map[interface{}]interface{}, version string) ([]byte, error) {
+func generateEventsAPIYml(i map[interface{}]interface{}, version string) ([]byte, error) {
 	m := deepCopyMap(i)
 
 	m["basePath"] = "/" + version
