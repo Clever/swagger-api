@@ -367,6 +367,8 @@ definitions:
     properties:
       credentials:
         $ref: '#/definitions/Credentials'
+      department:
+        type: string
       district:
         type: string
         x-validation: true
