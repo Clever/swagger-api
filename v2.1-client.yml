@@ -422,6 +422,8 @@ definitions:
         x-validation: true
       email:
         type: string
+      ext:
+        type: object
       id:
         type: string
         x-validation: true
