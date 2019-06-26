@@ -126,13 +126,6 @@ definitions:
         x-validation: true
       error:
         type: string
-      goals_enabled:
-        enum:
-        - "Y"
-        - "N"
-        - ""
-        type: string
-        x-validation: true
       id:
         type: string
         x-validation: true
@@ -415,11 +408,15 @@ definitions:
     properties:
       credentials:
         $ref: '#/definitions/Credentials'
+      department:
+        type: string
       district:
         type: string
         x-validation: true
       email:
         type: string
+      ext:
+        type: object
       id:
         type: string
         x-validation: true

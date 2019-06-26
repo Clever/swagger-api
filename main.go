@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Clever/swagger-api/V1"
-	"github.com/Clever/swagger-api/V2"
+	"github.com/Clever/swagger-api/v1"
+	"github.com/Clever/swagger-api/v2"
 )
 
 func main() {
@@ -16,9 +16,9 @@ func main() {
 
 	version := strings.ToLower(os.Args[1])
 	if version == "v1" {
-		V1.Generate()
+		v1.Generate()
 	} else if version == "v2" {
-		V2.Generate()
+		v2.Generate()
 	} else {
 		log.Fatalf("Invalid version")
 	}
