@@ -2020,9 +2020,6 @@ definitions:
       first:
         type: string
         x-nullable: true
-      middle:
-        type: string
-        x-nullable: true
       last:
         type: string
         x-nullable: true
