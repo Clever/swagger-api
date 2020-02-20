@@ -1988,13 +1988,6 @@ definitions:
         $ref: "#/definitions/DistrictAdmin"
         x-nullable: true
         x-validation: true
-      goals_enabled:
-        type: string
-        x-validation: true
-        enum:
-        - "Y"
-        - "N"
-        - ""
 
   DistrictAdmin:
     type: object

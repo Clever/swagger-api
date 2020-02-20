@@ -116,13 +116,6 @@ definitions:
         x-validation: true
       error:
         type: string
-      goals_enabled:
-        enum:
-        - "Y"
-        - "N"
-        - ""
-        type: string
-        x-validation: true
       id:
         type: string
         x-validation: true
