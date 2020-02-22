@@ -242,9 +242,6 @@ definitions:
       last:
         type: string
         x-nullable: true
-      middle:
-        type: string
-        x-nullable: true
     type: object
   NotFound:
     properties:
