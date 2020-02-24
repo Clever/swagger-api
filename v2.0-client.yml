@@ -171,7 +171,7 @@ definitions:
         type: string
         x-validation: true
       name:
-        $ref: '#/definitions/Name'
+        $ref: '#/definitions/AdminName'
         x-nullable: true
       title:
         type: string
@@ -266,6 +266,18 @@ definitions:
         x-nullable: true
     type: object
   Name:
+    properties:
+      first:
+        type: string
+        x-nullable: true
+      middle:	
+        type: string	
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+    type: object
+  AdminName:
     properties:
       first:
         type: string
@@ -383,7 +395,7 @@ definitions:
         type: string
         x-validation: true
       name:
-        $ref: '#/definitions/Name'
+        $ref: '#/definitions/AdminName'
       schools:
         items:
           type: string
