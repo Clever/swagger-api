@@ -80,6 +80,10 @@ definitions:
         items:
           $ref: '#/definitions/ContactResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
     type: object
   Course:
     properties:
@@ -111,6 +115,10 @@ definitions:
       data:
         items:
           $ref: '#/definitions/CourseResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
         type: array
     type: object
   Credentials:
@@ -210,6 +218,10 @@ definitions:
         items:
           $ref: '#/definitions/DistrictAdminResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
     type: object
   DistrictObject:
     properties:
@@ -226,6 +238,10 @@ definitions:
       data:
         items:
           $ref: '#/definitions/DistrictResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
         type: array
     type: object
   Event:
@@ -255,10 +271,25 @@ definitions:
         items:
           $ref: '#/definitions/EventResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
     type: object
   InternalError:
     properties:
       message:
+        type: string
+    type: object
+  Link:
+    properties:
+      rel:
+        enum:
+        - next
+        - prev
+        - self
+        type: string
+      uri:
         type: string
     type: object
   Location:
@@ -458,6 +489,10 @@ definitions:
         items:
           $ref: '#/definitions/SchoolAdminResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
     type: object
   SchoolEnrollment:
     properties:
@@ -488,6 +523,10 @@ definitions:
       data:
         items:
           $ref: '#/definitions/SchoolResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
         type: array
     type: object
   Section:
@@ -603,6 +642,10 @@ definitions:
       data:
         items:
           $ref: '#/definitions/SectionResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
         type: array
     type: object
   Student:
@@ -807,6 +850,10 @@ definitions:
         items:
           $ref: '#/definitions/StudentResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
     type: object
   Teacher:
     properties:
@@ -870,6 +917,10 @@ definitions:
         items:
           $ref: '#/definitions/TeacherResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
     type: object
   Term:
     properties:
@@ -908,6 +959,10 @@ definitions:
       data:
         items:
           $ref: '#/definitions/TermResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
         type: array
     type: object
   contacts.created:
