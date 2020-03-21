@@ -1980,6 +1980,11 @@ definitions:
       title:
         type: string
         x-nullable: true
+      department:
+        type: string
+        x-nullable: true
+      ext:
+        type: object
 
   District:
     type: object

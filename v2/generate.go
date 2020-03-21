@@ -125,6 +125,11 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 		if version == "v2.0" {
 			delete(properties, "ext")
 		}
+	case "SchoolAdmin":
+		if version == "v2.0" {
+			delete(properties, "ext")
+			delete(properties, "department")
+		}
 	case "Section":
 		if version == "v2.0" {
 			delete(properties, "ext")
