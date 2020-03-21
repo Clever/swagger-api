@@ -86,9 +86,9 @@ func removeV21GradeEnums(properties map[interface{}]interface{}, fieldName strin
 		"InfantToddler":            true,
 		"Preschool":                true,
 		"TransitionalKindergarten": true,
-		"13":       true,
-		"Ungraded": true,
-		"":         true,
+		"13":                       true,
+		"Ungraded":                 true,
+		"":                         true,
 	})
 }
 
