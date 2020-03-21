@@ -1252,6 +1252,18 @@ definitions:
       message:
         type: string
 
+  Link:
+    properties:
+      rel:
+        enum:
+          - next
+          - prev
+          - self
+        type: string
+      uri:
+        type: string
+    type: object
+
   BadRequest:
     type: object
     properties:
@@ -1265,6 +1277,10 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/StudentResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   StudentResponse:
     type: object
@@ -1279,6 +1295,10 @@ definitions:
         type: array
         items:
            $ref: "#/definitions/ContactResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   ContactResponse:
     type: object
@@ -1293,6 +1313,10 @@ definitions:
         type: array
         items:
            $ref: "#/definitions/TeacherResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   TeacherResponse:
     type: object
@@ -1307,6 +1331,10 @@ definitions:
         type: array
         items:
            $ref: "#/definitions/SectionResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   SectionResponse:
     type: object
@@ -1321,6 +1349,10 @@ definitions:
         type: array
         items:
            $ref: "#/definitions/SchoolResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   SchoolResponse:
     type: object
@@ -1335,6 +1367,10 @@ definitions:
         type: array
         items:
            $ref: "#/definitions/SchoolAdminResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   SchoolAdminResponse:
     type: object
@@ -1349,6 +1385,10 @@ definitions:
         type: array
         items:
            $ref: "#/definitions/TermResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   TermResponse:
     type: object
@@ -1363,6 +1403,10 @@ definitions:
         type: array
         items:
            $ref: "#/definitions/CourseResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   CourseResponse:
     type: object
@@ -1377,6 +1421,10 @@ definitions:
         type: array
         items:
            $ref: "#/definitions/DistrictResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   DistrictResponse:
     type: object
@@ -1391,6 +1439,10 @@ definitions:
         type: array
         items:
            $ref: "#/definitions/DistrictAdminResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   DistrictAdminResponse:
     type: object
@@ -2171,6 +2223,10 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/EventResponse"
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
 
   EventResponse:
     type: object
