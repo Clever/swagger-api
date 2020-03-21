@@ -1969,7 +1969,7 @@ definitions:
       email:
         type: string
       name:
-        $ref: "#/definitions/Name"
+        $ref: "#/definitions/AdminName"
       schools:
         type: array
         x-validation: true
@@ -2048,7 +2048,7 @@ definitions:
         type: string
         x-validation: true
       name:
-        $ref: "#/definitions/Name"
+        $ref: "#/definitions/AdminName"
         x-nullable: true
       email:
         type: string
@@ -2066,6 +2066,16 @@ definitions:
         type: string
         x-nullable: true
       middle:
+        type: string
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+
+  AdminName:
+    type: object
+    properties:
+      first:
         type: string
         x-nullable: true
       last:
