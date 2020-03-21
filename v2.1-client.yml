@@ -1,5 +1,14 @@
 basePath: /v2.1
 definitions:
+  AdminName:
+    properties:
+      first:
+        type: string
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+    type: object
   BadRequest:
     properties:
       message:
@@ -318,19 +327,10 @@ definitions:
       first:
         type: string
         x-nullable: true
+      last:
+        type: string
+        x-nullable: true
       middle:
-        type: string
-        x-nullable: true
-      last:
-        type: string
-        x-nullable: true
-    type: object
-  AdminName:
-    properties:
-      first:
-        type: string
-        x-nullable: true
-      last:
         type: string
         x-nullable: true
     type: object
@@ -450,6 +450,7 @@ definitions:
         $ref: '#/definitions/Credentials'
       department:
         type: string
+        x-nullable: true
       district:
         type: string
         x-validation: true
