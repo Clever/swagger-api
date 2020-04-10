@@ -86,9 +86,9 @@ func removeV21GradeEnums(properties map[interface{}]interface{}, fieldName strin
 		"InfantToddler":            true,
 		"Preschool":                true,
 		"TransitionalKindergarten": true,
-		"13":       true,
-		"Ungraded": true,
-		"":         true,
+		"13":                       true,
+		"Ungraded":                 true,
+		"":                         true,
 	})
 }
 
@@ -125,6 +125,11 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 		if version == "v2.0" {
 			delete(properties, "ext")
 		}
+	case "SchoolAdmin":
+		if version == "v2.0" {
+			delete(properties, "ext")
+			delete(properties, "department")
+		}
 	case "Section":
 		if version == "v2.0" {
 			delete(properties, "ext")
@@ -143,7 +148,6 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			delete(properties, "portal_url")
 			delete(properties, "login_methods")
 			delete(properties, "district_contact")
-			delete(properties, "goals_enabled")
 			removeEnum(properties, "state", map[string]bool{"": true})
 			removeFieldProperty(properties, "state", "x-nullable")
 		}

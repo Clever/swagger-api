@@ -1969,7 +1969,7 @@ definitions:
       email:
         type: string
       name:
-        $ref: "#/definitions/Name"
+        $ref: "#/definitions/AdminName"
       schools:
         type: array
         x-validation: true
@@ -1980,6 +1980,11 @@ definitions:
       title:
         type: string
         x-nullable: true
+      department:
+        type: string
+        x-nullable: true
+      ext:
+        type: object
 
   District:
     type: object
@@ -2040,13 +2045,6 @@ definitions:
         $ref: "#/definitions/DistrictAdmin"
         x-nullable: true
         x-validation: true
-      goals_enabled:
-        type: string
-        x-validation: true
-        enum:
-        - "Y"
-        - "N"
-        - ""
 
   DistrictAdmin:
     type: object
@@ -2055,7 +2053,7 @@ definitions:
         type: string
         x-validation: true
       name:
-        $ref: "#/definitions/Name"
+        $ref: "#/definitions/AdminName"
         x-nullable: true
       email:
         type: string
@@ -2073,6 +2071,16 @@ definitions:
         type: string
         x-nullable: true
       middle:
+        type: string
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+
+  AdminName:
+    type: object
+    properties:
+      first:
         type: string
         x-nullable: true
       last:
