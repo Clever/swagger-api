@@ -248,6 +248,10 @@ definitions:
         items:
           $ref: '#/definitions/DistrictResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
     type: object
   Event:
     discriminator: type
@@ -276,10 +280,25 @@ definitions:
         items:
           $ref: '#/definitions/EventResponse'
         type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
     type: object
   InternalError:
     properties:
       message:
+        type: string
+    type: object
+  Link:
+    properties:
+      rel:
+        enum:
+        - next
+        - prev
+        - self
+        type: string
+      uri:
         type: string
     type: object
   Location:

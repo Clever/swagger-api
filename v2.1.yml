@@ -133,13 +133,6 @@ definitions:
         x-validation: true
       error:
         type: string
-      goals_enabled:
-        enum:
-        - "Y"
-        - "N"
-        - ""
-        type: string
-        x-validation: true
       id:
         type: string
         x-validation: true
@@ -202,7 +195,7 @@ definitions:
         type: string
         x-validation: true
       name:
-        $ref: '#/definitions/Name'
+        $ref: '#/definitions/AdminName'
         x-nullable: true
       title:
         type: string

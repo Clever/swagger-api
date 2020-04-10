@@ -148,7 +148,6 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			delete(properties, "portal_url")
 			delete(properties, "login_methods")
 			delete(properties, "district_contact")
-			delete(properties, "goals_enabled")
 			removeEnum(properties, "state", map[string]bool{"": true})
 			removeFieldProperty(properties, "state", "x-nullable")
 		}
