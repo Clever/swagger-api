@@ -1634,7 +1634,6 @@ securityDefinitions:
     flow: accessCode
     tokenUrl: https://clever.com/oauth/tokens
     type: oauth2
-    x-default: TEST_TOKEN
 swagger: "2.0"
 x-samples-languages:
 - curl
