@@ -1204,7 +1204,6 @@ securityDefinitions:
     flow: accessCode
     authorizationUrl: https://clever.com/oauth/authorize
     tokenUrl: https://clever.com/oauth/tokens
-    x-default: TEST_TOKEN
 
 definitions:
   NotFound:
