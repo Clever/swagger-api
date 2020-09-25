@@ -2011,6 +2011,7 @@ definitions:
         - "pending"
         - "error"
         - "paused"
+        - ""
         - "success"
       last_sync:
         type: string
