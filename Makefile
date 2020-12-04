@@ -1,2 +1,2 @@
 generate:
-		go run main.go v$(VERSION)
+		go run main.go $(VERSION)

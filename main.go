@@ -16,11 +16,11 @@ func main() {
 	}
 
 	version := strings.ToLower(os.Args[1])
-	if version == "v1" {
+	if version == "1" {
 		v1.Generate()
-	} else if version == "v2" {
+	} else if version == "2" {
 		v2.Generate()
-	} else if version == "v3" {
+	} else if version == "3" {
 		v3.Generate()
 	} else {
 		log.Fatalf("Invalid version")
