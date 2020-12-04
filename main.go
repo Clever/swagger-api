@@ -5,13 +5,14 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Clever/swagger-api/v1"
-	"github.com/Clever/swagger-api/v2"
+	v1 "github.com/Clever/swagger-api/v1"
+	v2 "github.com/Clever/swagger-api/v2"
+	v3 "github.com/Clever/swagger-api/v3"
 )
 
 func main() {
 	if len(os.Args) == 1 {
-		log.Fatalf("You must supply a version to generate: v1 or v2")
+		log.Fatalf("You must supply a version to generate (VERSION=(1|2|3))")
 	}
 
 	version := strings.ToLower(os.Args[1])
@@ -19,6 +20,8 @@ func main() {
 		v1.Generate()
 	} else if version == "v2" {
 		v2.Generate()
+	} else if version == "v3" {
+		v3.Generate()
 	} else {
 		log.Fatalf("Invalid version")
 	}
