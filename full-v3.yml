@@ -321,7 +321,7 @@ paths:
   /resources/{id}/users:
     get:
       tags: ["Resources"]
-      description: Returns the users for a resource
+      description: Returns the contact, staff, student and/or teacher users for a resource
       operationId: getUsersForResource
       parameters:
       - in: path
@@ -499,7 +499,7 @@ paths:
   /schools/{id}/users:
     get:
       tags: ["Schools"]
-      description: Returns the users for a school
+      description: Returns the staff, student, and/or teacher users for a school
       operationId: getUsersForSchool
       parameters:
       - in: path
@@ -677,7 +677,7 @@ paths:
   /sections/{id}/users:
     get:
       tags: ["Sections"]
-      description: Returns the users for a section
+      description: Returns the student and/or teacher users for a section
       operationId: getUsersForSection
       parameters:
       - in: path
@@ -827,7 +827,7 @@ paths:
   /users:
     get:
       tags: ["Users"]
-      description: Returns a list of users
+      description: Returns a list of contact, district admin, staff, student, and/or teacher users
       operationId: getUsers
       parameters:
       - in: query
@@ -896,7 +896,7 @@ paths:
   /users/{id}/mycontacts:
     get:
       tags: ["Users"]
-      description: Returns the contacts for a user
+      description: Returns the contact users for a student user
       operationId: getContactsForUser
       parameters:
       - in: path
@@ -916,14 +916,14 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/ContactsResponse'
+            $ref: '#/definitions/UsersResponse'
         '404':
           $ref: '#/responses/NotFound'
 
   /users/{id}/mystudents:
     get:
       tags: ["Users"]
-      description: Returns the students for a user
+      description: Returns the student users for a teacher user
       operationId: getStudentsForUser
       parameters:
       - in: path
@@ -943,14 +943,14 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentsResponse'
+            $ref: '#/definitions/UsersResponse'
         '404':
           $ref: '#/responses/NotFound'
 
   /users/{id}/myteachers:
     get:
       tags: ["Users"]
-      description: Returns the teachers for a user
+      description: Returns the teacher users for a student user
       operationId: getTeachersForUser
       parameters:
       - in: path
@@ -970,7 +970,7 @@ paths:
         '200':
           description: OK Response
           schema:
-            $ref: '#/definitions/TeachersResponse'
+            $ref: '#/definitions/UsersResponse'
         '404':
           $ref: '#/responses/NotFound'
 
