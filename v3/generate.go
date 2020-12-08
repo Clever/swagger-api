@@ -3,6 +3,7 @@ package v3
 import (
 	"io/ioutil"
 	"log"
+	"sharedlib"
 	"strings"
 
 	"github.com/Clever/yaml"
@@ -60,25 +61,6 @@ func Generate() {
 	}
 }
 
-// removeFieldProperty removes the specified value from a field's properties, if it exists.
-func removeFieldProperty(properties map[interface{}]interface{}, fieldName, propertyName string) {
-	fieldProperties := properties[fieldName].(map[interface{}]interface{})
-	delete(fieldProperties, propertyName)
-}
-
-// removeEnum removes the specified enum from a field's properties, if it exists.
-func removeEnum(properties map[interface{}]interface{}, fieldName string, enumBlacklist map[string]bool) {
-	fieldProperties := properties[fieldName].(map[interface{}]interface{})
-	oldEnums := fieldProperties["enum"].([]interface{})
-	newEnums := []interface{}{}
-	for _, enum := range oldEnums {
-		if _, ok := enumBlacklist[enum.(string)]; !ok {
-			newEnums = append(newEnums, enum)
-		}
-	}
-	fieldProperties["enum"] = newEnums
-}
-
 // modifyDefinitions removes fields that don't apply to the particular version / client
 // combination. For example, it removes students.schools from v1.1.
 func modifyDefinitions(version string, isClient bool, name string, def map[interface{}]interface{}) {
@@ -104,7 +86,7 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 // generateDataAPIYml generates the data API from the base yml for a specific version. It does
 // this by removing things from the yml, for example the /events endpoints.
 func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, error) {
-	m := deepCopyMap(i)
+	m := sharedlib.DeepCopyMap(i)
 
 	m["basePath"] = "/" + version
 	info := m["info"].(map[interface{}]interface{})
@@ -159,7 +141,7 @@ func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, 
 // generateEventsAPIYml generates the events API from the base yml for a specific version. It does
 // this by removing things from the yml, for example the non /events endpoints.
 func generateEventsAPIYml(i map[interface{}]interface{}, version string) ([]byte, error) {
-	m := deepCopyMap(i)
+	m := sharedlib.DeepCopyMap(i)
 
 	m["basePath"] = "/" + version
 	info := m["info"].(map[interface{}]interface{})
@@ -187,7 +169,7 @@ func generateEventsAPIYml(i map[interface{}]interface{}, version string) ([]byte
 // generateClientYml generates the yml for the client libraries. It removes things we don't need
 // implementations to use.
 func generateClientYml(i map[interface{}]interface{}, versionStr string) ([]byte, error) {
-	m := deepCopyMap(i)
+	m := sharedlib.DeepCopyMap(i)
 
 	delete(m, "x-sample-languages")
 	info := m["info"].(map[interface{}]interface{})
@@ -215,19 +197,4 @@ func generateClientYml(i map[interface{}]interface{}, versionStr string) ([]byte
 	}
 
 	return yaml.Marshal(m)
-}
-
-// deepCopyMap recursively copies the map. We use this so we can modify it for each output yml
-func deepCopyMap(m map[interface{}]interface{}) map[interface{}]interface{} {
-	ret := make(map[interface{}]interface{})
-
-	for k, v := range m {
-		subMap, isMap := v.(map[interface{}]interface{})
-		if isMap {
-			ret[k] = deepCopyMap(subMap)
-		} else {
-			ret[k] = v
-		}
-	}
-	return ret
 }
