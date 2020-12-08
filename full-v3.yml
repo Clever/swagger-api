@@ -329,6 +329,13 @@ paths:
         required: true
         type: string
       - in: query
+        name: role
+        enum:
+        - "contact"
+        - "staff"
+        - "student"
+        - "teacher"
+      - in: query
         name: limit
         type: integer
       - in: query
@@ -499,6 +506,13 @@ paths:
         name: id
         required: true
         type: string
+      - in: query
+        name: role
+        type: string
+        enum:
+        - "staff"
+        - "student"
+        - "teacher"
       - in: query
         name: limit
         type: integer
@@ -671,6 +685,12 @@ paths:
         required: true
         type: string
       - in: query
+        name: role
+        type: string
+        enum:
+        - "student"
+        - "teacher"
+      - in: query
         name: limit
         type: integer
       - in: query
@@ -814,6 +834,15 @@ paths:
         name: limit
         type: integer
       - in: query
+        name: role
+        type: string
+        enum:
+        - "contact"
+        - "district_admin"
+        - "staff"
+        - "student"
+        - "teacher"
+      - in: query
         name: starting_after
         type: string
       - in: query
@@ -822,9 +851,6 @@ paths:
       - in: query
         name: count
         type: string
-        enum:
-        - ""
-        - "true"
       responses:
         '200':
           description: OK Response

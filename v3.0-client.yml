@@ -1486,6 +1486,13 @@ paths:
         name: id
         required: true
         type: string
+      - enum:
+        - contact
+        - staff
+        - student
+        - teacher
+        in: query
+        name: role
       - in: query
         name: limit
         type: integer
@@ -1656,6 +1663,13 @@ paths:
       - in: path
         name: id
         required: true
+        type: string
+      - enum:
+        - staff
+        - student
+        - teacher
+        in: query
+        name: role
         type: string
       - in: query
         name: limit
@@ -1828,6 +1842,12 @@ paths:
         name: id
         required: true
         type: string
+      - enum:
+        - student
+        - teacher
+        in: query
+        name: role
+        type: string
       - in: query
         name: limit
         type: integer
@@ -1971,16 +1991,22 @@ paths:
       - in: query
         name: limit
         type: integer
+      - enum:
+        - contact
+        - district_admin
+        - staff
+        - student
+        - teacher
+        in: query
+        name: role
+        type: string
       - in: query
         name: starting_after
         type: string
       - in: query
         name: ending_before
         type: string
-      - enum:
-        - ""
-        - "true"
-        in: query
+      - in: query
         name: count
         type: string
       responses:
