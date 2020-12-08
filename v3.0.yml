@@ -1146,6 +1146,7 @@ paths:
         - teacher
         in: query
         name: role
+        type: string
       - in: query
         name: limit
         type: integer
