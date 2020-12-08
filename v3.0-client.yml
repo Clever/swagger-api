@@ -1479,7 +1479,7 @@ paths:
       - Data
   /resources/{id}/users:
     get:
-      description: Returns the users for a resource
+      description: Returns the contact, staff, student and/or teacher users for a resource
       operationId: getUsersForResource
       parameters:
       - in: path
@@ -1657,7 +1657,7 @@ paths:
       - Data
   /schools/{id}/users:
     get:
-      description: Returns the users for a school
+      description: Returns the staff, student, and/or teacher users for a school
       operationId: getUsersForSchool
       parameters:
       - in: path
@@ -1835,7 +1835,7 @@ paths:
       - Data
   /sections/{id}/users:
     get:
-      description: Returns the users for a section
+      description: Returns the student and/or teacher users for a section
       operationId: getUsersForSection
       parameters:
       - in: path
@@ -1985,7 +1985,7 @@ paths:
       - Data
   /users:
     get:
-      description: Returns a list of users
+      description: Returns a list of contact, district admin, staff, student, and/or teacher users
       operationId: getUsers
       parameters:
       - in: query
@@ -2054,7 +2054,7 @@ paths:
       - Data
   /users/{id}/mycontacts:
     get:
-      description: Returns the contacts for a user
+      description: Returns the contact users for a student user
       operationId: getContactsForUser
       parameters:
       - in: path
@@ -2074,14 +2074,14 @@ paths:
         "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/ContactsResponse'
+            $ref: '#/definitions/UsersResponse'
         "404":
           $ref: '#/responses/NotFound'
       tags:
       - Data
   /users/{id}/mystudents:
     get:
-      description: Returns the students for a user
+      description: Returns the student users for a teacher user
       operationId: getStudentsForUser
       parameters:
       - in: path
@@ -2101,14 +2101,14 @@ paths:
         "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentsResponse'
+            $ref: '#/definitions/UsersResponse'
         "404":
           $ref: '#/responses/NotFound'
       tags:
       - Data
   /users/{id}/myteachers:
     get:
-      description: Returns the teachers for a user
+      description: Returns the teacher users for a student user
       operationId: getTeachersForUser
       parameters:
       - in: path
@@ -2128,7 +2128,7 @@ paths:
         "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/TeachersResponse'
+            $ref: '#/definitions/UsersResponse'
         "404":
           $ref: '#/responses/NotFound'
       tags:
