@@ -4,7 +4,7 @@ A Swagger Definition for the Clever API
 
 
 ## Generate Files
-Update the source yml (full-vX.yml) and run `make generate-vX`
+Update the source yml (full-vX.yml) and run `make generate VERSION=3` (for any version, example given is for version v3)
 
 ## Custom Swagger Extensions
 

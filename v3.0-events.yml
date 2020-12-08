@@ -1,0 +1,1172 @@
+basePath: /v3.0
+definitions:
+  AdminName:
+    properties:
+      first:
+        type: string
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+    type: object
+  BadRequest:
+    properties:
+      message:
+        type: string
+    type: object
+  Contact:
+    properties:
+      id:
+        type: string
+        x-validation: true
+      phone:
+        type: string
+        x-nullable: true
+      phone_type:
+        enum:
+        - Cell
+        - Home
+        - Work
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      relationship:
+        enum:
+        - Parent
+        - Grandparent
+        - Self
+        - Aunt/Uncle
+        - Sibling
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      sis_id:
+        type: string
+        x-nullable: true
+      student_relationships:
+        items:
+          $ref: '#/definitions/StudentRelationship'
+        type: array
+        x-validation: true
+      students:
+        items:
+          type: string
+        type: array
+        x-validation: true
+      type:
+        enum:
+        - Parent/Guardian
+        - Emergency
+        - Primary
+        - Secondary
+        - Family
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+    type: object
+  Course:
+    properties:
+      district:
+        type: string
+        x-validation: true
+      id:
+        type: string
+        x-validation: true
+      name:
+        type: string
+        x-nullable: true
+      number:
+        type: string
+        x-nullable: true
+    type: object
+  CourseObject:
+    properties:
+      object:
+        $ref: '#/definitions/Course'
+    type: object
+  CourseResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Course'
+    type: object
+  CoursesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/CourseResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
+  Credentials:
+    properties:
+      district_username:
+        type: string
+    type: object
+  District:
+    properties:
+      district_contact:
+        $ref: '#/definitions/DistrictAdmin'
+        x-nullable: true
+        x-validation: true
+      error:
+        type: string
+      id:
+        type: string
+        x-validation: true
+      last_sync:
+        format: datetime
+        type: string
+        x-nullable: true
+        x-validation: true
+      launch_date:
+        format: datetime
+        type: string
+        x-validation: true
+      login_methods:
+        items:
+          type: string
+        type: array
+        x-validation: true
+      mdr_number:
+        type: string
+        x-nullable: true
+      name:
+        type: string
+      nces_id:
+        type: string
+        x-nullable: true
+      pause_end:
+        format: datetime
+        type: string
+        x-nullable: true
+        x-validation: true
+      pause_start:
+        format: datetime
+        type: string
+        x-nullable: true
+        x-validation: true
+      portal_url:
+        type: string
+      sis_type:
+        type: string
+        x-validation: true
+      state:
+        enum:
+        - running
+        - pending
+        - error
+        - paused
+        - ""
+        - success
+        type: string
+        x-nullable: true
+        x-validation: true
+    type: object
+  DistrictAdmin:
+    properties:
+      id:
+        type: string
+        x-validation: true
+      title:
+        type: string
+        x-nullable: true
+    type: object
+  DistrictObject:
+    properties:
+      object:
+        $ref: '#/definitions/District'
+    type: object
+  DistrictResponse:
+    properties:
+      data:
+        $ref: '#/definitions/District'
+    type: object
+  DistrictsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/DistrictResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
+  Event:
+    discriminator: type
+    properties:
+      created:
+        format: datetime
+        type: string
+        x-validation: true
+      id:
+        type: string
+        x-validation: true
+      type:
+        type: string
+        x-validation: true
+    required:
+    - type
+    type: object
+  EventResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Event'
+    type: object
+  EventsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/EventResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
+  InternalError:
+    properties:
+      message:
+        type: string
+    type: object
+  Link:
+    properties:
+      rel:
+        enum:
+        - next
+        - prev
+        - self
+        type: string
+      uri:
+        type: string
+    type: object
+  Location:
+    properties:
+      address:
+        type: string
+        x-nullable: true
+      city:
+        type: string
+        x-nullable: true
+      lat:
+        type: string
+        x-nullable: true
+      lon:
+        type: string
+        x-nullable: true
+      state:
+        type: string
+        x-nullable: true
+      zip:
+        type: string
+        x-nullable: true
+    type: object
+  Name:
+    properties:
+      first:
+        type: string
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+      middle:
+        type: string
+        x-nullable: true
+    type: object
+  NotFound:
+    properties:
+      message:
+        type: string
+    type: object
+  Principal:
+    properties:
+      email:
+        type: string
+        x-nullable: true
+      name:
+        type: string
+        x-nullable: true
+    type: object
+  Resource:
+    properties:
+      created:
+        format: date-time
+        type: string
+      district:
+        type: string
+      roles:
+        items:
+          enum:
+          - teacher
+          - student
+          type: string
+        type: array
+      sourcedId:
+        type: string
+      title:
+        type: string
+      updated:
+        format: date-time
+        type: string
+      vendorResourceId:
+        type: string
+    type: object
+  ResourceObject:
+    properties:
+      object:
+        $ref: '#/definitions/Resource'
+    type: object
+  ResourceResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Resource'
+    type: object
+  ResourcesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/ResourceResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
+  School:
+    properties:
+      created:
+        format: datetime
+        type: string
+        x-validation: true
+      district:
+        type: string
+        x-validation: true
+      ext:
+        type: object
+      high_grade:
+        enum:
+        - InfantToddler
+        - Preschool
+        - PreKindergarten
+        - TransitionalKindergarten
+        - Kindergarten
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "13"
+        - PostGraduate
+        - Ungraded
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      id:
+        type: string
+        x-validation: true
+      last_modified:
+        format: datetime
+        type: string
+        x-validation: true
+      location:
+        $ref: '#/definitions/Location'
+        x-nullable: true
+      low_grade:
+        enum:
+        - InfantToddler
+        - Preschool
+        - PreKindergarten
+        - TransitionalKindergarten
+        - Kindergarten
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "13"
+        - PostGraduate
+        - Ungraded
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      mdr_number:
+        type: string
+        x-nullable: true
+      name:
+        type: string
+      nces_id:
+        type: string
+        x-nullable: true
+      phone:
+        type: string
+        x-nullable: true
+      principal:
+        $ref: '#/definitions/Principal'
+      school_number:
+        type: string
+      sis_id:
+        type: string
+      state_id:
+        type: string
+        x-nullable: true
+    type: object
+  SchoolEnrollment:
+    properties:
+      end_date:
+        format: datetime
+        type: string
+        x-validation: true
+      school:
+        type: string
+        x-validation: true
+      start_date:
+        format: datetime
+        type: string
+        x-validation: true
+    type: object
+  SchoolObject:
+    properties:
+      object:
+        $ref: '#/definitions/School'
+    type: object
+  SchoolResponse:
+    properties:
+      data:
+        $ref: '#/definitions/School'
+    type: object
+  SchoolsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/SchoolResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
+  Section:
+    properties:
+      course:
+        type: string
+        x-nullable: true
+        x-validation: true
+      created:
+        format: datetime
+        type: string
+        x-validation: true
+      district:
+        type: string
+        x-validation: true
+      ext:
+        type: object
+      grade:
+        enum:
+        - InfantToddler
+        - Preschool
+        - PreKindergarten
+        - TransitionalKindergarten
+        - Kindergarten
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "13"
+        - PostGraduate
+        - Ungraded
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      id:
+        type: string
+        x-validation: true
+      last_modified:
+        format: datetime
+        type: string
+        x-validation: true
+      name:
+        type: string
+      period:
+        type: string
+        x-nullable: true
+      school:
+        type: string
+        x-validation: true
+      section_number:
+        type: string
+        x-nullable: true
+      sis_id:
+        type: string
+      students:
+        items:
+          type: string
+        type: array
+        x-validation: true
+      subject:
+        enum:
+        - english/language arts
+        - math
+        - science
+        - social studies
+        - language
+        - homeroom/advisory
+        - interventions/online learning
+        - technology and engineering
+        - PE and health
+        - arts and music
+        - other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      teacher:
+        type: string
+        x-nullable: true
+        x-validation: true
+      teachers:
+        items:
+          type: string
+        type: array
+        x-validation: true
+      term_id:
+        type: string
+        x-nullable: true
+        x-validation: true
+    type: object
+  SectionObject:
+    properties:
+      object:
+        $ref: '#/definitions/Section'
+    type: object
+  SectionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Section'
+    type: object
+  SectionsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/SectionResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
+  Staff:
+    properties:
+      credentials:
+        $ref: '#/definitions/Credentials'
+      department:
+        type: string
+        x-nullable: true
+      ext:
+        type: object
+      id:
+        type: string
+        x-validation: true
+      roles:
+        items:
+          type: string
+        type: array
+        x-validation: true
+      schools:
+        items:
+          type: string
+        type: array
+        x-validation: true
+      staff_id:
+        type: string
+      title:
+        type: string
+        x-nullable: true
+    type: object
+  Student:
+    properties:
+      created:
+        format: datetime
+        type: string
+        x-validation: true
+      credentials:
+        $ref: '#/definitions/Credentials'
+      dob:
+        format: datetime
+        type: string
+        x-nullable: true
+        x-validation: true
+      ell_status:
+        enum:
+        - "Y"
+        - "N"
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      enrollments:
+        items:
+          $ref: '#/definitions/SchoolEnrollment'
+        type: array
+        x-validation: true
+      ext:
+        type: object
+      gender:
+        enum:
+        - M
+        - F
+        - X
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      grade:
+        enum:
+        - InfantToddler
+        - Preschool
+        - PreKindergarten
+        - TransitionalKindergarten
+        - Kindergarten
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "13"
+        - PostGraduate
+        - Ungraded
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      graduation_year:
+        type: string
+        x-nullable: true
+        x-validation: true
+      hispanic_ethnicity:
+        enum:
+        - "Y"
+        - "N"
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      id:
+        type: string
+        x-validation: true
+      last_modified:
+        format: datetime
+        type: string
+        x-validation: true
+      location:
+        $ref: '#/definitions/Location'
+        x-nullable: true
+      race:
+        enum:
+        - Caucasian
+        - Asian
+        - Black or African American
+        - American Indian
+        - Hawaiian or Other Pacific Islander
+        - Two or More Races
+        - Unknown
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      school:
+        type: string
+        x-validation: true
+      schools:
+        items:
+          type: string
+        type: array
+        x-validation: true
+      sis_id:
+        type: string
+      state_id:
+        type: string
+        x-nullable: true
+      student_number:
+        type: string
+        x-nullable: true
+    type: object
+  StudentRelationship:
+    properties:
+      relationship:
+        enum:
+        - Parent
+        - Grandparent
+        - Self
+        - Aunt/Uncle
+        - Sibling
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      student:
+        type: string
+        x-validation: true
+      type:
+        enum:
+        - Parent/Guardian
+        - Emergency
+        - Primary
+        - Secondary
+        - Family
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+    type: object
+  Teacher:
+    properties:
+      created:
+        format: datetime
+        type: string
+        x-validation: true
+      credentials:
+        $ref: '#/definitions/Credentials'
+        x-nullable: true
+      district:
+        type: string
+        x-validation: true
+      email:
+        type: string
+        x-nullable: true
+      ext:
+        type: object
+      id:
+        type: string
+        x-validation: true
+      last_modified:
+        format: datetime
+        type: string
+        x-validation: true
+      name:
+        $ref: '#/definitions/Name'
+      school:
+        type: string
+        x-validation: true
+      schools:
+        items:
+          type: string
+        type: array
+        x-validation: true
+      sis_id:
+        type: string
+      state_id:
+        type: string
+        x-nullable: true
+      teacher_number:
+        type: string
+        x-nullable: true
+      title:
+        type: string
+        x-nullable: true
+    type: object
+  Term:
+    properties:
+      district:
+        type: string
+        x-validation: true
+      end_date:
+        format: datetime
+        type: string
+        x-nullable: true
+        x-validation: true
+      id:
+        type: string
+        x-validation: true
+      name:
+        type: string
+        x-nullable: true
+      start_date:
+        format: datetime
+        type: string
+        x-nullable: true
+        x-validation: true
+    type: object
+  TermObject:
+    properties:
+      object:
+        $ref: '#/definitions/Term'
+    type: object
+  TermResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Term'
+    type: object
+  TermsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/TermResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
+  User:
+    properties:
+      contact:
+        $ref: '#/definitions/Contact'
+        x-nullable: true
+      created:
+        format: datetime
+        type: string
+        x-validation: true
+      district:
+        type: string
+        x-validation: true
+      district_admin:
+        $ref: '#/definitions/DistrictAdmin'
+        x-nullable: true
+      email:
+        type: string
+        x-nullable: true
+      id:
+        type: string
+        x-validation: true
+      last_modified:
+        format: datetime
+        type: string
+        x-validation: true
+      name:
+        $ref: '#/definitions/Name'
+      staff:
+        $ref: '#/definitions/Staff'
+        x-nullable: true
+      student:
+        $ref: '#/definitions/Student'
+        x-nullable: true
+      teacher:
+        $ref: '#/definitions/Teacher'
+        x-nullable: true
+    type: object
+  UserObject:
+    properties:
+      object:
+        $ref: '#/definitions/User'
+    type: object
+  UserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/User'
+    type: object
+  UsersResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/UserResponse'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
+  courses.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/CourseObject'
+      type: object
+  courses.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/CourseObject'
+      type: object
+  courses.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/CourseObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+  districts.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/DistrictObject'
+      type: object
+  districts.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/DistrictObject'
+      type: object
+  districts.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/DistrictObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+  resources.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/ResourceObject'
+      type: object
+  resources.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/ResourceObject'
+      type: object
+  resources.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/ResourceObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+  schools.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/SchoolObject'
+      type: object
+  schools.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/SchoolObject'
+      type: object
+  schools.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/SchoolObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+  sections.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/SectionObject'
+      type: object
+  sections.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/SectionObject'
+      type: object
+  sections.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/SectionObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+  terms.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/TermObject'
+      type: object
+  terms.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/TermObject'
+      type: object
+  terms.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/TermObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+  users.created:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/UserObject'
+      type: object
+  users.deleted:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/UserObject'
+      type: object
+  users.updated:
+    allOf:
+    - $ref: '#/definitions/Event'
+    - properties:
+        data:
+          $ref: '#/definitions/UserObject'
+        previous_attributes:
+          additionalProperties:
+            type: object
+      type: object
+host: api.clever.com
+info:
+  description: The Clever Events API
+  title: Events API
+  version: 3.0.0
+paths:
+  /events:
+    get:
+      description: Returns a list of events
+      operationId: getEvents
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      - in: query
+        name: school
+        type: string
+      - collectionFormat: multi
+        in: query
+        items:
+          type: string
+        name: record_type
+        type: array
+      responses:
+        "200":
+          description: OK Response
+          schema:
+            $ref: '#/definitions/EventsResponse'
+        "404":
+          $ref: '#/responses/NotFound'
+      tags:
+      - Events
+  /events/{id}:
+    get:
+      description: Returns the specific event
+      operationId: getEvent
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK Response
+          schema:
+            $ref: '#/definitions/EventResponse'
+        "404":
+          $ref: '#/responses/NotFound'
+      tags:
+      - Events
+produces:
+- application/json
+responses:
+  BadRequest:
+    description: Bad Request
+    schema:
+      $ref: '#/definitions/BadRequest'
+  InternalError:
+    description: Internal Error
+    schema:
+      $ref: '#/definitions/InternalError'
+  NotFound:
+    description: Entity Not Found
+    schema:
+      $ref: '#/definitions/NotFound'
+schemes:
+- https
+security:
+- oauth: []
+securityDefinitions:
+  oauth:
+    authorizationUrl: https://clever.com/oauth/authorize
+    flow: accessCode
+    tokenUrl: https://clever.com/oauth/tokens
+    type: oauth2
+swagger: "2.0"
+x-samples-languages:
+- curl
+- node
+- ruby
+- python
+- php
+- java
+- go
