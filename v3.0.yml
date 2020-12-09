@@ -1,14 +1,5 @@
 basePath: /v3.0
 definitions:
-  AdminName:
-    properties:
-      first:
-        type: string
-        x-nullable: true
-      last:
-        type: string
-        x-nullable: true
-    type: object
   BadRequest:
     properties:
       message:
@@ -16,7 +7,7 @@ definitions:
     type: object
   Contact:
     properties:
-      id:
+      legacy_id:
         type: string
         x-validation: true
       phone:
@@ -32,18 +23,6 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
-      relationship:
-        enum:
-        - Parent
-        - Grandparent
-        - Self
-        - Aunt/Uncle
-        - Sibling
-        - Other
-        - ""
-        type: string
-        x-nullable: true
-        x-validation: true
       sis_id:
         type: string
         x-nullable: true
@@ -51,23 +30,6 @@ definitions:
         items:
           $ref: '#/definitions/StudentRelationship'
         type: array
-        x-validation: true
-      students:
-        items:
-          type: string
-        type: array
-        x-validation: true
-      type:
-        enum:
-        - Parent/Guardian
-        - Emergency
-        - Primary
-        - Secondary
-        - Family
-        - Other
-        - ""
-        type: string
-        x-nullable: true
         x-validation: true
     type: object
   Course:
@@ -109,8 +71,7 @@ definitions:
   District:
     properties:
       district_contact:
-        $ref: '#/definitions/DistrictAdmin'
-        x-nullable: true
+        type: string
         x-validation: true
       error:
         type: string
@@ -168,7 +129,7 @@ definitions:
     type: object
   DistrictAdmin:
     properties:
-      id:
+      legacy_id:
         type: string
         x-validation: true
       title:
@@ -543,7 +504,7 @@ definitions:
         x-nullable: true
       ext:
         type: object
-      id:
+      legacy_id:
         type: string
         x-validation: true
       roles:
@@ -638,11 +599,11 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
-      id:
-        type: string
-        x-validation: true
       last_modified:
         format: datetime
+        type: string
+        x-validation: true
+      legacy_id:
         type: string
         x-validation: true
       location:
@@ -720,16 +681,13 @@ definitions:
       district:
         type: string
         x-validation: true
-      email:
-        type: string
-        x-nullable: true
       ext:
         type: object
-      id:
-        type: string
-        x-validation: true
       last_modified:
         format: datetime
+        type: string
+        x-validation: true
+      legacy_id:
         type: string
         x-validation: true
       name:
@@ -794,9 +752,6 @@ definitions:
     type: object
   User:
     properties:
-      contact:
-        $ref: '#/definitions/Contact'
-        x-nullable: true
       created:
         format: datetime
         type: string
@@ -804,9 +759,6 @@ definitions:
       district:
         type: string
         x-validation: true
-      district_admin:
-        $ref: '#/definitions/DistrictAdmin'
-        x-nullable: true
       email:
         type: string
         x-nullable: true
@@ -819,15 +771,24 @@ definitions:
         x-validation: true
       name:
         $ref: '#/definitions/Name'
-      staff:
-        $ref: '#/definitions/Staff'
-        x-nullable: true
-      student:
-        $ref: '#/definitions/Student'
-        x-nullable: true
-      teacher:
-        $ref: '#/definitions/Teacher'
-        x-nullable: true
+      roles:
+        additionalProperties:
+          contact:
+            $ref: '#/definitions/Contact'
+            x-nullable: true
+          district_admin:
+            $ref: '#/definitions/DistrictAdmin'
+            x-nullable: true
+          staff:
+            $ref: '#/definitions/Staff'
+            x-nullable: true
+          student:
+            $ref: '#/definitions/Student'
+            x-nullable: true
+          teacher:
+            $ref: '#/definitions/Teacher'
+            x-nullable: true
+        type: object
     type: object
   UserResponse:
     properties:
@@ -1132,7 +1093,7 @@ paths:
       - Resources
   /resources/{id}/users:
     get:
-      description: Returns the contact, staff, student and/or teacher users for a resource
+      description: Returns the student and/or teacher users for a resource
       operationId: getUsersForResource
       parameters:
       - in: path
@@ -1140,13 +1101,10 @@ paths:
         required: true
         type: string
       - enum:
-        - contact
-        - staff
         - student
         - teacher
         in: query
         name: role
-        type: string
       - in: query
         name: limit
         type: integer
@@ -1735,7 +1693,7 @@ paths:
       - Users
   /users/{id}/mystudents:
     get:
-      description: Returns the student users for a teacher user
+      description: Returns the student users for a teacher or contact user
       operationId: getStudentsForUser
       parameters:
       - in: path
