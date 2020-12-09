@@ -330,6 +330,7 @@ paths:
         type: string
       - in: query
         name: role
+        type: string
         enum:
         - "student"
         - "teacher"
@@ -1420,6 +1421,24 @@ definitions:
       vendorResourceId:
         type: string
 
+  Roles:
+    properties:
+      contact:
+        $ref: '#/definitions/Contact'
+        x-nullable: true
+      district_admin:
+        $ref: '#/definitions/DistrictAdmin'
+        x-nullable: true
+      staff:
+        $ref: '#/definitions/Staff'
+        x-nullable: true
+      student:
+        $ref: '#/definitions/Student'
+        x-nullable: true
+      teacher:
+        $ref: '#/definitions/Teacher'
+        x-nullable: true
+
   School:
     type: object
     properties:
@@ -1998,23 +2017,7 @@ definitions:
       name:
         $ref: "#/definitions/Name"
       roles:
-        type: object
-        additionalProperties:
-          contact:
-            $ref: '#/definitions/Contact'
-            x-nullable: true
-          district_admin:
-            $ref: '#/definitions/DistrictAdmin'
-            x-nullable: true
-          staff:
-            $ref: '#/definitions/Staff'
-            x-nullable: true
-          student:
-            $ref: '#/definitions/Student'
-            x-nullable: true
-          teacher:
-            $ref: '#/definitions/Teacher'
-            x-nullable: true
+        $ref: "#/definitions/Roles"
 
   CourseObject:
     type: object
