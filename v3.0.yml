@@ -255,6 +255,23 @@ definitions:
           $ref: '#/definitions/Link'
         type: array
     type: object
+  Roles:
+    properties:
+      contact:
+        $ref: '#/definitions/Contact'
+        x-nullable: true
+      district_admin:
+        $ref: '#/definitions/DistrictAdmin'
+        x-nullable: true
+      staff:
+        $ref: '#/definitions/Staff'
+        x-nullable: true
+      student:
+        $ref: '#/definitions/Student'
+        x-nullable: true
+      teacher:
+        $ref: '#/definitions/Teacher'
+        x-nullable: true
   School:
     properties:
       created:
@@ -772,23 +789,7 @@ definitions:
       name:
         $ref: '#/definitions/Name'
       roles:
-        additionalProperties:
-          contact:
-            $ref: '#/definitions/Contact'
-            x-nullable: true
-          district_admin:
-            $ref: '#/definitions/DistrictAdmin'
-            x-nullable: true
-          staff:
-            $ref: '#/definitions/Staff'
-            x-nullable: true
-          student:
-            $ref: '#/definitions/Student'
-            x-nullable: true
-          teacher:
-            $ref: '#/definitions/Teacher'
-            x-nullable: true
-        type: object
+        $ref: '#/definitions/Roles'
     type: object
   UserResponse:
     properties:
@@ -1105,6 +1106,7 @@ paths:
         - teacher
         in: query
         name: role
+        type: string
       - in: query
         name: limit
         type: integer
