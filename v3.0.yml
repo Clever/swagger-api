@@ -1285,6 +1285,12 @@ paths:
         in: query
         name: role
         type: string
+      - enum:
+        - ""
+        - "true"
+        in: query
+        name: primary
+        type: string
       - in: query
         name: limit
         type: integer
@@ -1461,6 +1467,12 @@ paths:
         - teacher
         in: query
         name: role
+        type: string
+      - enum:
+        - ""
+        - "true"
+        in: query
+        name: primary
         type: string
       - in: query
         name: limit
@@ -1782,6 +1794,12 @@ paths:
       - in: path
         name: id
         required: true
+        type: string
+      - enum:
+        - ""
+        - "true"
+        in: query
+        name: primary
         type: string
       - in: query
         name: limit
