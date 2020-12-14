@@ -1429,14 +1429,14 @@ definitions:
           enum:
             - teacher
             - student
-      sourcedId:
+      id:
         type: string
       title:
         type: string
       updated:
         type: string
         format: date-time
-      vendorResourceId:
+      resource_id:
         type: string
 
   Roles:
