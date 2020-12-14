@@ -222,6 +222,10 @@ definitions:
         type: string
       district:
         type: string
+      id:
+        type: string
+      resource_id:
+        type: string
       roles:
         items:
           enum:
@@ -229,14 +233,10 @@ definitions:
           - student
           type: string
         type: array
-      sourcedId:
-        type: string
       title:
         type: string
       updated:
         format: date-time
-        type: string
-      vendorResourceId:
         type: string
     type: object
   ResourceResponse:
