@@ -1354,12 +1354,6 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - enum:
-        - ""
-        - "true"
-        in: query
-        name: count
-        type: string
       responses:
         "200":
           description: OK Response
