@@ -891,6 +891,11 @@ definitions:
           $ref: '#/definitions/Link'
         type: array
     type: object
+  Timeout:
+    properties:
+      message:
+        type: string
+    type: object
   User:
     properties:
       created:
@@ -2202,6 +2207,10 @@ responses:
     description: Entity Not Found
     schema:
       $ref: '#/definitions/NotFound'
+  Timeout:
+    description: Request Timed Out
+    schema:
+      $ref: '#/definitions/Timeout'
 schemes:
 - https
 security:
