@@ -35,11 +35,6 @@ responses:
     schema:
       $ref: "#/definitions/NotFound"
 
-  Timeout:
-    description: Request Timed Out
-    schema:
-      $ref: "#/definitions/Timeout"
-
 security:
   - oauth: []
 
@@ -1155,12 +1150,6 @@ definitions:
     type: object
 
   NotFound:
-    type: object
-    properties:
-      message:
-        type: string
-
-  Timeout:
     type: object
     properties:
       message:
