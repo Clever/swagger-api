@@ -843,7 +843,7 @@ paths:
         type: string
         enum:
         - "contact"
-        - "district_admin"
+        - "districtadmin"
         - "staff"
         - "student"
         - "teacher"
@@ -1438,7 +1438,7 @@ definitions:
       contact:
         $ref: '#/definitions/Contact'
         x-nullable: true
-      district_admin:
+      districtadmin:
         $ref: '#/definitions/DistrictAdmin'
         x-nullable: true
       staff:
