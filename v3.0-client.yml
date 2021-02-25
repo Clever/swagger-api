@@ -307,7 +307,7 @@ definitions:
       contact:
         $ref: '#/definitions/Contact'
         x-nullable: true
-      districtadmin:
+      district_admin:
         $ref: '#/definitions/DistrictAdmin'
         x-nullable: true
       staff:
@@ -1960,7 +1960,7 @@ paths:
         type: integer
       - enum:
         - contact
-        - districtadmin
+        - district_admin
         - staff
         - student
         - teacher
