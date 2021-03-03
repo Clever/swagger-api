@@ -190,6 +190,7 @@ definitions:
         - error
         - paused
         - ""
+        - success
         type: string
         x-nullable: true
         x-validation: true

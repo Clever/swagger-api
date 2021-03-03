@@ -167,6 +167,7 @@ definitions:
         - pending
         - error
         - paused
+        - success
         type: string
         x-validation: true
     type: object
