@@ -1383,7 +1383,7 @@ definitions:
         x-validation: true
       dob:
         type: string
-        format: datetime
+        pattern: (?:[0-9]{1,2})/([0-9]{1,2})/([0-9]{4})
         x-nullable: true
         x-validation: true
       ell_status:

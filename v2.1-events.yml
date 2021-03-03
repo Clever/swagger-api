@@ -661,7 +661,7 @@ definitions:
         type: string
         x-validation: true
       dob:
-        format: datetime
+        pattern: (?:[0-9]{1,2})/([0-9]{1,2})/([0-9]{4})
         type: string
         x-nullable: true
         x-validation: true
