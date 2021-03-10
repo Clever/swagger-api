@@ -76,8 +76,8 @@ definitions:
   District:
     properties:
       district_contact:
-        type: string
-        x-validation: true
+        $ref: '#/definitions/DistrictContact'
+        type: object
       error:
         type: string
       id:
@@ -89,7 +89,7 @@ definitions:
         x-nullable: true
         x-validation: true
       launch_date:
-        format: datetime
+        format: date
         type: string
         x-validation: true
       login_methods:
@@ -140,6 +140,23 @@ definitions:
       title:
         type: string
         x-nullable: true
+    type: object
+  DistrictContact:
+    properties:
+      district:
+        type: string
+        x-validation: true
+      email:
+        type: string
+        x-nullable: true
+      id:
+        type: string
+        x-validation: true
+      name:
+        $ref: '#/definitions/Name'
+      title:
+        type: string
+        x-validation: true
     type: object
   DistrictObject:
     properties:
