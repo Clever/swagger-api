@@ -1826,12 +1826,6 @@ paths:
         in: query
         name: role
         type: string
-      - enum:
-        - ""
-        - "true"
-        in: query
-        name: primary
-        type: string
       - in: query
         name: limit
         type: integer

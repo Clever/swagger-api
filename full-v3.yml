@@ -690,12 +690,6 @@ paths:
         - "student"
         - "teacher"
       - in: query
-        name: primary
-        type: string
-        enum:
-        - ""
-        - "true"
-      - in: query
         name: limit
         type: integer
       - in: query
