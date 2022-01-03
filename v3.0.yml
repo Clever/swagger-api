@@ -976,7 +976,7 @@ paths:
       - Courses
   /districts:
     get:
-      description: Returns a list of districts
+      description: Returns a district
       operationId: getDistricts
       parameters:
       - enum:
