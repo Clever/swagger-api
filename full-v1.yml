@@ -42,7 +42,7 @@ paths:
   /districts:
     get:
       tags: ["Districts"]
-      description: Returns a list of districts
+      description: Returns a list of districts. In practice this will only return the one district associated with the bearer token
       operationId: getDistricts
       responses:
         '200':
