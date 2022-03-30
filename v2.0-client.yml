@@ -74,12 +74,14 @@ definitions:
         $ref: '#/definitions/Contact'
     type: object
   ContactsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/ContactResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/ContactResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   Course:
     properties:
       id:
@@ -103,12 +105,14 @@ definitions:
         $ref: '#/definitions/Course'
     type: object
   CoursesResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/CourseResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/CourseResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   Credentials:
     properties:
       district_username:
@@ -188,12 +192,14 @@ definitions:
         $ref: '#/definitions/DistrictAdmin'
     type: object
   DistrictAdminsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/DistrictAdminResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/DistrictAdminResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   DistrictObject:
     properties:
       object:
@@ -205,12 +211,14 @@ definitions:
         $ref: '#/definitions/District'
     type: object
   DistrictsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/DistrictResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/DistrictResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   Event:
     discriminator: type
     properties:
@@ -233,15 +241,28 @@ definitions:
         $ref: '#/definitions/Event'
     type: object
   EventsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/EventResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/EventResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   InternalError:
     properties:
       message:
+        type: string
+    type: object
+  Link:
+    properties:
+      rel:
+        enum:
+        - next
+        - prev
+        - self
+        type: string
+      uri:
         type: string
     type: object
   Location:
@@ -290,6 +311,13 @@ definitions:
     properties:
       message:
         type: string
+    type: object
+  PluralResponse:
+    properties:
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
     type: object
   Principal:
     properties:
@@ -418,12 +446,14 @@ definitions:
         $ref: '#/definitions/SchoolAdmin'
     type: object
   SchoolAdminsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/SchoolAdminResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/SchoolAdminResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   SchoolObject:
     properties:
       object:
@@ -435,12 +465,14 @@ definitions:
         $ref: '#/definitions/School'
     type: object
   SchoolsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/SchoolResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/SchoolResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   Section:
     properties:
       course:
@@ -540,12 +572,14 @@ definitions:
         $ref: '#/definitions/Section'
     type: object
   SectionsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/SectionResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/SectionResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   Student:
     properties:
       created:
@@ -728,12 +762,14 @@ definitions:
         $ref: '#/definitions/Student'
     type: object
   StudentsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/StudentResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/StudentResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   Teacher:
     properties:
       created:
@@ -789,12 +825,14 @@ definitions:
         $ref: '#/definitions/Teacher'
     type: object
   TeachersResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/TeacherResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/TeacherResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   Term:
     properties:
       end_date:
@@ -825,12 +863,14 @@ definitions:
         $ref: '#/definitions/Term'
     type: object
   TermsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/TermResponse'
-        type: array
-    type: object
+    allOf:
+      - properties:
+          data:
+            items:
+              $ref: '#/definitions/TermResponse'
+            type: array
+        type: object
+      - $ref: '#/definitions/PluralResponse'
   contacts.created:
     allOf:
     - $ref: '#/definitions/Event'
