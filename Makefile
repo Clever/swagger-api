@@ -3,3 +3,4 @@ generate:
 
 install_deps:
 		go mod vendor
+		
