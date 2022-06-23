@@ -3,9 +3,9 @@ package v3
 import (
 	"io/ioutil"
 	"log"
-	"sharedlib"
 	"strings"
 
+	"github.com/Clever/swagger-api/sharedlib"
 	"github.com/Clever/yaml"
 )
 
