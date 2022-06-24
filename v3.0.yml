@@ -847,6 +847,8 @@ paths:
       - enum:
         - ""
         - "true"
+        - "false"
+        - undefined
         in: query
         name: count
         type: string
@@ -982,6 +984,8 @@ paths:
       - enum:
         - ""
         - "true"
+        - "false"
+        - undefined
         in: query
         name: count
         type: string
@@ -1153,6 +1157,8 @@ paths:
       - enum:
         - ""
         - "true"
+        - "false"
+        - undefined
         in: query
         name: count
         type: string
@@ -1337,6 +1343,8 @@ paths:
       - enum:
         - ""
         - "true"
+        - "false"
+        - undefined
         in: query
         name: count
         type: string
@@ -1514,6 +1522,8 @@ paths:
       - enum:
         - ""
         - "true"
+        - "false"
+        - undefined
         in: query
         name: count
         type: string
@@ -1637,7 +1647,12 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - in: query
+      - enum:
+        - ""
+        - "true"
+        - "false"
+        - undefined
+        in: query
         name: count
         type: string
       responses:

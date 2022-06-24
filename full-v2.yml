@@ -51,6 +51,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -96,6 +98,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -258,6 +262,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -447,6 +453,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -636,6 +644,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -780,6 +790,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -868,6 +880,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -931,6 +945,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -1021,6 +1037,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -1111,6 +1129,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response

@@ -60,6 +60,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -195,6 +197,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -366,6 +370,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -550,6 +556,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -727,6 +735,8 @@ paths:
         enum:
         - ""
         - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
@@ -850,6 +860,11 @@ paths:
       - in: query
         name: count
         type: string
+        enum:
+        - ""
+        - "true"
+        - "false"
+        - "undefined"
       responses:
         '200':
           description: OK Response
