@@ -1980,6 +1980,8 @@ paths:
       - enum:
         - ""
         - "true"
+        - "false"
+        - undefined
         in: query
         name: count
         type: string
