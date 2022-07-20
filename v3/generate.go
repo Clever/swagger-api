@@ -14,7 +14,7 @@ import (
 // to copy this file and modify it for new API versions.
 const majorVersion = "3"
 
-var minorVersions = []string{"0"}
+var minorVersions = []string{"0", "1"}
 var versionStrs = []string{}
 
 // Generate generates API source ymls for the major/minor versions.

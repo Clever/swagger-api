@@ -1,4 +1,4 @@
-basePath: /v3.0
+basePath: /v3.1
 definitions:
   BadRequest:
     properties:
@@ -46,11 +46,6 @@ definitions:
       number:
         type: string
         x-nullable: true
-    type: object
-  CourseObject:
-    properties:
-      object:
-        $ref: '#/definitions/Course'
     type: object
   CourseResponse:
     properties:
@@ -158,11 +153,6 @@ definitions:
         type: string
         x-validation: true
     type: object
-  DistrictObject:
-    properties:
-      object:
-        $ref: '#/definitions/District'
-    type: object
   DistrictResponse:
     properties:
       data:
@@ -173,38 +163,6 @@ definitions:
       data:
         items:
           $ref: '#/definitions/DistrictResponse'
-        type: array
-      links:
-        items:
-          $ref: '#/definitions/Link'
-        type: array
-    type: object
-  Event:
-    discriminator: type
-    properties:
-      created:
-        format: datetime
-        type: string
-        x-validation: true
-      id:
-        type: string
-        x-validation: true
-      type:
-        type: string
-        x-validation: true
-    required:
-    - type
-    type: object
-  EventResponse:
-    properties:
-      data:
-        $ref: '#/definitions/Event'
-    type: object
-  EventsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/EventResponse'
         type: array
       links:
         items:
@@ -297,11 +255,6 @@ definitions:
       updated:
         format: date-time
         type: string
-    type: object
-  ResourceObject:
-    properties:
-      object:
-        $ref: '#/definitions/Resource'
     type: object
   ResourceResponse:
     properties:
@@ -446,11 +399,6 @@ definitions:
         type: string
         x-validation: true
     type: object
-  SchoolObject:
-    properties:
-      object:
-        $ref: '#/definitions/School'
-    type: object
   SchoolResponse:
     properties:
       data:
@@ -564,11 +512,6 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
-    type: object
-  SectionObject:
-    properties:
-      object:
-        $ref: '#/definitions/Section'
     type: object
   SectionResponse:
     properties:
@@ -690,13 +633,6 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
-      home_language:
-        type: string
-        x-nullable: true
-        x-validation: true
-      iep_status:
-        type: string
-        x-nullable: true
       last_modified:
         format: datetime
         type: string
@@ -734,12 +670,6 @@ definitions:
         type: string
         x-nullable: true
       student_number:
-        type: string
-        x-nullable: true
-      unweighted_gpa:
-        type: string
-        x-nullable: true
-      weighted_gpa:
         type: string
         x-nullable: true
     type: object
@@ -838,11 +768,6 @@ definitions:
         x-nullable: true
         x-validation: true
     type: object
-  TermObject:
-    properties:
-      object:
-        $ref: '#/definitions/Term'
-    type: object
   TermResponse:
     properties:
       data:
@@ -883,11 +808,6 @@ definitions:
       roles:
         $ref: '#/definitions/Roles'
     type: object
-  UserObject:
-    properties:
-      object:
-        $ref: '#/definitions/User'
-    type: object
   UserResponse:
     properties:
       data:
@@ -904,178 +824,10 @@ definitions:
           $ref: '#/definitions/Link'
         type: array
     type: object
-  courses.created:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/CourseObject'
-      type: object
-  courses.deleted:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/CourseObject'
-      type: object
-  courses.updated:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/CourseObject'
-        previous_attributes:
-          additionalProperties:
-            type: object
-      type: object
-  districts.created:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/DistrictObject'
-      type: object
-  districts.deleted:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/DistrictObject'
-      type: object
-  districts.updated:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/DistrictObject'
-        previous_attributes:
-          additionalProperties:
-            type: object
-      type: object
-  resources.created:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/ResourceObject'
-      type: object
-  resources.deleted:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/ResourceObject'
-      type: object
-  resources.updated:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/ResourceObject'
-        previous_attributes:
-          additionalProperties:
-            type: object
-      type: object
-  schools.created:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/SchoolObject'
-      type: object
-  schools.deleted:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/SchoolObject'
-      type: object
-  schools.updated:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/SchoolObject'
-        previous_attributes:
-          additionalProperties:
-            type: object
-      type: object
-  sections.created:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/SectionObject'
-      type: object
-  sections.deleted:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/SectionObject'
-      type: object
-  sections.updated:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/SectionObject'
-        previous_attributes:
-          additionalProperties:
-            type: object
-      type: object
-  terms.created:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/TermObject'
-      type: object
-  terms.deleted:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/TermObject'
-      type: object
-  terms.updated:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/TermObject'
-        previous_attributes:
-          additionalProperties:
-            type: object
-      type: object
-  users.created:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/UserObject'
-      type: object
-  users.deleted:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/UserObject'
-      type: object
-  users.updated:
-    allOf:
-    - $ref: '#/definitions/Event'
-    - properties:
-        data:
-          $ref: '#/definitions/UserObject'
-        previous_attributes:
-          additionalProperties:
-            type: object
-      type: object
 host: api.clever.com
 info:
-  description: The Clever API
-  title: Clever API
+  description: Serves the Clever Data API
+  title: Data API
   version: 3.1.0
 paths:
   /courses:
@@ -1106,7 +858,7 @@ paths:
           schema:
             $ref: '#/definitions/CoursesResponse'
       tags:
-      - Data
+      - Courses
   /courses/{id}:
     get:
       description: Returns a specific course
@@ -1124,7 +876,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Courses
   /courses/{id}/district:
     get:
       description: Returns the district for a course
@@ -1142,7 +894,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Courses
   /courses/{id}/resources:
     get:
       description: Returns the resources for a course
@@ -1169,7 +921,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Courses
   /courses/{id}/schools:
     get:
       description: Returns the schools for a course
@@ -1196,7 +948,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Courses
   /courses/{id}/sections:
     get:
       description: Returns the sections for a course
@@ -1223,7 +975,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Courses
   /districts:
     get:
       description: Returns a list of districts. In practice this will only return the one district associated with the bearer token
@@ -1243,7 +995,7 @@ paths:
           schema:
             $ref: '#/definitions/DistrictsResponse'
       tags:
-      - Data
+      - Districts
   /districts/{id}:
     get:
       description: Returns a specific district
@@ -1261,57 +1013,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
-  /events:
-    get:
-      description: Returns a list of events
-      operationId: getEvents
-      parameters:
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: starting_after
-        type: string
-      - in: query
-        name: ending_before
-        type: string
-      - in: query
-        name: school
-        type: string
-      - collectionFormat: multi
-        in: query
-        items:
-          type: string
-        name: record_type
-        type: array
-      responses:
-        "200":
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventsResponse'
-        "404":
-          $ref: '#/responses/NotFound'
-      tags:
-      - Events
-  /events/{id}:
-    get:
-      description: Returns the specific event
-      operationId: getEvent
-      parameters:
-      - in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        "200":
-          description: OK Response
-          schema:
-            $ref: '#/definitions/EventResponse'
-        "404":
-          $ref: '#/responses/NotFound'
-      tags:
-      - Events
+      - Districts
   /resources:
     get:
       description: Returns a list of resources
@@ -1332,7 +1034,7 @@ paths:
           schema:
             $ref: '#/definitions/ResourcesResponse'
       tags:
-      - Data
+      - Resources
   /resources/{id}:
     get:
       description: Returns a specific resource
@@ -1350,7 +1052,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Resources
   /resources/{id}/courses:
     get:
       description: Returns the courses for a resource
@@ -1377,7 +1079,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Resources
   /resources/{id}/sections:
     get:
       description: Returns the sections for a resource
@@ -1404,7 +1106,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Resources
   /resources/{id}/users:
     get:
       description: Returns the student and/or teacher users for a resource
@@ -1437,7 +1139,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Resources
   /schools:
     get:
       description: Returns a list of schools
@@ -1466,7 +1168,7 @@ paths:
           schema:
             $ref: '#/definitions/SchoolsResponse'
       tags:
-      - Data
+      - Schools
   /schools/{id}:
     get:
       description: Returns a specific school
@@ -1484,7 +1186,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Schools
   /schools/{id}/courses:
     get:
       description: Returns the courses for a school
@@ -1511,7 +1213,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Schools
   /schools/{id}/district:
     get:
       description: Returns the district for a school
@@ -1529,7 +1231,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Schools
   /schools/{id}/sections:
     get:
       description: Returns the sections for a school
@@ -1556,7 +1258,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Schools
   /schools/{id}/terms:
     get:
       description: Returns the terms for a school
@@ -1583,7 +1285,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Schools
   /schools/{id}/users:
     get:
       description: Returns the staff, student, and/or teacher users for a school
@@ -1623,7 +1325,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Schools
   /sections:
     get:
       description: Returns a list of sections
@@ -1652,7 +1354,7 @@ paths:
           schema:
             $ref: '#/definitions/SectionsResponse'
       tags:
-      - Data
+      - Sections
   /sections/{id}:
     get:
       description: Returns a specific section
@@ -1670,7 +1372,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Sections
   /sections/{id}/course:
     get:
       description: Returns the course for a section
@@ -1688,7 +1390,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Sections
   /sections/{id}/district:
     get:
       description: Returns the district for a section
@@ -1706,7 +1408,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Sections
   /sections/{id}/resources:
     get:
       description: Returns the resources for a section
@@ -1733,7 +1435,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Sections
   /sections/{id}/school:
     get:
       description: Returns the school for a section
@@ -1751,7 +1453,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Sections
   /sections/{id}/term:
     get:
       description: Returns the term for a section
@@ -1769,7 +1471,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Sections
   /sections/{id}/users:
     get:
       description: Returns the student and/or teacher users for a section
@@ -1802,7 +1504,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Sections
   /terms:
     get:
       description: Returns a list of terms
@@ -1831,7 +1533,7 @@ paths:
           schema:
             $ref: '#/definitions/TermsResponse'
       tags:
-      - Data
+      - Terms
   /terms/{id}:
     get:
       description: Returns a specific term
@@ -1849,7 +1551,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Terms
   /terms/{id}/district:
     get:
       description: Returns the district for a term
@@ -1867,7 +1569,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Terms
   /terms/{id}/schools:
     get:
       description: Returns the schools for a term
@@ -1894,7 +1596,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Terms
   /terms/{id}/sections:
     get:
       description: Returns the sections for a term
@@ -1921,7 +1623,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Terms
   /users:
     get:
       description: Returns a list of contact, district admin, staff, student, and/or teacher users
@@ -1959,7 +1661,7 @@ paths:
           schema:
             $ref: '#/definitions/UsersResponse'
       tags:
-      - Data
+      - Users
   /users/{id}:
     get:
       description: Returns a specific user
@@ -1977,7 +1679,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Users
   /users/{id}/district:
     get:
       description: Returns the district for a user
@@ -1995,7 +1697,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Users
   /users/{id}/mycontacts:
     get:
       description: Returns the contact users for a student user
@@ -2022,7 +1724,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Users
   /users/{id}/mystudents:
     get:
       description: Returns the student users for a teacher or contact user
@@ -2049,7 +1751,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Users
   /users/{id}/myteachers:
     get:
       description: Returns the teacher users for a student user
@@ -2076,7 +1778,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Users
   /users/{id}/resources:
     get:
       description: Returns the resources for a user
@@ -2103,7 +1805,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Users
   /users/{id}/schools:
     get:
       description: Returns the schools for a user
@@ -2136,7 +1838,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Users
   /users/{id}/sections:
     get:
       description: Returns the sections for a user
@@ -2163,7 +1865,7 @@ paths:
         "404":
           $ref: '#/responses/NotFound'
       tags:
-      - Data
+      - Users
 produces:
 - application/json
 responses:

@@ -1,4 +1,4 @@
-basePath: /v3.0
+basePath: /v3.1
 definitions:
   BadRequest:
     properties:
