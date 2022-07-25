@@ -88,7 +88,7 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 				home_language_name := properties["home_language_name"].(map[interface{}]interface{})
 				home_language_code := properties["home_language_code"].(map[interface{}]interface{})
 				home_language_name["enum"] = languages.ISO6392Names
-				home_language_code["enum"] = languages.ISO6392Names
+				home_language_code["enum"] = languages.ISO6392Codes
 			}
 		}
 	default:
