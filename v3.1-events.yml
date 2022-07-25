@@ -690,6 +690,14 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
+      home_language_code:
+        type: string
+        x-nullable: true
+        x-validation: true
+      home_language_name:
+        type: string
+        x-nullable: true
+        x-validation: true
       last_modified:
         format: datetime
         type: string
