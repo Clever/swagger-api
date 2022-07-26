@@ -83,6 +83,7 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			delete(properties, "unweighted_gpa")
 			delete(properties, "weighted_gpa")
 		} else {
+			// home_language is split into two new fields home_language_name and home_language_code in v3.1 and greater
 			if version > "v3.0" {
 				delete(properties, "home_language")
 				home_language_name := properties["home_language_name"].(map[interface{}]interface{})
