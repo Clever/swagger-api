@@ -1,4 +1,4 @@
-basePath: /v3.0
+basePath: /v3.1
 definitions:
   BadRequest:
     properties:
@@ -690,56 +690,243 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
-      home_language:
+      home_language_code:
         enum:
-        - English
-        - Albanian
-        - Amharic
-        - Arabic
-        - Bengali
-        - Bosnian
-        - Burmese
-        - Cantonese
-        - Chinese
-        - Dutch
-        - Farsi
-        - French
-        - German
-        - Hebrew
-        - Hindi
-        - Hmong
-        - Ilocano
-        - Japanese
-        - Javanese
-        - Karen
-        - Khmer
-        - Korean
-        - Laotian
-        - Latvian
-        - Malay
-        - Mandarin
-        - Nepali
-        - Oromo
-        - Polish
-        - Portuguese
-        - Punjabi
+        - cpp
+        - kan
+        - slk
+        - yor
+        - guj
+        - ukr
+        - ara
+        - jav
+        - mkd
+        - mon
+        - pus
+        - urd
+        - kaz
+        - kin
+        - ltz
+        - mal
+        - tel
+        - amh
+        - eng
+        - hrv
+        - heb
+        - smo
+        - spa
+        - bos
+        - sot
+        - tat
+        - tuk
+        - nob
+        - tgk
+        - fry
+        - glg
+        - hun
+        - nep
+        - tur
+        - ces
+        - fil
+        - gle
+        - kor
+        - eus
+        - cos
+        - haw
+        - orm
+        - pan
+        - sna
+        - fin
+        - swe
+        - dan
+        - mlt
+        - tha
+        - yid
+        - alb
+        - ben
+        - kur
+        - ron
+        - arm
+        - hau
+        - vie
+        - ceb
+        - isl
+        - lit
+        - bel
+        - rus
+        - xho
+        - ilo
+        - msa
+        - zh-TW
+        - nld
+        - deu
+        - ell
+        - ibo
+        - jpn
+        - pol
+        - zh-Hans
+        - mah
+        - srp
+        - som
+        - sun
+        - aze
+        - est
+        - tam
+        - zul
+        - afr
+        - hat
+        - lav
+        - mao
+        - sin
+        - swa
+        - lao
+        - fra
+        - kat
+        - gla
+        - other
+        - bul
+        - hin
+        - kir
+        - fas
+        - ind
+        - ita
+        - kar
+        - hmn
+        - mlg
+        - ori
+        - snd
+        - slv
+        - uig
+        - uzb
+        - prs
+        - khm
+        - mar
+        - tir
+        - cym
+        - mya
+        - cat
+        - nya
+        - por
+        type: string
+        x-nullable: true
+        x-validation: true
+      home_language_name:
+        enum:
         - Romanian
-        - Russian
-        - Samoan
-        - Serbian
+        - Chinese (Simplified)
+        - Sundanese
+        - Hindi
+        - Javanese
+        - Arabic
+        - Norwegian
+        - Kazakh
+        - Turkmen
+        - Korean
+        - Galician
+        - Hawaiian
+        - Estonian
+        - Haitian Creole
+        - Chichewa
+        - Hebrew
+        - Amharic
+        - Frisian
+        - Filipino
+        - Oromo
+        - Punjabi
+        - Japanese
+        - Bulgarian
+        - Gujarati
+        - Belarusian
+        - Chinese (Traditional)
+        - Marathi
         - Somali
-        - Spanish
-        - Swahili
-        - Tagalog
-        - Tamil
-        - Telugu
+        - Odia
+        - Kannada
+        - Kyrgyz
+        - Karen
+        - Macedonian
+        - Basque
         - Thai
-        - Tigrinya
+        - Armenian
+        - Malay
+        - Marshallese
+        - Bosnian
         - Turkish
-        - Ukrainian
         - Urdu
+        - Malayalam
+        - Nepali
+        - Maltese
+        - Xhosa
+        - German
+        - French
+        - Slovenian
+        - Catalan
+        - Hausa
+        - Icelandic
+        - Tatar
+        - Telugu
+        - Bengali
+        - Iloko
+        - Malagasy
+        - Khmer
+        - Kinyarwanda
+        - Dutch
+        - Sindhi
+        - Portuguese
+        - Russian
+        - Latvian
+        - Dari
+        - Pashto
+        - Samoan
+        - Shona
+        - Irish
         - Vietnamese
-        - ""
+        - Polish
+        - Lao
+        - Georgian
+        - Cabo Verdean
+        - Luxembourgish
+        - Danish
+        - Yiddish
+        - Burmese
+        - Croatian
+        - Tamil
+        - Uzbek
+        - Greek
+        - Sesotho
+        - Cebuano
+        - Lithuanian
+        - Italian
+        - Slovak
+        - Hungarian
+        - Indonesian
+        - English
+        - Finnish
+        - Albanian
+        - Azerbaijani
+        - Tigrinya
+        - Swahili
+        - Other
+        - Ukrainian
+        - Afrikaans
+        - Tajik
+        - Czech
+        - Zulu
+        - Corsican
+        - Kurdish
+        - Uyghur
+        - Spanish
+        - Serbian
+        - Maori
+        - Hmong
+        - Yoruba
+        - Swedish
+        - Igbo
+        - Welsh
+        - Mongolian
+        - Sinhala
+        - Scots Gaelic
+        - Farsi
         type: string
         x-nullable: true
         x-validation: true

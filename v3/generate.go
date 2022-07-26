@@ -5,6 +5,7 @@ import (
 	"log"
 	"strings"
 
+	"github.com/Clever/i18n-go/languages"
 	"github.com/Clever/swagger-api/sharedlib"
 	"github.com/Clever/yaml"
 )
@@ -14,7 +15,7 @@ import (
 // to copy this file and modify it for new API versions.
 const majorVersion = "3"
 
-var minorVersions = []string{"0"}
+var minorVersions = []string{"0", "1"}
 var versionStrs = []string{}
 
 // Generate generates API source ymls for the major/minor versions.
@@ -64,7 +65,6 @@ func Generate() {
 // modifyDefinitions removes fields that don't apply to the particular version / client
 // combination. For example, it removes students.schools from v1.1.
 func modifyDefinitions(version string, isClient bool, name string, def map[interface{}]interface{}) {
-
 	properties, ok := def["properties"].(map[interface{}]interface{})
 	if !ok {
 		// Polymorphic sub-types, like students.updated, don't have their own properties
@@ -73,11 +73,24 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 
 	switch name {
 	case "Student":
+		if version == "v3.0" {
+			delete(properties, "home_language_name")
+			delete(properties, "home_language_code")
+		}
 		if !isClient {
 			delete(properties, "iep_status")
 			delete(properties, "home_language")
 			delete(properties, "unweighted_gpa")
 			delete(properties, "weighted_gpa")
+		} else {
+			// home_language is split into two new fields home_language_name and home_language_code in v3.1 and greater
+			if version > "v3.0" {
+				delete(properties, "home_language")
+				home_language_name := properties["home_language_name"].(map[interface{}]interface{})
+				home_language_code := properties["home_language_code"].(map[interface{}]interface{})
+				home_language_name["enum"] = languages.ISO6392Names
+				home_language_code["enum"] = languages.ISO6392Codes
+			}
 		}
 	default:
 	}
@@ -117,7 +130,6 @@ func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, 
 	definitions := m["definitions"].(map[interface{}]interface{})
 	// Remove any definitions that are used only for Events
 	for nameInterface, definition := range definitions {
-
 		name := nameInterface.(string)
 		if strings.HasSuffix(name, ".created") ||
 			strings.HasSuffix(name, ".updated") ||
