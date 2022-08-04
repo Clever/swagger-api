@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/Clever/i18n-go/languages"
+	"github.com/Clever/i18n-go/v2/languages"
 	"github.com/Clever/swagger-api/sharedlib"
 	"github.com/Clever/yaml"
 )
@@ -88,8 +88,8 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 				delete(properties, "home_language")
 				home_language_name := properties["home_language_name"].(map[interface{}]interface{})
 				home_language_code := properties["home_language_code"].(map[interface{}]interface{})
-				home_language_name["enum"] = languages.ISO6392Names
-				home_language_code["enum"] = languages.ISO6392Codes
+				home_language_name["enum"] = languages.ISO6393Names
+				home_language_code["enum"] = languages.ISO6393Codes
 			}
 		}
 	default:
