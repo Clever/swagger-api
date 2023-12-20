@@ -68,6 +68,52 @@ definitions:
       district_username:
         type: string
     type: object
+  Disability:
+    properties:
+      disability_code:
+        enum:
+        - aut
+        - db
+        - dd
+        - emn
+        - hi
+        - id
+        - md
+        - oi
+        - other
+        - ohi
+        - sld
+        - sli
+        - tbi
+        - vi
+        type: string
+        x-nullable: true
+      disability_status:
+        enum:
+        - "Y"
+        - "N"
+        - ""
+        type: string
+        x-nullable: true
+      disability_type:
+        enum:
+        - Autism
+        - Deaf-blindness
+        - Developmental delay
+        - Emotional disturbance
+        - Hearing impairment
+        - Intellectual Disability
+        - Multiple disabilities
+        - Orthopedic impairment
+        - Other
+        - Other health impairment
+        - Specific learning disability
+        - Speech or language impairment
+        - Traumatic brain injury
+        - Visual impairment
+        type: string
+        x-nullable: true
+    type: object
   District:
     properties:
       district_contact:
@@ -222,6 +268,18 @@ definitions:
     properties:
       message:
         type: string
+    type: object
+  PreferredName:
+    properties:
+      first:
+        type: string
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+      middle:
+        type: string
+        x-nullable: true
     type: object
   Principal:
     properties:
@@ -565,6 +623,8 @@ definitions:
         x-validation: true
       credentials:
         $ref: '#/definitions/Credentials'
+      disability:
+        $ref: '#/definitions/Disability'
       dob:
         pattern: (?:[0-9]{1,2})/([0-9]{1,2})/([0-9]{4})
         type: string
@@ -585,11 +645,29 @@ definitions:
         x-validation: true
       ext:
         type: object
+      frl_status:
+        enum:
+        - Free
+        - Reduced
+        - Paid
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
       gender:
         enum:
         - M
         - F
         - X
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      gifted_status:
+        enum:
+        - "Y"
+        - "N"
         - ""
         type: string
         x-nullable: true
@@ -637,10 +715,6 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
-      home_language_name:
-        type: string
-        x-nullable: true
-        x-validation: true
       last_modified:
         format: datetime
         type: string
@@ -651,6 +725,8 @@ definitions:
       location:
         $ref: '#/definitions/Location'
         x-nullable: true
+      preferred_name:
+        $ref: '#/definitions/PreferredName'
       race:
         enum:
         - Caucasian
@@ -671,6 +747,14 @@ definitions:
         items:
           type: string
         type: array
+        x-validation: true
+      section_504_status:
+        enum:
+        - "Y"
+        - "N"
+        - ""
+        type: string
+        x-nullable: true
         x-validation: true
       sis_id:
         type: string

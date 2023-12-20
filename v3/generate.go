@@ -1,6 +1,7 @@
 package v3
 
 import (
+	"errors"
 	"io/ioutil"
 	"log"
 	"strings"
@@ -36,7 +37,13 @@ func Generate() {
 	}
 
 	for _, versionStr := range versionStrs {
-		clientBytes, err := generateClientYml(swagger, versionStr)
+		swaggerCopy := duplicateMap(swagger)
+
+		if versionStr == "v3.0" {
+			deleteV31Definitions(swaggerCopy)
+		}
+
+		clientBytes, err := generateClientYml(swaggerCopy, versionStr)
 		if err != nil {
 			log.Fatalf("Error generating client yml: %s", err)
 		}
@@ -44,7 +51,7 @@ func Generate() {
 			log.Fatalf("Error writing client %s API: %s", versionStr, err)
 		}
 
-		versionData, err := generateDataAPIYml(swagger, versionStr)
+		versionData, err := generateDataAPIYml(swaggerCopy, versionStr)
 		if err != nil {
 			log.Fatalf("Error generating data %s API: %s", versionStr, err)
 		}
@@ -52,7 +59,7 @@ func Generate() {
 			log.Fatalf("Error writing data %s API: %s", versionStr, err)
 		}
 
-		versionEvents, err := generateEventsAPIYml(swagger, versionStr)
+		versionEvents, err := generateEventsAPIYml(swaggerCopy, versionStr)
 		if err != nil {
 			log.Fatalf("Error generating events %s API: %s", versionStr, err)
 		}
@@ -60,6 +67,37 @@ func Generate() {
 			log.Fatalf("Error writing events %s API: %s", versionStr, err)
 		}
 	}
+}
+
+// duplicateMap creates a deep copy of the provided map
+func duplicateMap(m map[interface{}]interface{}) map[interface{}]interface{} {
+	cp := make(map[interface{}]interface{})
+	for k, v := range m {
+		if v == nil {
+			cp[k] = nil
+			continue
+		}
+		vm, ok := v.(map[interface{}]interface{})
+		if ok {
+			cp[k] = duplicateMap(vm)
+		} else {
+			cp[k] = v
+		}
+	}
+
+	return cp
+}
+
+// deleteV31Definitions deletes object definitions not used in v3.0 of our APIs
+func deleteV31Definitions(i map[interface{}]interface{}) error {
+	definitions, ok := i["definitions"].(map[interface{}]interface{})
+	if ok {
+		delete(definitions, "PreferredName")
+		delete(definitions, "Disability")
+	} else {
+		return errors.New("no definitions found in provided map")
+	}
+	return nil
 }
 
 // modifyDefinitions removes fields that don't apply to the particular version / client
@@ -74,8 +112,11 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 	switch name {
 	case "Student":
 		if version == "v3.0" {
-			delete(properties, "home_language_name")
+			delete(properties, "disability")
+			delete(properties, "gifted_status")
 			delete(properties, "home_language_code")
+			delete(properties, "section_504_status")
+			delete(properties, "preferred_name")
 		}
 		if !isClient {
 			delete(properties, "iep_status")
@@ -83,12 +124,11 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			delete(properties, "unweighted_gpa")
 			delete(properties, "weighted_gpa")
 		} else {
-			// home_language is split into two new fields home_language_name and home_language_code in v3.1 and greater
 			if version > "v3.0" {
-				delete(properties, "home_language")
-				home_language_name := properties["home_language_name"].(map[interface{}]interface{})
+				// change home_language enum to v3.1 ISO-639-3 languages list and add enums for code
+				home_language := properties["home_language"].(map[interface{}]interface{})
+				home_language["enum"] = languages.ISO6393Names
 				home_language_code := properties["home_language_code"].(map[interface{}]interface{})
-				home_language_name["enum"] = languages.ISO6393Names
 				home_language_code["enum"] = languages.ISO6393Codes
 			}
 		}

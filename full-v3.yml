@@ -1312,6 +1312,53 @@ definitions:
       district_username:
         type: string
 
+  Disability:
+    properties:
+      disability_status:
+        enum:
+        - "Y"
+        - "N"
+        - ""
+        type: string
+        x-nullable: true
+      disability_code:
+        enum:
+        - aut
+        - db
+        - dd
+        - emn
+        - hi
+        - id
+        - md
+        - oi
+        - other
+        - ohi
+        - sld
+        - sli
+        - tbi
+        - vi
+        type: string
+        x-nullable: true
+      disability_type:
+        enum:
+        - Autism
+        - Deaf-blindness
+        - Developmental delay
+        - Emotional disturbance
+        - Hearing impairment
+        - Intellectual Disability
+        - Multiple disabilities
+        - Orthopedic impairment
+        - Other
+        - Other health impairment
+        - Specific learning disability
+        - Speech or language impairment
+        - Traumatic brain injury
+        - Visual impairment
+        type: string
+        x-nullable: true
+    type: object
+  
   District:
     type: object
     properties:
@@ -1416,6 +1463,19 @@ definitions:
       email:
         type: string
         x-nullable: true
+  
+  PreferredName:
+    properties:
+      first:
+        type: string
+        x-nullable: true
+      middle:
+        type: string
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+    type: object
 
   Resource:
     type: object
@@ -1804,6 +1864,8 @@ definitions:
         x-validation: true
       credentials:
         $ref: "#/definitions/Credentials"
+      disability:
+        $ref: '#/definitions/Disability'
       dob:
         type: string
         pattern: (?:[0-9]{1,2})/([0-9]{1,2})/([0-9]{4})
@@ -1822,6 +1884,16 @@ definitions:
         x-validation: true
         items:
           $ref: "#/definitions/SchoolEnrollment"
+      frl_status:
+        enum:
+        - "Free"
+        - "Reduced"
+        - "Paid"
+        - "Other"
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
       gender:
         type: string
         x-nullable: true
@@ -1831,6 +1903,14 @@ definitions:
         - "F"
         - "X"
         - ""
+      gifted_status:
+        enum:
+        - "Y"
+        - "N"
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
       graduation_year:
         type: string
         x-nullable: true
@@ -1870,14 +1950,6 @@ definitions:
         - "Y"
         - "N"
         - ""
-      home_language_name:
-        type: string
-        x-nullable: true
-        x-validation: true
-      home_language_code:
-        type: string
-        x-nullable: true
-        x-validation: true
       home_language:
         type: string
         x-nullable: true
@@ -1931,6 +2003,10 @@ definitions:
         - Urdu
         - Vietnamese
         - ""
+      home_language_code:
+        type: string
+        x-nullable: true
+        x-validation: true
       iep_status:
         type: string
         x-nullable: true
@@ -1941,6 +2017,8 @@ definitions:
       location:
         $ref: "#/definitions/Location"
         x-nullable: true
+      preferred_name:
+        $ref: '#/definitions/PreferredName'
       race:
         type: string
         x-nullable: true
@@ -1962,6 +2040,14 @@ definitions:
         x-validation: true
         items:
           type: string
+      section_504_status:
+        enum:
+        - "Y"
+        - "N"
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
       sis_id:
         type: string
       state_id:
