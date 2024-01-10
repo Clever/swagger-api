@@ -73,6 +73,52 @@ definitions:
       district_username:
         type: string
     type: object
+  Disability:
+    properties:
+      disability_code:
+        enum:
+        - aut
+        - db
+        - dd
+        - emn
+        - hi
+        - id
+        - md
+        - oi
+        - other
+        - ohi
+        - sld
+        - sli
+        - tbi
+        - vi
+        type: string
+        x-nullable: true
+      disability_status:
+        enum:
+        - "Y"
+        - "N"
+        - ""
+        type: string
+        x-nullable: true
+      disability_type:
+        enum:
+        - Autism
+        - Deaf-blindness
+        - Developmental delay
+        - Emotional disturbance
+        - Hearing impairment
+        - Intellectual Disability
+        - Multiple disabilities
+        - Orthopedic impairment
+        - Other
+        - Other health impairment
+        - Specific learning disability
+        - Speech or language impairment
+        - Traumatic brain injury
+        - Visual impairment
+        type: string
+        x-nullable: true
+    type: object
   District:
     properties:
       district_contact:
@@ -264,6 +310,18 @@ definitions:
     properties:
       message:
         type: string
+    type: object
+  PreferredName:
+    properties:
+      first:
+        type: string
+        x-nullable: true
+      last:
+        type: string
+        x-nullable: true
+      middle:
+        type: string
+        x-nullable: true
     type: object
   Principal:
     properties:
@@ -622,6 +680,8 @@ definitions:
         x-validation: true
       credentials:
         $ref: '#/definitions/Credentials'
+      disability:
+        $ref: '#/definitions/Disability'
       dob:
         pattern: (?:[0-9]{1,2})/([0-9]{1,2})/([0-9]{4})
         type: string
@@ -642,11 +702,29 @@ definitions:
         x-validation: true
       ext:
         type: object
+      frl_status:
+        enum:
+        - Free
+        - Reduced
+        - Paid
+        - Other
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
       gender:
         enum:
         - M
         - F
         - X
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
+      gifted_status:
+        enum:
+        - "Y"
+        - "N"
         - ""
         type: string
         x-nullable: true
@@ -690,245 +768,245 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
-      home_language_code:
+      home_language:
         enum:
-        - jav
-        - other
-        - haw
-        - kaz
-        - guj
-        - mkd
-        - mri
-        - yid
-        - zul
-        - hin
-        - slk
-        - bos
-        - nep
-        - aze
-        - sqi
-        - cpp
-        - cmn
-        - mal
-        - afr
-        - fin
-        - kar
-        - lit
-        - nob
-        - sin
-        - ben
-        - hmn
-        - spa
-        - eus
-        - isl
-        - kin
-        - tgk
-        - tat
-        - eng
-        - cym
-        - nld
-        - mlg
-        - orm
-        - ron
-        - gla
-        - tha
-        - nya
-        - mah
-        - kor
-        - ltz
-        - sot
-        - tgl
-        - tir
-        - ukr
-        - ceb
-        - tel
-        - ilo
-        - hye
-        - fry
-        - kan
-        - srp
-        - uig
-        - ara
-        - hat
-        - lav
-        - sna
-        - uzb
-        - cos
-        - tuk
-        - yor
-        - sun
-        - kur
-        - msa
-        - slv
-        - vie
-        - prs
-        - tur
-        - amh
-        - heb
-        - mlt
-        - por
-        - fra
-        - pan
-        - rus
-        - snd
-        - khm
-        - ces
-        - kat
-        - hau
-        - ita
-        - pol
-        - smo
-        - swa
-        - mya
-        - swe
-        - glg
-        - pus
-        - som
-        - tam
-        - dan
-        - ell
-        - gle
-        - lao
-        - deu
-        - ind
-        - urd
-        - bul
-        - kir
-        - mar
-        - ori
-        - hun
-        - cat
-        - fas
-        - fil
-        - ibo
-        - jpn
-        - bel
-        - hrv
-        - est
-        - mon
-        - xho
-        - zho
+        - Basque
+        - Portuguese
+        - Hungarian
+        - Hmong
+        - Urdu
+        - Latvian
+        - Hausa
+        - Slovenian
+        - Chinese (Mandarin)
+        - Russian
+        - Arabic
+        - Telugu
+        - Afrikaans
+        - Tamil
+        - Irish
+        - Uzbek
+        - Norwegian
+        - Serbian
+        - Khmer
+        - Farsi
+        - Lao
+        - Gujarati
+        - Yiddish
+        - Lithuanian
+        - Mongolian
+        - Samoan
+        - Bengali
+        - Corsican
+        - Romanian
+        - Javanese
+        - Danish
+        - Scots Gaelic
+        - Burmese
+        - Kinyarwanda
+        - Swahili
+        - Yoruba
+        - Uyghur
+        - Hindi
+        - Azerbaijani
+        - Cabo Verdean
+        - Haitian Creole
+        - Amharic
+        - Maori
+        - Somali
+        - English
+        - Hawaiian
+        - Maltese
+        - Thai
+        - Slovak
+        - Nepali
+        - Bosnian
+        - Marathi
+        - Frisian
+        - Swedish
+        - Kazakh
+        - German
+        - Turkish
+        - Chinese
+        - Luxembourgish
+        - Armenian
+        - Dari
+        - Macedonian
+        - Karen
+        - Iloko
+        - Igbo
+        - Kannada
+        - Galician
+        - Cebuano
+        - Punjabi
+        - Indonesian
+        - Estonian
+        - Odia
+        - Spanish
+        - Filipino
+        - Albanian
+        - Korean
+        - Croatian
+        - Japanese
+        - Bulgarian
+        - Catalan
+        - Polish
+        - Sinhala
+        - Other
+        - Icelandic
+        - Tatar
+        - Ukrainian
+        - Tajik
+        - Italian
+        - French
+        - Malayalam
+        - Chichewa
+        - Kurdish (Kurmanji)
+        - Czech
+        - Xhosa
+        - Hebrew
+        - Georgian
+        - Oromo
+        - Shona
+        - Sindhi
+        - Sesotho
+        - Tagalog
+        - Malagasy
+        - Tigrinya
+        - Welsh
+        - Turkmen
+        - Malay
+        - Marshallese
+        - Belarusian
+        - Dutch
+        - Finnish
+        - Greek
+        - Kyrgyz
+        - Zulu
+        - Sundanese
+        - Vietnamese
+        - Pashto
         type: string
         x-nullable: true
         x-validation: true
-      home_language_name:
+      home_language_code:
         enum:
-        - Czech
-        - Hausa
-        - Macedonian
-        - Slovak
-        - Mongolian
-        - Slovenian
-        - Pashto
-        - Somali
-        - Other
-        - Urdu
-        - Haitian Creole
-        - Vietnamese
-        - Danish
-        - Nepali
-        - Iloko
-        - Yoruba
-        - Karen
-        - Spanish
-        - Chichewa
-        - Hebrew
-        - Farsi
-        - Sesotho
-        - Swahili
-        - Xhosa
-        - Cabo Verdean
-        - Hmong
-        - Greek
-        - Serbian
-        - Uyghur
-        - Malayalam
-        - Thai
-        - Corsican
-        - Italian
-        - Albanian
-        - Welsh
-        - Armenian
-        - German
-        - Irish
-        - Odia
-        - Zulu
-        - Bosnian
-        - Lithuanian
-        - Norwegian
-        - Indonesian
-        - Telugu
-        - Frisian
-        - Latvian
-        - Russian
-        - Swedish
-        - Kyrgyz
-        - Sinhala
-        - Tigrinya
-        - Punjabi
-        - Malagasy
-        - Oromo
-        - Scots Gaelic
-        - Bengali
-        - Romanian
-        - Sindhi
-        - Azerbaijani
-        - Cebuano
-        - Portuguese
-        - Catalan
-        - English
-        - Icelandic
-        - Malay
-        - Galician
-        - Bulgarian
-        - Estonian
-        - Arabic
-        - Dari
-        - Filipino
-        - Gujarati
-        - Shona
-        - Samoan
-        - Ukrainian
-        - Khmer
-        - Hawaiian
-        - Finnish
-        - Sundanese
-        - Lao
-        - Kazakh
-        - Tatar
-        - Dutch
-        - Hungarian
-        - Kurdish (Kurmanji)
-        - Marathi
-        - Javanese
-        - Hindi
-        - Turkish
-        - Burmese
-        - Georgian
-        - Maori
-        - Chinese (Mandarin)
-        - Polish
-        - Igbo
-        - Afrikaans
-        - Basque
-        - Tajik
-        - Tagalog
-        - Tamil
-        - Japanese
-        - Korean
-        - Luxembourgish
-        - Kannada
-        - Uzbek
-        - French
-        - Chinese
-        - Croatian
-        - Yiddish
-        - Marshallese
-        - Amharic
-        - Kinyarwanda
-        - Turkmen
-        - Maltese
-        - Belarusian
+        - hau
+        - ilo
+        - dan
+        - som
+        - xho
+        - slv
+        - bos
+        - cos
+        - ces
+        - mlg
+        - vie
+        - bel
+        - hin
+        - hun
+        - mon
+        - pan
+        - tgk
+        - heb
+        - prs
+        - mlt
+        - pus
+        - tir
+        - eng
+        - mar
+        - nld
+        - est
+        - zho
+        - fas
+        - fry
+        - jpn
+        - aze
+        - rus
+        - gla
+        - yor
+        - cmn
+        - bul
+        - fin
+        - hmn
+        - ita
+        - pol
+        - ara
+        - ell
+        - khm
+        - mkd
+        - cpp
+        - ibo
+        - urd
+        - cym
+        - hat
+        - lao
+        - ltz
+        - snd
+        - swa
+        - mya
+        - ori
+        - kat
+        - smo
+        - spa
+        - kor
+        - nob
+        - ron
+        - tha
+        - ind
+        - fra
+        - tel
+        - hye
+        - guj
+        - isl
+        - msa
+        - slk
+        - swe
+        - tuk
+        - eus
+        - kaz
+        - mal
+        - kan
+        - amh
+        - orm
+        - afr
+        - fil
+        - haw
+        - lav
+        - sin
+        - yid
+        - ben
+        - kir
+        - mri
+        - tam
+        - glg
+        - ceb
+        - tat
+        - zul
+        - lit
+        - nep
+        - por
+        - sot
+        - other
+        - nya
+        - sun
+        - cat
+        - tgl
+        - ukr
+        - uzb
+        - gle
+        - srp
+        - deu
+        - jav
+        - kur
+        - mah
+        - sna
+        - uig
+        - kin
+        - hrv
+        - kar
+        - tur
+        - sqi
         type: string
         x-nullable: true
         x-validation: true
@@ -945,6 +1023,8 @@ definitions:
       location:
         $ref: '#/definitions/Location'
         x-nullable: true
+      preferred_name:
+        $ref: '#/definitions/PreferredName'
       race:
         enum:
         - Caucasian
@@ -965,6 +1045,14 @@ definitions:
         items:
           type: string
         type: array
+        x-validation: true
+      section_504_status:
+        enum:
+        - "Y"
+        - "N"
+        - ""
+        type: string
+        x-nullable: true
         x-validation: true
       sis_id:
         type: string
