@@ -133,14 +133,13 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 				delete(properties, "iep_status")
 				delete(properties, "home_language")
 			}
-		} else {
-			if version > "v3.0" {
-				// change home_language enum to v3.1 ISO-639-3 languages list and add enums for code
-				home_language := properties["home_language"].(map[interface{}]interface{})
-				home_language["enum"] = languages.ISO6393Names
-				home_language_code := properties["home_language_code"].(map[interface{}]interface{})
-				home_language_code["enum"] = languages.ISO6393Codes
-			}
+		}
+		if version > "v3.0" {
+			// change home_language enum to v3.1 ISO-639-3 languages list and add enums for code
+			home_language := properties["home_language"].(map[interface{}]interface{})
+			home_language["enum"] = languages.ISO6393Names
+			home_language_code := properties["home_language_code"].(map[interface{}]interface{})
+			home_language_code["enum"] = languages.ISO6393Codes
 		}
 	default:
 	}
