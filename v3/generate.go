@@ -117,6 +117,11 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			delete(properties, "home_language_code")
 			delete(properties, "section_504_status")
 			delete(properties, "preferred_name")
+
+			// frl_status should be included in v3.0 but filtering
+			// it out here to separate out changes to v3.1 from
+			// v3.0 as part of SHAPI-861
+			delete(properties, "frl_status")
 		}
 		if !isClient {
 			delete(properties, "iep_status")

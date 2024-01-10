@@ -585,16 +585,6 @@ definitions:
         x-validation: true
       ext:
         type: object
-      frl_status:
-        enum:
-        - Free
-        - Reduced
-        - Paid
-        - Other
-        - ""
-        type: string
-        x-nullable: true
-        x-validation: true
       gender:
         enum:
         - M
