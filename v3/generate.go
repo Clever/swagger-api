@@ -118,16 +118,21 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			delete(properties, "section_504_status")
 			delete(properties, "preferred_name")
 
-			// frl_status should be included in v3.0 but filtering
+			// Frl_status should be included in v3.0 but filtering
 			// it out here to separate out changes to v3.1 from
 			// v3.0 as part of SHAPI-861
 			delete(properties, "frl_status")
 		}
 		if !isClient {
-			delete(properties, "iep_status")
-			delete(properties, "home_language")
 			delete(properties, "unweighted_gpa")
 			delete(properties, "weighted_gpa")
+
+			// Home_language and iep_status are being filtered out of the
+			// v3.0 events schema. Including it in versions 3.1 and above
+			if version == "v3.0" {
+				delete(properties, "iep_status")
+				delete(properties, "home_language")
+			}
 		} else {
 			if version > "v3.0" {
 				// change home_language enum to v3.1 ISO-639-3 languages list and add enums for code

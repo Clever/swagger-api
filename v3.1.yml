@@ -711,10 +711,66 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
+      home_language:
+        enum:
+        - English
+        - Albanian
+        - Amharic
+        - Arabic
+        - Bengali
+        - Bosnian
+        - Burmese
+        - Cantonese
+        - Chinese
+        - Dutch
+        - Farsi
+        - French
+        - German
+        - Hebrew
+        - Hindi
+        - Hmong
+        - Ilocano
+        - Japanese
+        - Javanese
+        - Karen
+        - Khmer
+        - Korean
+        - Laotian
+        - Latvian
+        - Malay
+        - Mandarin
+        - Nepali
+        - Oromo
+        - Polish
+        - Portuguese
+        - Punjabi
+        - Romanian
+        - Russian
+        - Samoan
+        - Serbian
+        - Somali
+        - Spanish
+        - Swahili
+        - Tagalog
+        - Tamil
+        - Telugu
+        - Thai
+        - Tigrinya
+        - Turkish
+        - Ukrainian
+        - Urdu
+        - Vietnamese
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
       home_language_code:
         type: string
         x-nullable: true
         x-validation: true
+      iep_status:
+        type: string
+        x-nullable: true
       last_modified:
         format: datetime
         type: string
