@@ -1,5 +1,3 @@
-github.com/Clever/i18n-go v1.1.0 h1:C+Sa454zM2LJhT9IxFSWoFKKk1C8B2F8shcM98z5IqE=
-github.com/Clever/i18n-go v1.1.0/go.mod h1:FwgFJ8UxRYPFQ4+jMGhKHws81mX4G9EbT3ECefev/Cw=
 github.com/Clever/i18n-go/v2 v2.0.1 h1:ZXZgLcLK2YLQ/nRQ6EsOGkqpZsj0yWyjLJaQO1VhXW4=
 github.com/Clever/i18n-go/v2 v2.0.1/go.mod h1:S+fBBGo/9Qu+OpF+QGfU0WNq8au8RCi9a4sXwmOmOwY=
 github.com/Clever/yaml v0.0.0-20170104005607-8f7677dc217d h1:zONh7OShm/893Z8SSUFcEjt18U25RfyhYXqji/YNlMA=
