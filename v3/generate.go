@@ -19,6 +19,28 @@ const majorVersion = "3"
 var minorVersions = []string{"0", "1"}
 var versionStrs = []string{}
 
+var lmsConnectModels = []string{
+	"Unauthorized",
+	"Assignment",
+	"Submission",
+	"AssigneeMode",
+	"AssignmentState",
+	"Attachment",
+	"GradingScale",
+	"GradingScaleEntry",
+	"GradingType",
+	"SubmissionType",
+	"SubmissionFlag",
+	"SubmissionState",
+	"AssignmentRequest",
+	"AttachmentRequest",
+	"SubmissionRequest",
+	"AssignmentResponse",
+	"SubmissionResponse",
+	"SubmissionsResponse",
+	"SubmissionsLink",
+}
+
 // Generate generates API source ymls for the major/minor versions.
 func Generate() {
 	for _, minorVersion := range minorVersions {
@@ -41,6 +63,7 @@ func Generate() {
 
 		if versionStr == "v3.0" {
 			deleteV31Definitions(swaggerCopy)
+			deleteLMSConnectObjects(swaggerCopy)
 		}
 
 		clientBytes, err := generateClientYml(swaggerCopy, versionStr)
@@ -66,7 +89,21 @@ func Generate() {
 		if err := ioutil.WriteFile(versionStr+"-events.yml", versionEvents, 0644); err != nil {
 			log.Fatalf("Error writing events %s API: %s", versionStr, err)
 		}
+
+		if versionStr != "v3.0" {
+			versionLMSConnect, err := generateLMSConnectAPIYml(swaggerCopy, versionStr)
+			if err != nil {
+				log.Fatalf("Error generating LMS Connect %s API: %s", versionStr, err)
+			}
+			if err := ioutil.WriteFile(versionStr+"-lms.yml", versionLMSConnect, 0644); err != nil {
+				log.Fatalf("Error writing LMS Connect %s API: %s", versionStr, err)
+			}
+		}
 	}
+}
+
+func isLMSConnectEndpoint(path interface{}) bool {
+	return strings.Contains(path.(string), "/assignments") || strings.Contains(path.(string), "/submissions")
 }
 
 // duplicateMap creates a deep copy of the provided map
@@ -86,6 +123,26 @@ func duplicateMap(m map[interface{}]interface{}) map[interface{}]interface{} {
 	}
 
 	return cp
+}
+
+// deleteLMSConnectResponses deletes responses and definitions not used in v3.0 of our APIs
+func deleteLMSConnectObjects(i map[interface{}]interface{}) error {
+	responses, ok := i["responses"].(map[interface{}]interface{})
+	if ok {
+		delete(responses, "Unauthorized")
+	} else {
+		return errors.New("no responses found in provided map")
+	}
+
+	definitions, ok := i["definitions"].(map[interface{}]interface{})
+	if ok {
+		for _, modelName := range lmsConnectModels {
+			delete(definitions, modelName)
+		}
+	} else {
+		return errors.New("no definitions found in provided map")
+	}
+	return nil
 }
 
 // deleteV31Definitions deletes object definitions not used in v3.0 of our APIs
@@ -141,12 +198,21 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 			home_language_code := properties["home_language_code"].(map[interface{}]interface{})
 			home_language_code["enum"] = languages.ISO6393Codes
 		}
+	case "District":
+		if version == "v3.0" {
+			delete(properties, "lms_state")
+		}
+		if !isClient {
+			if version == "v3.0" {
+				delete(properties, "lms_state")
+			}
+		}
 	default:
 	}
 }
 
 // generateDataAPIYml generates the data API from the base yml for a specific version. It does
-// this by removing things from the yml, for example the /events endpoints.
+// this by removing things from the yml, for example the /events and LMS Connect endpoints.
 func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, error) {
 	m := sharedlib.DeepCopyMap(i)
 
@@ -156,7 +222,8 @@ func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, 
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path, methodOp := range paths {
-		if strings.Contains(path.(string), "/events") && path.(string) != "/districts/{id}/status" {
+		if strings.Contains(path.(string), "/events") && path.(string) != "/districts/{id}/status" ||
+			isLMSConnectEndpoint(path) {
 			delete(paths, path)
 			continue
 		}
@@ -176,8 +243,8 @@ func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, 
 		}
 	}
 
+	deleteLMSConnectObjects(m)
 	definitions := m["definitions"].(map[interface{}]interface{})
-	// Remove any definitions that are used only for Events
 	for nameInterface, definition := range definitions {
 		name := nameInterface.(string)
 		if strings.HasSuffix(name, ".created") ||
@@ -218,10 +285,69 @@ func generateEventsAPIYml(i map[interface{}]interface{}, version string) ([]byte
 		}
 	}
 
+	deleteLMSConnectObjects(m)
 	definitions := m["definitions"].(map[interface{}]interface{})
 	for nameInterface, definition := range definitions {
 		name := nameInterface.(string)
 		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
+	}
+
+	return yaml.Marshal(m)
+}
+
+// generateLMSConnectAPIYml generates the LMS Connect API from the base yml for a specific version. It does
+// this by removing things from the yml, for example the non-LMS Connect endpoints.
+func generateLMSConnectAPIYml(i map[interface{}]interface{}, version string) ([]byte, error) {
+	m := sharedlib.DeepCopyMap(i)
+
+	m["basePath"] = "/" + version
+	info := m["info"].(map[interface{}]interface{})
+	info["title"] = "LMS Connect API"
+	info["description"] = "The Clever LMS Connect API"
+	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
+
+	paths := m["paths"].(map[interface{}]interface{})
+	for path, methodOp := range paths {
+		if !isLMSConnectEndpoint(path) {
+			delete(paths, path)
+			continue
+		}
+
+		for _, o := range methodOp.(map[interface{}]interface{}) {
+			operation := o.(map[interface{}]interface{})
+			params, ok := operation["parameters"].([]interface{})
+			if !ok {
+				continue
+			}
+			paramsForClient := make([]map[interface{}]interface{}, 0)
+			for _, p := range params {
+				param := p.(map[interface{}]interface{})
+				paramsForClient = append(paramsForClient, param)
+			}
+			operation["parameters"] = paramsForClient
+		}
+	}
+
+	definitions := m["definitions"].(map[interface{}]interface{})
+	// Remove Data + Events API models from LMS file
+	lmsConnectModelsPlusSharedModels := append(lmsConnectModels, []string{
+		"BadRequest",
+		"InternalError",
+		"NotFound",
+	}...)
+	for nameInterface, _ := range definitions {
+		name := nameInterface.(string)
+		isLMSConnectModel := false
+		for _, lmsConnectModelName := range lmsConnectModelsPlusSharedModels {
+			if lmsConnectModelName == name {
+				isLMSConnectModel = true
+				continue
+			}
+		}
+
+		if !isLMSConnectModel {
+			delete(definitions, nameInterface)
+		}
 	}
 
 	return yaml.Marshal(m)
@@ -240,12 +366,20 @@ func generateClientYml(i map[interface{}]interface{}, versionStr string) ([]byte
 
 	paths := m["paths"].(map[interface{}]interface{})
 	for path, methodOp := range paths {
+		// LMS Connect API is v3.1 and above
+		if versionStr == "v3.0" && isLMSConnectEndpoint(path) {
+			delete(paths, path)
+			continue
+		}
+
 		for _, o := range methodOp.(map[interface{}]interface{}) {
 			operation := o.(map[interface{}]interface{})
 
 			// Tweak the tags so they show up correctly in the client libraries
 			if strings.Contains(path.(string), "/events") {
 				operation["tags"] = []string{"Events"}
+			} else if isLMSConnectEndpoint(path) {
+				operation["tags"] = []string{"LMS Connect"}
 			} else {
 				operation["tags"] = []string{"Data"}
 			}
