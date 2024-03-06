@@ -1106,8 +1106,6 @@ paths:
           $ref: "#/responses/BadRequest"
         '401':
           $ref: "#/responses/Unauthorized"
-        '404':
-          $ref: '#/responses/NotFound'
 
   /sections/{section_id}/assignments/{assignment_id}:
     get:
