@@ -138,6 +138,16 @@ definitions:
         format: date
         type: string
         x-validation: true
+      lms_state:
+        enum:
+        - matching_in_progress
+        - error
+        - disconnected
+        - ""
+        - success
+        type: string
+        x-nullable: true
+        x-validation: true
       login_methods:
         items:
           type: string

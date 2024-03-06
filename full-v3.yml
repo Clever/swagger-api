@@ -35,6 +35,11 @@ responses:
     schema:
       $ref: "#/definitions/NotFound"
 
+  Unauthorized:
+    description: Not authorized
+    schema:
+      $ref: "#/definitions/Unauthorized"
+
 security:
   - oauth: []
 
@@ -1075,6 +1080,210 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
 
+  # LMS Connect endpoints
+  /sections/{section_id}/assignments:
+    post:
+      tags: ["Assignments"]
+      description: Creates a new assignment in the specified section
+      operationId: createAssignmentForSection
+      parameters:
+        - name: section_id
+          in: path
+          type: string
+          format: mongo-id
+          required: true
+        - name: assignmentRequestBody
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/AssignmentRequest"
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: "#/definitions/AssignmentResponse"
+        '400':
+          $ref: "#/responses/BadRequest"
+        '401':
+          $ref: "#/responses/Unauthorized"
+
+  /sections/{section_id}/assignments/{assignment_id}:
+    get:
+      tags: ["Assignments"]
+      description: Returns a specific assignment for a section
+      operationId: getAssignmentForSection
+      parameters:
+        - name: section_id
+          in: path
+          type: string
+          format: mongo-id
+          required: true
+        - name: assignment_id
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: "#/definitions/AssignmentResponse"
+        '401':
+          $ref: "#/responses/Unauthorized"
+        '404':
+          $ref: '#/responses/NotFound'
+    patch:
+      tags: ["Assignments"]
+      description: Updates an existing assignment in the specified section
+      operationId: updateAssignmentForSection
+      parameters:
+        - name: section_id
+          in: path
+          type: string
+          format: mongo-id
+          required: true
+        - name: assignment_id
+          in: path
+          type: string
+          required: true
+        - name: assignmentRequestBody
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/AssignmentRequest"
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: "#/definitions/AssignmentResponse"
+        '401':
+          $ref: "#/responses/Unauthorized"
+        '404':
+          $ref: '#/responses/NotFound'
+        '400':
+          $ref: "#/responses/BadRequest"
+        '500':
+          $ref: "#/responses/InternalError"
+    delete:
+      tags: ["Assignments"]
+      description: Deletes an existing assignment in the specified section
+      operationId: deleteAssignmentForSection
+      parameters:
+        - name: section_id
+          in: path
+          type: string
+          format: mongo-id
+          required: true
+        - name: assignment_id
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: OK Response
+        '401':
+          $ref: "#/responses/Unauthorized"
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{section_id}/assignments/{assignment_id}/submissions:
+    get:
+      tags: ["Assignments"]
+      description: Returns the submissions for an assignment.
+      operationId: getSubmissionsForAssignment
+      parameters:
+        - name: section_id
+          in: path
+          type: string
+          format: mongo-id
+          required: true
+        - name: assignment_id
+          in: path
+          type: string
+          required: true
+        - name: cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: "#/definitions/SubmissionsResponse"
+        '401':
+          $ref: "#/responses/Unauthorized"
+        '404':
+          $ref: '#/responses/NotFound'
+
+  /sections/{section_id}/assignments/{assignment_id}/submissions/{user_id}:
+    get:
+      tags: ["Submissions"]
+      description: Returns a specific user's submission for an assignment.
+      operationId: getSubmissionForAssignment
+      parameters:
+        - name: section_id
+          in: path
+          type: string
+          format: mongo-id
+          required: true
+        - name: assignment_id
+          in: path
+          type: string
+          required: true
+        - name: user_id
+          in: path
+          type: string
+          format: mongo-id
+          required: true
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: "#/definitions/SubmissionResponse"
+        '401':
+          $ref: "#/responses/Unauthorized"
+        '404':
+          $ref: '#/responses/NotFound'
+    patch:
+      tags: ["Submissions"]
+      description: Updates an existing submission in the specified assignment for a user.
+      operationId: updateSubmissionForAssignment
+      parameters:
+        - name: section_id
+          in: path
+          type: string
+          format: mongo-id
+          required: true
+        - name: assignment_id
+          in: path
+          type: string
+          required: true
+        - name: user_id
+          in: path
+          type: string
+          format: mongo-id
+          required: true
+        - name: submissionRequestBody
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/SubmissionRequest"
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: "#/definitions/SubmissionResponse"
+        '401':
+          $ref: "#/responses/Unauthorized"
+        '404':
+          $ref: '#/responses/NotFound'
+        '400':
+          $ref: "#/responses/BadRequest"
+        '500':
+          $ref: "#/responses/InternalError"
 
   /events:
     get:
@@ -1141,6 +1350,12 @@ definitions:
         type: string
 
   InternalError:
+    type: object
+    properties:
+      message:
+        type: string
+
+  Unauthorized:
     type: object
     properties:
       message:
@@ -1365,6 +1580,16 @@ definitions:
       id:
         type: string
         x-validation: true
+      lms_state:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "matching_in_progress"
+        - "error"
+        - "disconnected"
+        - ""
+        - "success"
       name:
         type: string
       mdr_number:
@@ -2193,6 +2418,373 @@ definitions:
     properties:
       object:
         $ref: "#/definitions/User"
+
+  Assignment:
+    type: object
+    properties:
+      id:
+        type: string
+      created:
+        type: string
+        format: datetime
+        x-nullable: true
+      last_modified:
+        type: string
+        format: datetime
+        x-nullable: true
+      description:
+        type: string
+      due_date:
+        type: string
+        format: datetime
+        x-nullable: true
+      grading_type:
+        $ref: "#/definitions/GradingType"
+      state:
+        $ref: "#/definitions/AssignmentState"
+      title:
+        type: string
+      assignee_ids:
+        type: array
+        items:
+          type: string
+        x-omitempty: true
+      assignee_mode:
+        $ref: "#/definitions/AssigneeMode"
+        x-nullable: true
+      attachments:
+        type: array
+        items:
+          $ref: "#/definitions/Attachment"
+        x-omitempty: true
+      category_id:
+        type: string
+        x-nullable: true
+      description_plaintext:
+        type: string
+        x-nullable: true
+      display_date:
+        type: string
+        format: datetime
+        x-nullable: true
+      end_date:
+        type: string
+        format: datetime
+        x-nullable: true
+      grading_scale:
+        type: array
+        items:
+          $ref: "#/definitions/GradingScale"
+        x-omitempty: true
+      max_attempts:
+        type: integer
+        x-omitempty: true
+      points_possible:
+        type: number
+        format: float
+        x-nullable: true
+      start_date:
+        type: string
+        format: datetime
+        x-nullable: true
+      submission_types:
+        type: array
+        items:
+          $ref: "#/definitions/SubmissionType"
+        x-omitempty: true
+      term_id:
+        type: string
+        x-nullable: true
+
+  Submission:
+    type: object
+    properties:
+      id:
+        type: string
+      created:
+        type: string
+        format: datetime
+        x-nullable: true
+      assignment_id:
+        type: string
+      state:
+        $ref: "#/definitions/SubmissionState"
+      user_id:
+        type: string
+      attachments:
+        type: array
+        items:
+          $ref: "#/definitions/Attachment"
+        x-omitempty: true
+      extra_attempts:
+        type: integer
+        x-omitempty: true
+      flags:
+        type: array
+        items:
+          $ref: "#/definitions/SubmissionFlag"
+        x-omitempty: true
+      grade:
+        type: string
+        x-nullable: true
+      grade_comment:
+        type: string
+        x-nullable: true
+      grade_points:
+        type: number
+        format: float
+        x-omitempty: true
+      grader_id:
+        type: string
+        x-nullable: true
+      last_modified:
+        type: string
+        format: datetime
+        x-nullable: true
+      override_due_date:
+        type: string
+        format: datetime
+        x-nullable: true
+
+  AssigneeMode:
+    type: string
+    enum:
+        - all
+        - individuals
+
+  AssignmentState:
+    type: string
+    enum:
+        - draft
+        - scheduled
+        - open
+        - locked
+
+  Attachment:
+    type: object
+    properties:
+      type:
+        type: string
+      title:
+        type: string
+        x-nullable: true
+      description:
+        type: string
+        x-nullable: true
+      file_external_id:
+        type: string
+        x-nullable: true
+      size:
+        type: number
+        format: float
+        x-omitempty: true
+      thumbnail_url:
+        type: string
+        x-nullable: true
+      url:
+        type: string
+        x-nullable: true
+
+  GradingScale:
+    type: object
+    properties:
+      name:
+        type: string
+      entries:
+        type: array
+        items:
+          $ref: "#/definitions/GradingScaleEntry"
+        x-nullable: true
+
+  GradingScaleEntry:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+
+  GradingType:
+    type: string
+    enum:
+      - points
+      - percent
+      - pass_fail
+      - letter_grade
+
+  SubmissionType:
+    type: string
+    enum:
+        - link
+        - file
+        - text
+        - discussion
+
+  SubmissionFlag:
+    type: string
+    enum:
+      - excused
+      - late
+      - missing
+
+  SubmissionState:
+    type: string
+    enum:
+      - created
+      - submitted
+      - returned
+      - reclaimed
+
+  AssignmentRequest:
+    type: object
+    properties:
+      # Required fields for create request
+      description:
+        type: string
+        x-nullable: true
+      due_date:
+        type: string
+        format: datetime
+        x-nullable: true
+      grading_type:
+        $ref: "#/definitions/GradingType"
+        x-nullable: true
+      points_possible:
+        type: number
+        format: float
+        x-nullable: true
+      title:
+        type: string
+        x-nullable: true
+      # Optional fields
+      assignee_ids:
+        type: array
+        items:
+          type: string
+        x-omitempty: true
+      assignee_mode:
+        $ref: "#/definitions/AssigneeMode"
+        x-nullable: true
+      attachments:
+        type: array
+        items:
+          $ref: "#/definitions/AttachmentRequest"
+        x-omitempty: true
+      description_plaintext:
+        type: string
+        x-nullable: true
+      display_date:
+        type: string
+        format: datetime
+        x-nullable: true
+      end_date:
+        type: string
+        format: datetime
+        x-nullable: true
+      max_attempts:
+        type: integer
+        x-omitempty: true
+      start_date:
+        type: string
+        format: datetime
+        x-nullable: true
+      submission_types:
+        type: array
+        items:
+          $ref: "#/definitions/SubmissionType"
+        x-omitempty: true
+      term_id:
+        type: string
+        x-nullable: true
+
+  AttachmentRequest:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+        - file
+      title:
+        type: string
+        x-nullable: true
+      description:
+        type: string
+        x-nullable: true
+      url:
+        type: string
+        x-nullable: true
+
+  SubmissionRequest:
+    type: object
+    properties:
+      attachments:
+        type: array
+        items:
+          $ref: "#/definitions/AttachmentRequest"
+        x-omitempty: true
+      extra_attempts:
+        type: integer
+        x-omitempty: true
+      flags:
+        type: array
+        items:
+          $ref: "#/definitions/SubmissionFlag"
+        x-omitempty: true
+      grade:
+        type: string
+        x-nullable: true
+      grade_comment:
+        type: string
+        x-nullable: true
+      grade_points:
+        type: number
+        format: float
+        x-omitempty: true
+      grader_id:
+        type: string
+        x-nullable: true
+      override_due_date:
+        type: string
+        format: datetime
+        x-nullable: true
+      state:
+        $ref: "#/definitions/SubmissionState"
+        x-nullable: true
+
+  AssignmentResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Assignment"
+
+  SubmissionResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/Submission"
+
+  SubmissionsResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/Submission"
+      links:
+        x-omitempty: true
+        type: array
+        items:
+          $ref: "#/definitions/SubmissionsLink"
+
+  SubmissionsLink:
+    type: object
+    properties:
+      rel:
+        enum:
+          - next
+        type: string
+      uri:
+        type: string
 
   EventsResponse:
     type: object
