@@ -3,7 +3,7 @@ module github.com/Clever/swagger-api
 go 1.21
 
 require (
-	github.com/Clever/i18n-go/v2 v2.0.1
+	github.com/Clever/i18n-go/v2 v2.1.0
 	github.com/Clever/yaml v0.0.0-20170104005607-8f7677dc217d
 )
 
