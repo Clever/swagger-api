@@ -201,10 +201,7 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 	case "District":
 		if version == "v3.0" {
 			delete(properties, "lms_state")
-
-			if !isClient {
-				delete(properties, "lms_state")
-			}
+			delete(properties, "lms_type")
 		}
 	default:
 	}

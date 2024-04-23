@@ -1590,6 +1590,15 @@ definitions:
         - "disconnected"
         - ""
         - "success"
+      lms_type:
+        type: string
+        x-nullable: true
+        x-validation: true
+        enum:
+        - "canvas"
+        - "schoology"
+        - "google_classroom"
+        - ""
       name:
         type: string
       mdr_number:

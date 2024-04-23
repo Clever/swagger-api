@@ -148,6 +148,15 @@ definitions:
         type: string
         x-nullable: true
         x-validation: true
+      lms_type:
+        enum:
+        - canvas
+        - schoology
+        - google_classroom
+        - ""
+        type: string
+        x-nullable: true
+        x-validation: true
       login_methods:
         items:
           type: string
