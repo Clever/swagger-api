@@ -250,6 +250,11 @@ definitions:
       uri:
         type: string
     type: object
+  LmsStatus:
+    properties:
+      synced_in_lms:
+        type: boolean
+    type: object
   Location:
     properties:
       address:
@@ -541,6 +546,8 @@ definitions:
         format: datetime
         type: string
         x-validation: true
+      lms_status:
+        $ref: '#/definitions/LmsStatus'
       name:
         type: string
       period:
@@ -1155,6 +1162,8 @@ definitions:
         format: datetime
         type: string
         x-validation: true
+      lms_status:
+        $ref: '#/definitions/LmsStatus'
       name:
         $ref: '#/definitions/Name'
       roles:
