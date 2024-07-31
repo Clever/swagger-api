@@ -1675,6 +1675,12 @@ definitions:
         type: string
         x-nullable: true
 
+  LmsStatus:
+    type: object
+    properties:
+      synced_in_lms:
+        type: boolean
+
   Name:
     type: object
     properties:
@@ -1914,6 +1920,8 @@ definitions:
         type: string
         format: datetime
         x-validation: true
+      lms_status:
+        $ref: "#/definitions/LmsStatus"
       name:
         type: string
       period:
@@ -2363,6 +2371,8 @@ definitions:
         type: string
         format: datetime
         x-validation: true
+      lms_status:
+        $ref: "#/definitions/LmsStatus"
       name:
         $ref: "#/definitions/Name"
       roles:
