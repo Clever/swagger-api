@@ -1922,6 +1922,7 @@ definitions:
         x-validation: true
       lms_status:
         $ref: "#/definitions/LmsStatus"
+        x-nullable: true
       name:
         type: string
       period:
@@ -2373,6 +2374,7 @@ definitions:
         x-validation: true
       lms_status:
         $ref: "#/definitions/LmsStatus"
+        x-nullable: true
       name:
         $ref: "#/definitions/Name"
       roles:
