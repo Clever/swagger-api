@@ -250,6 +250,11 @@ definitions:
       uri:
         type: string
     type: object
+  LmsStatus:
+    properties:
+      synced_in_lms:
+        type: boolean
+    type: object
   Location:
     properties:
       address:
@@ -541,6 +546,9 @@ definitions:
         format: datetime
         type: string
         x-validation: true
+      lms_status:
+        $ref: '#/definitions/LmsStatus'
+        x-nullable: true
       name:
         type: string
       period:
@@ -732,243 +740,315 @@ definitions:
         x-validation: true
       home_language:
         enum:
-        - Basque
-        - Portuguese
-        - Hungarian
-        - Hmong
-        - Urdu
-        - Latvian
-        - Hausa
-        - Slovenian
-        - Chinese (Mandarin)
+        - Galician
+        - Sindhi
+        - Vietnamese
+        - Cebuano
+        - Hawaiian
+        - Ewe
+        - Turkish
+        - Amharic
+        - Polish
+        - Oromo
+        - Maltese
+        - Krio
         - Russian
-        - Arabic
-        - Telugu
-        - Afrikaans
-        - Tamil
-        - Irish
-        - Uzbek
-        - Norwegian
-        - Serbian
-        - Khmer
-        - Farsi
-        - Lao
-        - Gujarati
-        - Yiddish
-        - Lithuanian
-        - Mongolian
-        - Samoan
-        - Bengali
-        - Corsican
-        - Romanian
-        - Javanese
-        - Danish
-        - Scots Gaelic
+        - Shona
+        - Nepali
+        - Indonesian
+        - Tahitian
+        - Tsonga
+        - Tongan
         - Burmese
-        - Kinyarwanda
-        - Swahili
-        - Yoruba
-        - Uyghur
+        - Irish
+        - Armenian
+        - Spanish
+        - Catalan
+        - Malay
+        - Malagasy
+        - Hmong
         - Hindi
+        - Dogri
+        - Swedish
+        - Arabic
+        - Swahili
+        - Punjabi
         - Azerbaijani
+        - Assamese
+        - French
+        - Georgian
+        - English
+        - Tamil
+        - Tatar
+        - German
+        - Romanian
+        - Bashkir
+        - Quechua
+        - Albanian
+        - Croatian
+        - Manipuri
+        - Bosnian
+        - Malayalam
+        - Gujarati
+        - Aymara
+        - Chichewa
+        - Javanese
+        - Faroese
+        - Serbian
+        - Xhosa
+        - Fijian
+        - Greek
+        - Belarusian
+        - Sinhala
+        - Uzbek
+        - Zulu
+        - Farsi
+        - Italian
+        - Other
         - Cabo Verdean
         - Haitian Creole
-        - Amharic
-        - Maori
-        - Somali
-        - English
-        - Hawaiian
-        - Maltese
-        - Thai
-        - Slovak
-        - Nepali
-        - Bosnian
-        - Marathi
-        - Frisian
-        - Swedish
-        - Kazakh
-        - German
-        - Turkish
-        - Chinese
-        - Luxembourgish
-        - Armenian
-        - Dari
-        - Macedonian
-        - Karen
-        - Iloko
-        - Igbo
-        - Kannada
-        - Galician
-        - Cebuano
-        - Punjabi
-        - Indonesian
-        - Estonian
-        - Odia
-        - Spanish
-        - Filipino
-        - Albanian
-        - Korean
-        - Croatian
-        - Japanese
-        - Bulgarian
-        - Catalan
-        - Polish
-        - Sinhala
-        - Other
-        - Icelandic
-        - Tatar
-        - Ukrainian
-        - Tajik
-        - Italian
-        - French
-        - Malayalam
-        - Chichewa
-        - Kurdish (Kurmanji)
-        - Czech
-        - Xhosa
         - Hebrew
-        - Georgian
-        - Oromo
-        - Shona
-        - Sindhi
-        - Sesotho
-        - Tagalog
-        - Malagasy
-        - Tigrinya
-        - Welsh
-        - Turkmen
-        - Malay
-        - Marshallese
-        - Belarusian
-        - Dutch
-        - Finnish
-        - Greek
-        - Kyrgyz
-        - Zulu
+        - Kirundi
+        - Lower Sorbian
+        - Divehi
         - Sundanese
-        - Vietnamese
+        - Maori
+        - Upper Sorbian
+        - Kinyarwanda
+        - Czech
+        - Bengali
+        - Sesotho
+        - Twi
+        - Japanese
+        - Queretaro Otomi
+        - Kyrgyz
+        - Welsh
+        - Mongolian
+        - Konkani
+        - Odia
+        - Guarani
+        - Kannada
+        - Lithuanian
+        - Samoan
+        - Somali
+        - Kazakh
+        - Hungarian
+        - Laotian
+        - Maithili
+        - Yoruba
+        - Luganda
+        - Hausa
+        - Thai
+        - Slovenian
+        - Bulgarian
+        - Dari
+        - Telugu
+        - Igbo
+        - Bambara
+        - Luxembourgish
+        - Chuukese
+        - Mizo
+        - Inuktitut
+        - Filipino
+        - Marshallese
+        - Ilocano
+        - Northern Sotho
+        - Tibetan
+        - Marathi
+        - Tajik
+        - Chinese
+        - Corsican
+        - Tagalog
+        - Dutch
+        - Urdu
+        - Portuguese
+        - Korean
+        - Estonian
+        - Danish
+        - Afrikaans
+        - Ukrainian
+        - Scots Gaelic
+        - Kurdish (Kurmanji)
+        - Macedonian
+        - Yucatec Maya
+        - Inuinnaqtun
+        - Cantonese
+        - Norwegian
+        - Basque
+        - Karen
+        - Yiddish
+        - Khmer
+        - Mandarin
+        - Setswana
+        - Tigrinya
+        - Icelandic
+        - Uyghur
+        - Kurdish (Sorani)
+        - Lingala
+        - Latvian
         - Pashto
+        - Frisian
+        - Bhojpuri
+        - Finnish
+        - Slovak
+        - Turkmen
         type: string
         x-nullable: true
         x-validation: true
       home_language_code:
         enum:
-        - hau
-        - ilo
-        - dan
-        - som
-        - xho
-        - slv
-        - bos
-        - cos
-        - ces
-        - mlg
-        - vie
-        - bel
-        - hin
-        - hun
-        - mon
-        - pan
+        - bak
+        - mya
+        - cpp
+        - ikt
+        - ckb
+        - lin
         - tgk
-        - heb
-        - prs
-        - mlt
-        - pus
-        - tir
-        - eng
+        - cym
+        - yue
+        - nya
+        - dan
+        - mah
+        - jav
         - mar
-        - nld
-        - est
+        - tat
+        - guj
+        - nob
+        - sna
+        - slk
         - zho
-        - fas
-        - fry
-        - jpn
+        - ilo
+        - lug
+        - nep
+        - uzb
+        - fij
         - aze
-        - rus
-        - gla
-        - yor
-        - cmn
-        - bul
-        - fin
+        - kat
+        - hau
+        - kaz
+        - twi
+        - ces
+        - prs
+        - fao
+        - kan
+        - kur
+        - lav
+        - lit
+        - mni
+        - nso
+        - urd
+        - asm
+        - ind
+        - tel
+        - tuk
+        - bam
+        - bos
         - hmn
         - ita
-        - pol
-        - ara
-        - ell
-        - khm
-        - mkd
-        - cpp
-        - ibo
-        - urd
-        - cym
-        - hat
-        - lao
-        - ltz
-        - snd
-        - swa
-        - mya
-        - ori
-        - kat
-        - smo
-        - spa
-        - kor
-        - nob
-        - ron
-        - tha
-        - ind
-        - fra
-        - tel
-        - hye
-        - guj
-        - isl
-        - msa
-        - slk
-        - swe
-        - tuk
-        - eus
-        - kaz
         - mal
-        - kan
-        - amh
-        - orm
-        - afr
-        - fil
-        - haw
-        - lav
-        - sin
-        - yid
+        - smo
         - ben
-        - kir
-        - mri
-        - tam
-        - glg
-        - ceb
-        - tat
-        - zul
-        - lit
-        - nep
-        - por
-        - sot
-        - other
-        - nya
-        - sun
-        - cat
-        - tgl
-        - ukr
-        - uzb
-        - gle
-        - srp
+        - ewe
         - deu
-        - jav
-        - kur
-        - mah
-        - sna
-        - uig
-        - kin
-        - hrv
+        - hin
+        - por
+        - que
+        - sot
+        - afr
+        - eus
+        - heb
+        - kor
+        - mkd
+        - pol
+        - srp
+        - tha
+        - div
+        - dgo
         - kar
+        - mai
+        - tsn
+        - tir
+        - cos
+        - isl
+        - mon
+        - ron
+        - yor
+        - zul
+        - other
+        - fas
+        - fra
+        - run
+        - sun
         - tur
+        - amh
+        - aym
+        - nld
+        - hun
+        - ibo
+        - jpn
+        - bod
+        - ukr
+        - eng
+        - gle
+        - lao
+        - tam
+        - cat
+        - chk
+        - glg
+        - msa
+        - orm
+        - mlt
+        - mri
+        - lus
+        - snd
+        - yid
+        - hye
+        - knn
+        - dsb
+        - swe
+        - hsb
+        - ell
+        - otq
+        - tgl
+        - iku
+        - kin
+        - kri
+        - mlg
+        - pus
+        - rus
+        - gla
+        - tah
+        - xho
+        - ara
+        - hat
         - sqi
+        - fry
+        - spa
+        - grn
+        - ltz
+        - yua
+        - ori
+        - uig
+        - tso
+        - khm
+        - kir
+        - vie
+        - bho
+        - ceb
+        - haw
+        - slv
+        - som
+        - swa
+        - ton
+        - bel
+        - est
+        - fin
+        - cmn
+        - sin
+        - bul
+        - hrv
+        - fil
+        - pan
         type: string
         x-nullable: true
         x-validation: true
@@ -1155,6 +1235,9 @@ definitions:
         format: datetime
         type: string
         x-validation: true
+      lms_status:
+        $ref: '#/definitions/LmsStatus'
+        x-nullable: true
       name:
         $ref: '#/definitions/Name'
       roles:

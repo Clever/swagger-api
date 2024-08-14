@@ -151,6 +151,7 @@ func deleteV31Definitions(i map[interface{}]interface{}) error {
 	if ok {
 		delete(definitions, "PreferredName")
 		delete(definitions, "Disability")
+		delete(definitions, "LmsStatus")
 	} else {
 		return errors.New("no definitions found in provided map")
 	}
@@ -202,6 +203,14 @@ func modifyDefinitions(version string, isClient bool, name string, def map[inter
 		if version == "v3.0" {
 			delete(properties, "lms_state")
 			delete(properties, "lms_type")
+		}
+	case "Section":
+		if version == "v3.0" {
+			delete(properties, "lms_status")
+		}
+	case "User":
+		if version == "v3.0" {
+			delete(properties, "lms_status")
 		}
 	default:
 	}
