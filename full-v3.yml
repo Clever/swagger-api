@@ -1285,6 +1285,105 @@ paths:
         '500':
           $ref: "#/responses/InternalError"
 
+  # Attendance API endpoints
+  /attendance/schools/{school_id}:
+    get:
+      summary: Returns a list of attendance records for a school
+      operationId: listAttendanceForSchool
+      parameters:
+        - name: school_id
+          in: path
+          type: string
+          required: true
+        - name: date_range_start
+          in: query
+          type: string
+          format: date
+        - name: date_range_end
+          in: query
+          type: string
+          format: date
+        - name: status
+          in: query
+          type: string
+          enum:
+            - present
+            - absent
+            - tardy
+        - name: limit
+          in: query
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: starting_after
+          in: query
+          type: string
+        - name: ending_before
+          in: query
+          type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: "#/definitions/AttendanceResponse"
+        '400':
+          $ref: "#/responses/BadRequest"
+        '401':
+          $ref: "#/responses/Unauthorized"
+        '404':
+          $ref: "#/responses/NotFound"
+        '500':
+          $ref: "#/responses/InternalError"
+
+  /attendance/sections/{section_id}:
+    get:
+      summary: Returns a list of attendance records for a section
+      operationId: listAttendanceForSection
+      parameters:
+        - name: section_id
+          in: path
+          type: string
+          required: true
+        - name: date_range_start
+          in: query
+          type: string
+          format: date
+        - name: date_range_end
+          in: query
+          type: string
+          format: date
+        - name: status
+          in: query
+          type: string
+          enum:
+            - present
+            - absent
+            - tardy
+        - name: limit
+          in: query
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: starting_after
+          in: query
+          type: string
+        - name: ending_before
+          in: query
+          type: string
+      responses:
+        '200':
+          description: OK Response
+          schema:
+            $ref: "#/definitions/AttendanceResponse"
+        '400':
+          $ref: "#/responses/BadRequest"
+        '401':
+          $ref: "#/responses/Unauthorized"
+        '404':
+          $ref: "#/responses/NotFound"
+        '500':
+          $ref: "#/responses/InternalError"
+
   /events:
     get:
       tags: ["Events"]
@@ -1622,6 +1721,11 @@ definitions:
         - ""
         - "success"
       last_sync:
+        type: string
+        x-validation: true
+        x-nullable: true
+        format: datetime
+      last_attendance_sync:
         type: string
         x-validation: true
         x-nullable: true
@@ -2440,6 +2544,7 @@ definitions:
       object:
         $ref: "#/definitions/User"
 
+  # LMS Connect definitions
   Assignment:
     type: object
     properties:
@@ -2806,6 +2911,72 @@ definitions:
         type: string
       uri:
         type: string
+
+  # Attendance API definitions
+  Attendance:
+    type: object
+    properties:
+      district_id:
+        type: string
+        format: mongo-id
+      school_id:
+        type: string
+        format: mongo-id
+      student_id:
+        type: string
+        format: mongo-id
+      sis_id:
+        type: string
+      section_id:
+        type: string
+        format: mongo-id
+      created:
+        type: string
+        format: datetime
+      last_modified:
+        type: string
+        format: datetime
+      attendance_date:
+        type: string
+        format: date
+      attendance_status:
+        $ref: "#/definitions/AttendanceStatus"
+      attendance_type:
+        $ref: "#/definitions/AttendanceType"
+      duration:
+        type: number
+        format: integer
+      excuse_code:
+        type: string
+
+  AttendanceStatus:
+    type: string
+    enum:
+      - present
+      - absent
+      - tardy
+
+  AttendanceType:
+    type: string
+    enum:
+      - daily
+      - section
+
+  AttendanceResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/Attendance"
+      total:
+        x-omitempty: false
+        type: integer
+      links:
+        x-omitempty: true
+        type: array
+        items:
+          $ref: "#/definitions/Link"
 
   EventsResponse:
     type: object
