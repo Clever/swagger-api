@@ -48,6 +48,13 @@ var attendanceModels = []string{
 	"AttendanceType",
 }
 
+// Shared models between Data, Events, Attendance, and LMS Connect APIs
+var sharedModels = []string{
+	"BadRequest",
+	"InternalError",
+	"NotFound",
+}
+
 // Generate generates API source ymls for the major/minor versions.
 func Generate() {
 	for _, minorVersion := range minorVersions {
@@ -142,6 +149,51 @@ func duplicateMap(m map[interface{}]interface{}) map[interface{}]interface{} {
 	}
 
 	return cp
+}
+
+// generateEndpointDetails is a helper function that adds endpoint details to, and removes
+// irrelevant endpoints from, the provided paths map
+func generateEndpointDetails(paths map[interface{}]interface{}, shouldDeletePath func(interface{}) bool) {
+	for path, methodOp := range paths {
+		if shouldDeletePath(path) {
+			delete(paths, path)
+			continue
+		}
+
+		for _, o := range methodOp.(map[interface{}]interface{}) {
+			operation := o.(map[interface{}]interface{})
+			params, ok := operation["parameters"].([]interface{})
+			if !ok {
+				continue
+			}
+			paramsForClient := make([]map[interface{}]interface{}, 0)
+			for _, p := range params {
+				param := p.(map[interface{}]interface{})
+				paramsForClient = append(paramsForClient, param)
+			}
+			operation["parameters"] = paramsForClient
+		}
+	}
+}
+
+// deleteDataAndEventAPIModels is a helper function that removes Data and Events API
+// specific models from the file
+func deleteDataAndEventAPIModels(i map[interface{}]interface{}, modelsToKeep []string) {
+	definitions := i["definitions"].(map[interface{}]interface{})
+	for nameInterface, _ := range definitions {
+		name := nameInterface.(string)
+		shouldKeepModel := false
+		for _, modelToKeepName := range modelsToKeep {
+			if modelToKeepName == name {
+				shouldKeepModel = true
+				continue
+			}
+		}
+
+		if !shouldKeepModel {
+			delete(definitions, nameInterface)
+		}
+	}
 }
 
 // deleteV31PlusSeparateAPIObjects deletes responses and definitions specific to
@@ -250,27 +302,11 @@ func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, 
 	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
 
 	paths := m["paths"].(map[interface{}]interface{})
-	for path, methodOp := range paths {
-		if strings.Contains(path.(string), "/events") && path.(string) != "/districts/{id}/status" ||
-			isLMSConnectEndpoint(path) || isAttendanceEndpoint(path) {
-			delete(paths, path)
-			continue
-		}
-
-		for _, o := range methodOp.(map[interface{}]interface{}) {
-			operation := o.(map[interface{}]interface{})
-			params, ok := operation["parameters"].([]interface{})
-			if !ok {
-				continue
-			}
-			paramsForClient := make([]map[interface{}]interface{}, 0)
-			for _, p := range params {
-				param := p.(map[interface{}]interface{})
-				paramsForClient = append(paramsForClient, param)
-			}
-			operation["parameters"] = paramsForClient
-		}
+	pathChecker := func(path interface{}) bool {
+		return strings.Contains(path.(string), "/events") && path.(string) != "/districts/{id}/status" ||
+			isLMSConnectEndpoint(path) || isAttendanceEndpoint(path)
 	}
+	generateEndpointDetails(paths, pathChecker)
 
 	deleteV31PlusSeparateAPIObjects(m)
 	definitions := m["definitions"].(map[interface{}]interface{})
@@ -336,48 +372,11 @@ func generateLMSConnectAPIYml(i map[interface{}]interface{}, version string) ([]
 	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
 
 	paths := m["paths"].(map[interface{}]interface{})
-	for path, methodOp := range paths {
-		if !isLMSConnectEndpoint(path) {
-			delete(paths, path)
-			continue
-		}
-
-		for _, o := range methodOp.(map[interface{}]interface{}) {
-			operation := o.(map[interface{}]interface{})
-			params, ok := operation["parameters"].([]interface{})
-			if !ok {
-				continue
-			}
-			paramsForClient := make([]map[interface{}]interface{}, 0)
-			for _, p := range params {
-				param := p.(map[interface{}]interface{})
-				paramsForClient = append(paramsForClient, param)
-			}
-			operation["parameters"] = paramsForClient
-		}
+	pathChecker := func(path interface{}) bool {
+		return !isLMSConnectEndpoint(path)
 	}
-
-	definitions := m["definitions"].(map[interface{}]interface{})
-	// Remove Data + Events API models from LMS file
-	lmsConnectModelsPlusSharedModels := append(lmsConnectModels, []string{
-		"BadRequest",
-		"InternalError",
-		"NotFound",
-	}...)
-	for nameInterface, _ := range definitions {
-		name := nameInterface.(string)
-		isLMSConnectModel := false
-		for _, lmsConnectModelName := range lmsConnectModelsPlusSharedModels {
-			if lmsConnectModelName == name {
-				isLMSConnectModel = true
-				continue
-			}
-		}
-
-		if !isLMSConnectModel {
-			delete(definitions, nameInterface)
-		}
-	}
+	generateEndpointDetails(paths, pathChecker)
+	deleteDataAndEventAPIModels(m, append(lmsConnectModels, sharedModels...))
 
 	return yaml.Marshal(m)
 }
@@ -394,48 +393,11 @@ func generateAttendanceAPIYml(i map[interface{}]interface{}, version string) ([]
 	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
 
 	paths := m["paths"].(map[interface{}]interface{})
-	for path, methodOp := range paths {
-		if !isAttendanceEndpoint(path) {
-			delete(paths, path)
-			continue
-		}
-
-		for _, o := range methodOp.(map[interface{}]interface{}) {
-			operation := o.(map[interface{}]interface{})
-			params, ok := operation["parameters"].([]interface{})
-			if !ok {
-				continue
-			}
-			paramsForClient := make([]map[interface{}]interface{}, 0)
-			for _, p := range params {
-				param := p.(map[interface{}]interface{})
-				paramsForClient = append(paramsForClient, param)
-			}
-			operation["parameters"] = paramsForClient
-		}
+	pathChecker := func(path interface{}) bool {
+		return !isAttendanceEndpoint(path)
 	}
-
-	definitions := m["definitions"].(map[interface{}]interface{})
-	// Remove Data + Events API models from Attendance file
-	attendanceModelsPlusSharedModels := append(attendanceModels, []string{
-		"BadRequest",
-		"InternalError",
-		"NotFound",
-	}...)
-	for nameInterface, _ := range definitions {
-		name := nameInterface.(string)
-		isAttendanceModel := false
-		for _, attendanceModelName := range attendanceModelsPlusSharedModels {
-			if attendanceModelName == name {
-				isAttendanceModel = true
-				continue
-			}
-		}
-
-		if !isAttendanceModel {
-			delete(definitions, nameInterface)
-		}
-	}
+	generateEndpointDetails(paths, pathChecker)
+	deleteDataAndEventAPIModels(m, append(attendanceModels, sharedModels...))
 
 	return yaml.Marshal(m)
 }
