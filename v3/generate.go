@@ -151,34 +151,9 @@ func duplicateMap(m map[interface{}]interface{}) map[interface{}]interface{} {
 	return cp
 }
 
-// generateEndpointDetails is a helper function that adds endpoint details to, and removes
-// irrelevant endpoints from, the provided paths map
-func generateEndpointDetails(paths map[interface{}]interface{}, shouldDeletePath func(interface{}) bool) {
-	for path, methodOp := range paths {
-		if shouldDeletePath(path) {
-			delete(paths, path)
-			continue
-		}
-
-		for _, o := range methodOp.(map[interface{}]interface{}) {
-			operation := o.(map[interface{}]interface{})
-			params, ok := operation["parameters"].([]interface{})
-			if !ok {
-				continue
-			}
-			paramsForClient := make([]map[interface{}]interface{}, 0)
-			for _, p := range params {
-				param := p.(map[interface{}]interface{})
-				paramsForClient = append(paramsForClient, param)
-			}
-			operation["parameters"] = paramsForClient
-		}
-	}
-}
-
-// deleteDataAndEventAPIModels is a helper function that removes Data and Events API
-// specific models from the file
-func deleteDataAndEventAPIModels(i map[interface{}]interface{}, modelsToKeep []string) {
+// deleteNonSpecifiedAPIModels is a helper function that removes all models from the
+// file other than the specified list
+func deleteNonSpecifiedAPIModels(i map[interface{}]interface{}, modelsToKeep []string) {
 	definitions := i["definitions"].(map[interface{}]interface{})
 	for nameInterface, _ := range definitions {
 		name := nameInterface.(string)
@@ -302,11 +277,13 @@ func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, 
 	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
 
 	paths := m["paths"].(map[interface{}]interface{})
-	pathChecker := func(path interface{}) bool {
-		return strings.Contains(path.(string), "/events") && path.(string) != "/districts/{id}/status" ||
-			isLMSConnectEndpoint(path) || isAttendanceEndpoint(path)
+	for path, _ := range paths {
+		if strings.Contains(path.(string), "/events") && path.(string) != "/districts/{id}/status" ||
+			isLMSConnectEndpoint(path) || isAttendanceEndpoint(path) {
+			delete(paths, path)
+			continue
+		}
 	}
-	generateEndpointDetails(paths, pathChecker)
 
 	deleteV31PlusSeparateAPIObjects(m)
 	definitions := m["definitions"].(map[interface{}]interface{})
@@ -372,11 +349,14 @@ func generateLMSConnectAPIYml(i map[interface{}]interface{}, version string) ([]
 	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
 
 	paths := m["paths"].(map[interface{}]interface{})
-	pathChecker := func(path interface{}) bool {
-		return !isLMSConnectEndpoint(path)
+	for path, _ := range paths {
+		if !isLMSConnectEndpoint(path) {
+			delete(paths, path)
+			continue
+		}
 	}
-	generateEndpointDetails(paths, pathChecker)
-	deleteDataAndEventAPIModels(m, append(lmsConnectModels, sharedModels...))
+	// remove Data and Events API specific models from the file
+	deleteNonSpecifiedAPIModels(m, append(lmsConnectModels, sharedModels...))
 
 	return yaml.Marshal(m)
 }
@@ -393,11 +373,14 @@ func generateAttendanceAPIYml(i map[interface{}]interface{}, version string) ([]
 	info["version"] = strings.Replace(version, "v", "", -1) + ".0"
 
 	paths := m["paths"].(map[interface{}]interface{})
-	pathChecker := func(path interface{}) bool {
-		return !isAttendanceEndpoint(path)
+	for path, _ := range paths {
+		if !isAttendanceEndpoint(path) {
+			delete(paths, path)
+			continue
+		}
 	}
-	generateEndpointDetails(paths, pathChecker)
-	deleteDataAndEventAPIModels(m, append(attendanceModels, sharedModels...))
+	// remove Data and Events API specific models from the file
+	deleteNonSpecifiedAPIModels(m, append(attendanceModels, sharedModels...))
 
 	return yaml.Marshal(m)
 }
