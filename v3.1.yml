@@ -124,6 +124,11 @@ definitions:
       id:
         type: string
         x-validation: true
+      last_attendance_sync:
+        format: datetime
+        type: string
+        x-nullable: true
+        x-validation: true
       last_sync:
         format: datetime
         type: string

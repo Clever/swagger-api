@@ -192,6 +192,67 @@ definitions:
         type: string
         x-nullable: true
     type: object
+  Attendance:
+    properties:
+      attendance_date:
+        format: date
+        type: string
+      attendance_status:
+        $ref: '#/definitions/AttendanceStatus'
+      attendance_type:
+        $ref: '#/definitions/AttendanceType'
+      created:
+        format: datetime
+        type: string
+      district_id:
+        format: mongo-id
+        type: string
+      duration:
+        format: integer
+        type: number
+      excuse_code:
+        type: string
+      last_modified:
+        format: datetime
+        type: string
+      school_id:
+        format: mongo-id
+        type: string
+      section_id:
+        format: mongo-id
+        type: string
+      sis_id:
+        type: string
+      student_id:
+        format: mongo-id
+        type: string
+    type: object
+  AttendanceResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Attendance'
+        type: array
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+        x-omitempty: true
+      total:
+        type: integer
+        x-omitempty: false
+    type: object
+  AttendanceStatus:
+    enum:
+    - present
+    - absent
+    - tardy
+    type: string
+  AttendanceType:
+    enum:
+    - daily
+    - section
+    type: string
   BadRequest:
     properties:
       message:
@@ -320,6 +381,11 @@ definitions:
         type: string
       id:
         type: string
+        x-validation: true
+      last_attendance_sync:
+        format: datetime
+        type: string
+        x-nullable: true
         x-validation: true
       last_sync:
         format: datetime
@@ -1858,6 +1924,106 @@ info:
   title: Clever API
   version: 3.1.0
 paths:
+  /attendance/schools/{school_id}:
+    get:
+      operationId: listAttendanceForSchool
+      parameters:
+      - in: path
+        name: school_id
+        required: true
+        type: string
+      - format: date
+        in: query
+        name: date_range_start
+        type: string
+      - format: date
+        in: query
+        name: date_range_end
+        type: string
+      - enum:
+        - present
+        - absent
+        - tardy
+        in: query
+        name: status
+        type: string
+      - in: query
+        maximum: 1000
+        minimum: 1
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        "200":
+          description: OK Response
+          schema:
+            $ref: '#/definitions/AttendanceResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
+      summary: Returns a list of attendance records for a school
+      tags:
+      - Attendance
+  /attendance/sections/{section_id}:
+    get:
+      operationId: listAttendanceForSection
+      parameters:
+      - in: path
+        name: section_id
+        required: true
+        type: string
+      - format: date
+        in: query
+        name: date_range_start
+        type: string
+      - format: date
+        in: query
+        name: date_range_end
+        type: string
+      - enum:
+        - present
+        - absent
+        - tardy
+        in: query
+        name: status
+        type: string
+      - in: query
+        maximum: 1000
+        minimum: 1
+        name: limit
+        type: integer
+      - in: query
+        name: starting_after
+        type: string
+      - in: query
+        name: ending_before
+        type: string
+      responses:
+        "200":
+          description: OK Response
+          schema:
+            $ref: '#/definitions/AttendanceResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
+      summary: Returns a list of attendance records for a section
+      tags:
+      - Attendance
   /courses:
     get:
       description: Returns a list of courses
