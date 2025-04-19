@@ -207,9 +207,6 @@ definitions:
       district_id:
         format: mongo-id
         type: string
-      duration:
-        format: integer
-        type: number
       excuse_code:
         type: string
       last_modified:

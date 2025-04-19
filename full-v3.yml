@@ -2943,9 +2943,6 @@ definitions:
         $ref: "#/definitions/AttendanceStatus"
       attendance_type:
         $ref: "#/definitions/AttendanceType"
-      duration:
-        type: number
-        format: integer
       excuse_code:
         type: string
 
