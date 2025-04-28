@@ -1303,7 +1303,7 @@ paths:
           in: query
           type: string
           format: date
-        - name: status
+        - name: attendance_status
           in: query
           type: string
           enum:
@@ -1352,7 +1352,7 @@ paths:
           in: query
           type: string
           format: date
-        - name: status
+        - name: attendance_status
           in: query
           type: string
           enum:
