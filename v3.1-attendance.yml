@@ -43,9 +43,6 @@ definitions:
           $ref: '#/definitions/Link'
         type: array
         x-omitempty: true
-      total:
-        type: integer
-        x-omitempty: false
     type: object
   AttendanceStatus:
     enum:

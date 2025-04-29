@@ -2966,9 +2966,6 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/Attendance"
-      total:
-        x-omitempty: false
-        type: integer
       links:
         x-omitempty: true
         type: array
