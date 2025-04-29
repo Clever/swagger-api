@@ -235,9 +235,6 @@ definitions:
           $ref: '#/definitions/Link'
         type: array
         x-omitempty: true
-      total:
-        type: integer
-        x-omitempty: false
     type: object
   AttendanceStatus:
     enum:
@@ -1942,7 +1939,7 @@ paths:
         - absent
         - tardy
         in: query
-        name: status
+        name: attendance_status
         type: string
       - in: query
         maximum: 1000
@@ -1992,7 +1989,7 @@ paths:
         - absent
         - tardy
         in: query
-        name: status
+        name: attendance_status
         type: string
       - in: query
         maximum: 1000
