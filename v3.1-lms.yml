@@ -266,6 +266,10 @@ definitions:
         type: string
         x-nullable: true
       id:
+        description: |
+          Deprecated. The Clever unique identifier of the submission. Will always be empty if the
+          upstream LMS provider is Google Classroom; it is currently still present for Canvas and
+          Schoology LMSs but will be removed in the near future.
         type: string
       last_modified:
         format: datetime

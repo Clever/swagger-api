@@ -1672,7 +1672,7 @@ definitions:
         type: string
         x-nullable: true
     type: object
-  
+
   District:
     type: object
     properties:
@@ -1807,7 +1807,7 @@ definitions:
       email:
         type: string
         x-nullable: true
-  
+
   PreferredName:
     properties:
       first:
@@ -2627,6 +2627,10 @@ definitions:
     properties:
       id:
         type: string
+        description: |
+          Deprecated. The Clever unique identifier of the submission. Will always be empty if the
+          upstream LMS provider is Google Classroom; it is currently still present for Canvas and
+          Schoology LMSs but will be removed in the near future.
       created:
         type: string
         format: datetime
