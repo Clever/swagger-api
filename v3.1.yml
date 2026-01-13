@@ -140,6 +140,8 @@ definitions:
         x-validation: true
       lms_state:
         enum:
+        - initial_sync_processing
+        - pending_authorization
         - matching_in_progress
         - error
         - disconnected

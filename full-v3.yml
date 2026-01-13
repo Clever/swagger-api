@@ -1684,11 +1684,13 @@ definitions:
         x-nullable: true
         x-validation: true
         enum:
-        - "matching_in_progress"
-        - "error"
-        - "disconnected"
+        - initial_sync_processing
+        - pending_authorization
+        - matching_in_progress
+        - error
+        - disconnected
         - ""
-        - "success"
+        - success
       lms_type:
         type: string
         x-nullable: true
