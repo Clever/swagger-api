@@ -1989,12 +1989,16 @@ definitions:
   UserLink:
     properties:
       rel:
+        description: >-
+          The relation this link represents. The user's role determines which enum values
+          are present and valid (e.g., myTeachers only appears for student users, etc.).
         enum:
           - self
           - district
           - schools
           - sections
           - myContacts
+          - myStudents
           - myTeachers
         type: string
       uri:
