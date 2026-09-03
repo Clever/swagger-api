@@ -606,11 +606,33 @@ responses:
 schemes:
 - https
 security:
-- oauth: []
+- bearerAuth: []
 securityDefinitions:
+  bearerAuth:
+    description: |
+      Provide a bearer token in the Authorization header, e.g.
+      `Authorization: Bearer <token>`. Obtain one via the `oauth` or
+      `oauthDistrict` flows below or via the Clever UI.
+    in: header
+    name: Authorization
+    type: apiKey
   oauth:
     authorizationUrl: https://clever.com/oauth/authorize
+    description: |
+      Redirect the user to authorizationUrl, then exchange the returned
+      code at tokenUrl (via HTTP Basic Auth with your client ID/secret)
+      for an access token. Issues an SSO bearer token, scoped to the
+      signed-in user. Does not provide full Data API/roster access.
     flow: accessCode
+    tokenUrl: https://clever.com/oauth/tokens
+    type: oauth2
+  oauthDistrict:
+    description: |
+      Authenticate directly against tokenUrl via HTTP Basic Auth with
+      your app's client ID/secret to get an access token. Add a
+      `district=<id>` query param to scope the token to that district.
+      Issues a district-app token in access_code field, scoped to that district's shared data.
+    flow: application
     tokenUrl: https://clever.com/oauth/tokens
     type: oauth2
 swagger: "2.0"

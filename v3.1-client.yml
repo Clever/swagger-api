@@ -279,6 +279,16 @@ definitions:
         type: array
         x-validation: true
     type: object
+  CountResponse:
+    description: "Returned instead of the normal list response when the `count` query\nparameter is set to \"true\". \n"
+    properties:
+      count:
+        type: integer
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
   Course:
     properties:
       district:
@@ -294,6 +304,18 @@ definitions:
         type: string
         x-nullable: true
     type: object
+  CourseLink:
+    properties:
+      rel:
+        enum:
+        - self
+        - district
+        - schools
+        - sections
+        type: string
+      uri:
+        type: string
+    type: object
   CourseObject:
     properties:
       object:
@@ -303,6 +325,12 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/Course'
+      links:
+        items:
+          $ref: '#/definitions/CourseLink'
+        type: array
+      uri:
+        type: string
     type: object
   CoursesResponse:
     properties:
@@ -477,6 +505,15 @@ definitions:
         type: string
         x-validation: true
     type: object
+  DistrictLink:
+    properties:
+      rel:
+        enum:
+        - self
+        type: string
+      uri:
+        type: string
+    type: object
   DistrictObject:
     properties:
       object:
@@ -486,6 +523,12 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/District'
+      links:
+        items:
+          $ref: '#/definitions/DistrictLink'
+        type: array
+      uri:
+        type: string
     type: object
   DistrictsResponse:
     properties:
@@ -806,6 +849,20 @@ definitions:
         type: string
         x-validation: true
     type: object
+  SchoolLink:
+    properties:
+      rel:
+        enum:
+        - self
+        - district
+        - courses
+        - sections
+        - terms
+        - users
+        type: string
+      uri:
+        type: string
+    type: object
   SchoolObject:
     properties:
       object:
@@ -815,6 +872,12 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/School'
+      links:
+        items:
+          $ref: '#/definitions/SchoolLink'
+        type: array
+      uri:
+        type: string
     type: object
   SchoolsResponse:
     properties:
@@ -928,6 +991,20 @@ definitions:
         x-nullable: true
         x-validation: true
     type: object
+  SectionLink:
+    properties:
+      rel:
+        enum:
+        - self
+        - district
+        - school
+        - course
+        - term
+        - users
+        type: string
+      uri:
+        type: string
+    type: object
   SectionObject:
     properties:
       object:
@@ -937,6 +1014,12 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/Section'
+      links:
+        items:
+          $ref: '#/definitions/SectionLink'
+        type: array
+      uri:
+        type: string
     type: object
   SectionsResponse:
     properties:
@@ -1075,315 +1158,315 @@ definitions:
         x-validation: true
       home_language:
         enum:
-        - Kannada
-        - Icelandic
-        - Shona
-        - Hmong
-        - Zulu
-        - Malay
-        - Estonian
-        - Quechua
-        - Fijian
-        - Slovenian
-        - Swedish
-        - Inuinnaqtun
-        - Yucatec Maya
-        - Tamil
-        - Nepali
-        - Cantonese
         - Arabic
-        - Welsh
-        - Gujarati
-        - Tigrinya
-        - Dutch
-        - Queretaro Otomi
-        - Indonesian
-        - Lingala
-        - Kazakh
-        - Somali
-        - Yoruba
-        - Bhojpuri
-        - Javanese
-        - Other
-        - Hawaiian
-        - Portuguese
-        - Twi
-        - Igbo
-        - Tsonga
-        - Upper Sorbian
-        - Belarusian
-        - Thai
-        - Faroese
-        - Lithuanian
-        - Georgian
-        - Sindhi
-        - Albanian
-        - Haitian Creole
-        - Hausa
-        - Azerbaijani
-        - Tongan
-        - Cabo Verdean
-        - Corsican
-        - Uzbek
-        - Russian
-        - Greek
-        - Hungarian
-        - Guarani
-        - Kirundi
-        - Mizo
-        - Divehi
-        - Pashto
-        - Ewe
-        - English
-        - Bengali
-        - Maithili
-        - Irish
-        - Bashkir
-        - Inuktitut
-        - Maori
-        - Tatar
-        - Hebrew
-        - Punjabi
-        - Chinese
-        - Krio
-        - Khmer
-        - Setswana
-        - Oromo
-        - Tagalog
-        - Armenian
-        - Konkani
-        - Urdu
-        - Karen
-        - Mandarin
-        - Marshallese
-        - Turkish
-        - Ilocano
-        - Chuukese
-        - Croatian
-        - Spanish
-        - Scots Gaelic
-        - Mongolian
-        - Serbian
-        - Chichewa
-        - Dari
-        - Korean
-        - Cebuano
-        - Afrikaans
-        - French
-        - Macedonian
-        - Laotian
-        - Malayalam
-        - Samoan
-        - Tibetan
         - Aymara
-        - Italian
-        - Yiddish
-        - Telugu
-        - Norwegian
-        - Tajik
-        - Lower Sorbian
-        - German
-        - Sundanese
-        - Bosnian
-        - Luxembourgish
-        - Turkmen
-        - Kurdish (Kurmanji)
-        - Amharic
         - Bambara
-        - Sinhala
-        - Farsi
-        - Finnish
-        - Catalan
-        - Frisian
-        - Odia
-        - Marathi
-        - Vietnamese
-        - Ukrainian
-        - Czech
-        - Luganda
-        - Galician
-        - Basque
-        - Kurdish (Sorani)
-        - Romanian
-        - Uyghur
-        - Tahitian
-        - Bulgarian
-        - Hindi
+        - Queretaro Otomi
+        - Malayalam
+        - Albanian
+        - Armenian
+        - German
+        - Maithili
+        - Nepali
+        - Irish
+        - Yoruba
+        - Lower Sorbian
+        - Mongolian
+        - Malay
         - Japanese
-        - Burmese
-        - Dogri
-        - Xhosa
-        - Latvian
+        - Croatian
+        - Shona
+        - Tajik
+        - Turkish
         - Polish
-        - Manipuri
-        - Danish
-        - Sesotho
-        - Filipino
-        - Northern Sotho
-        - Assamese
+        - Marshallese
+        - Italian
         - Kinyarwanda
-        - Swahili
-        - Malagasy
-        - Maltese
+        - Samoan
+        - Norwegian
+        - Filipino
+        - Serbian
+        - Sindhi
+        - Hausa
+        - Kurdish (Kurmanji)
+        - Sesotho
+        - Greek
+        - Maori
+        - Manipuri
+        - Galician
+        - Dogri
+        - Tongan
+        - Xhosa
+        - Odia
+        - Hungarian
+        - Javanese
+        - Georgian
+        - Marathi
+        - Belarusian
+        - French
+        - Russian
         - Kyrgyz
+        - Latvian
+        - Gujarati
+        - Mizo
+        - Other
+        - Igbo
+        - Karen
+        - Hindi
+        - Amharic
+        - Kirundi
+        - Bulgarian
+        - Oromo
+        - Tatar
+        - Chichewa
+        - Welsh
+        - Quechua
+        - Hmong
+        - Luxembourgish
+        - Inuktitut
+        - Uzbek
+        - Finnish
+        - Konkani
+        - Uyghur
+        - Sinhala
+        - Swedish
+        - Northern Sotho
+        - Basque
+        - Tahitian
+        - Azerbaijani
+        - Tagalog
+        - Lithuanian
+        - Somali
+        - Urdu
+        - Yiddish
+        - Afrikaans
+        - Indonesian
+        - Burmese
+        - Upper Sorbian
+        - Dari
+        - Swahili
+        - Hebrew
+        - Twi
+        - Tamil
+        - English
+        - Divehi
+        - Lingala
+        - Dutch
+        - Telugu
+        - Assamese
+        - Tibetan
+        - Thai
+        - Czech
+        - Kannada
+        - Zulu
+        - Inuinnaqtun
+        - Cantonese
+        - Romanian
+        - Catalan
+        - Bosnian
+        - Mandarin
+        - Tsonga
+        - Kazakh
+        - Malagasy
+        - Pashto
+        - Chuukese
         - Slovak
+        - Portuguese
+        - Fijian
+        - Chinese
+        - Corsican
+        - Punjabi
+        - Bashkir
+        - Ilocano
+        - Estonian
+        - Korean
+        - Ukrainian
+        - Faroese
+        - Ewe
+        - Tigrinya
+        - Khmer
+        - Maltese
+        - Turkmen
+        - Setswana
+        - Haitian Creole
+        - Bengali
+        - Vietnamese
+        - Scots Gaelic
+        - Laotian
+        - Macedonian
+        - Guarani
+        - Spanish
+        - Icelandic
+        - Luganda
+        - Yucatec Maya
+        - Slovenian
+        - Sundanese
+        - Danish
+        - Frisian
+        - Cebuano
+        - Kurdish (Sorani)
+        - Bhojpuri
+        - Hawaiian
+        - Krio
+        - Cabo Verdean
+        - Farsi
         type: string
         x-nullable: true
         x-validation: true
       home_language_code:
         enum:
-        - knn
-        - uig
-        - bam
-        - div
-        - msa
-        - sna
-        - swa
-        - ces
-        - kaz
-        - tsn
-        - tam
-        - xho
-        - cos
-        - est
-        - isl
-        - pus
-        - slk
-        - twi
-        - ibo
-        - iku
-        - mlg
-        - sot
-        - tah
-        - mai
         - mri
-        - orm
-        - slv
-        - swe
-        - tso
+        - fao
+        - ibo
+        - mah
+        - ori
+        - tha
+        - tir
         - bul
-        - tur
-        - ceb
-        - hin
-        - kat
-        - som
-        - bod
-        - kur
-        - snd
-        - tat
-        - yor
-        - fas
-        - heb
-        - lug
-        - hsb
-        - sqi
-        - glg
+        - nya
+        - zho
+        - hun
         - khm
-        - mlt
-        - spa
-        - gle
-        - gla
-        - bel
-        - bho
-        - nld
-        - ewe
-        - deu
-        - hat
-        - tgl
-        - eus
-        - hau
-        - jav
-        - aym
+        - uzb
+        - kar
+        - orm
+        - sna
+        - tso
         - fil
-        - fry
-        - ita
-        - lav
+        - fin
+        - haw
+        - hin
+        - kaz
         - mni
         - mon
-        - ron
-        - chk
-        - hrv
-        - uzb
+        - srp
+        - som
+        - tgk
+        - tam
+        - cos
+        - hat
+        - knn
+        - mlg
+        - msa
+        - tur
+        - zul
         - afr
-        - ilo
-        - nso
-        - pol
-        - otq
-        - yid
-        - fra
-        - ckb
-        - sun
-        - other
-        - fin
-        - nep
-        - pan
-        - rus
         - amh
-        - nya
-        - ell
-        - hun
         - ikt
-        - mkd
-        - que
-        - tel
-        - bos
+        - jav
+        - tat
+        - ben
+        - ewe
+        - guj
+        - mlt
+        - snd
+        - eus
+        - hau
         - ind
-        - tha
-        - eng
-        - prs
-        - jpn
-        - nob
-        - ori
+        - ron
+        - tah
         - hye
         - aze
-        - cat
-        - grn
-        - run
-        - kir
-        - lao
-        - lit
-        - mya
-        - yue
-        - dgo
-        - ltz
-        - cmn
-        - mar
-        - mah
-        - lus
-        - ben
-        - zho
-        - hmn
-        - kar
-        - kor
-        - tgk
-        - ton
-        - vie
-        - asm
-        - cpp
-        - kan
+        - kat
+        - lav
+        - eng
+        - pus
         - tuk
-        - ukr
-        - urd
-        - zul
-        - ara
+        - yor
+        - mya
+        - div
+        - deu
+        - grn
+        - mai
+        - mar
+        - pan
+        - spa
+        - bel
+        - lao
+        - lin
+        - hsb
+        - uig
+        - cym
+        - aym
+        - chk
+        - ces
+        - prs
+        - ita
+        - que
+        - slk
+        - sun
+        - bam
         - bak
         - dan
-        - fao
+        - glg
+        - lus
+        - otq
+        - vie
+        - hmn
         - kin
-        - lin
-        - srp
-        - cym
-        - fij
-        - guj
         - kri
-        - mal
-        - sin
-        - yua
-        - haw
+        - tsn
+        - isl
+        - dgo
+        - fry
+        - lug
+        - ltz
+        - urd
+        - iku
         - dsb
-        - por
+        - sin
+        - swe
+        - yid
+        - mal
+        - pol
         - smo
-        - tir
+        - cpp
+        - nld
+        - tel
+        - fas
+        - ilo
+        - run
+        - yue
+        - swa
+        - ton
+        - yua
+        - ceb
+        - fra
+        - jpn
+        - ckb
+        - por
+        - xho
+        - cat
+        - est
+        - mkd
+        - gla
+        - bos
+        - tgl
+        - other
+        - asm
+        - bho
+        - heb
+        - kor
+        - lit
+        - rus
+        - slv
+        - bod
+        - ara
+        - hrv
+        - kur
+        - kir
+        - cmn
+        - nep
+        - nso
+        - sot
+        - ell
+        - gle
+        - nob
+        - twi
+        - ukr
+        - sqi
+        - fij
+        - kan
         type: string
         x-nullable: true
         x-validation: true
@@ -1676,6 +1759,18 @@ definitions:
         x-nullable: true
         x-validation: true
     type: object
+  TermLink:
+    properties:
+      rel:
+        enum:
+        - self
+        - district
+        - schools
+        - sections
+        type: string
+      uri:
+        type: string
+    type: object
   TermObject:
     properties:
       object:
@@ -1685,6 +1780,12 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/Term'
+      links:
+        items:
+          $ref: '#/definitions/TermLink'
+        type: array
+      uri:
+        type: string
     type: object
   TermsResponse:
     properties:
@@ -1729,6 +1830,22 @@ definitions:
       roles:
         $ref: '#/definitions/Roles'
     type: object
+  UserLink:
+    properties:
+      rel:
+        description: The relation this link represents. The user's role determines which enum values are present and valid (e.g., myTeachers only appears for student users, etc.).
+        enum:
+        - self
+        - district
+        - schools
+        - sections
+        - myContacts
+        - myStudents
+        - myTeachers
+        type: string
+      uri:
+        type: string
+    type: object
   UserObject:
     properties:
       object:
@@ -1738,6 +1855,12 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/User'
+      links:
+        items:
+          $ref: '#/definitions/UserLink'
+        type: array
+      uri:
+        type: string
     type: object
   UsersResponse:
     properties:
@@ -2038,7 +2161,10 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - enum:
+      - description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
+        enum:
         - ""
         - "true"
         - "false"
@@ -2051,6 +2177,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CoursesResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /courses/{id}:
@@ -2067,8 +2199,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CourseResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /courses/{id}/district:
@@ -2085,8 +2221,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /courses/{id}/resources:
@@ -2112,8 +2252,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/ResourcesResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /courses/{id}/schools:
@@ -2139,8 +2285,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /courses/{id}/sections:
@@ -2166,8 +2318,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /districts:
@@ -2175,7 +2333,10 @@ paths:
       description: Returns a list of districts. In practice this will only return the one district associated with the bearer token
       operationId: getDistricts
       parameters:
-      - enum:
+      - description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
+        enum:
         - ""
         - "true"
         - "false"
@@ -2188,6 +2349,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /districts/{id}:
@@ -2204,8 +2371,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /events:
@@ -2277,6 +2448,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/ResourcesResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /resources/{id}:
@@ -2293,8 +2470,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/ResourceResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /resources/{id}/courses:
@@ -2320,8 +2501,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CoursesResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /resources/{id}/sections:
@@ -2347,8 +2534,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /resources/{id}/users:
@@ -2380,8 +2573,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /schools:
@@ -2398,7 +2597,10 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - enum:
+      - description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
+        enum:
         - ""
         - "true"
         - "false"
@@ -2411,6 +2613,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /schools/{id}:
@@ -2427,8 +2635,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /schools/{id}/courses:
@@ -2454,8 +2666,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CoursesResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /schools/{id}/district:
@@ -2472,8 +2690,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /schools/{id}/sections:
@@ -2499,8 +2721,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /schools/{id}/terms:
@@ -2526,8 +2754,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/TermsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /schools/{id}/users:
@@ -2566,8 +2800,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /sections:
@@ -2584,7 +2824,10 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - enum:
+      - description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
+        enum:
         - ""
         - "true"
         - "false"
@@ -2597,6 +2840,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /sections/{id}:
@@ -2613,8 +2862,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /sections/{id}/course:
@@ -2631,8 +2884,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CourseResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /sections/{id}/district:
@@ -2649,8 +2906,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /sections/{id}/resources:
@@ -2676,8 +2937,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/ResourcesResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /sections/{id}/school:
@@ -2694,8 +2961,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /sections/{id}/term:
@@ -2712,8 +2983,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/TermResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /sections/{id}/users:
@@ -2745,8 +3020,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /sections/{section_id}/assignments:
@@ -2970,7 +3251,10 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - enum:
+      - description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
+        enum:
         - ""
         - "true"
         - "false"
@@ -2983,6 +3267,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/TermsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /terms/{id}:
@@ -2999,8 +3289,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/TermResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /terms/{id}/district:
@@ -3017,8 +3311,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /terms/{id}/schools:
@@ -3044,8 +3342,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /terms/{id}/sections:
@@ -3071,8 +3375,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /users:
@@ -3098,7 +3408,10 @@ paths:
       - in: query
         name: ending_before
         type: string
-      - enum:
+      - description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
+        enum:
         - ""
         - "true"
         - "false"
@@ -3111,6 +3424,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /users/{id}:
@@ -3127,8 +3446,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UserResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /users/{id}/district:
@@ -3145,8 +3468,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /users/{id}/mycontacts:
@@ -3172,8 +3499,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /users/{id}/mystudents:
@@ -3199,8 +3532,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /users/{id}/myteachers:
@@ -3226,8 +3565,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /users/{id}/resources:
@@ -3253,8 +3598,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/ResourcesResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /users/{id}/schools:
@@ -3286,8 +3637,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
   /users/{id}/sections:
@@ -3313,8 +3670,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
         "404":
           $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/InternalError'
       tags:
       - Data
 produces:
@@ -3339,11 +3702,33 @@ responses:
 schemes:
 - https
 security:
-- oauth: []
+- bearerAuth: []
 securityDefinitions:
+  bearerAuth:
+    description: |
+      Provide a bearer token in the Authorization header, e.g.
+      `Authorization: Bearer <token>`. Obtain one via the `oauth` or
+      `oauthDistrict` flows below or via the Clever UI.
+    in: header
+    name: Authorization
+    type: apiKey
   oauth:
     authorizationUrl: https://clever.com/oauth/authorize
+    description: |
+      Redirect the user to authorizationUrl, then exchange the returned
+      code at tokenUrl (via HTTP Basic Auth with your client ID/secret)
+      for an access token. Issues an SSO bearer token, scoped to the
+      signed-in user. Does not provide full Data API/roster access.
     flow: accessCode
+    tokenUrl: https://clever.com/oauth/tokens
+    type: oauth2
+  oauthDistrict:
+    description: |
+      Authenticate directly against tokenUrl via HTTP Basic Auth with
+      your app's client ID/secret to get an access token. Add a
+      `district=<id>` query param to scope the token to that district.
+      Issues a district-app token in access_code field, scoped to that district's shared data.
+    flow: application
     tokenUrl: https://clever.com/oauth/tokens
     type: oauth2
 swagger: "2.0"
