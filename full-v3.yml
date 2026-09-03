@@ -1712,35 +1712,20 @@ definitions:
   BadRequest:
     type: object
     properties:
-      code:
-        type: integer
-      error:
+      message:
         type: string
-      data:
-        type: object
-        x-nullable: true
 
   InternalError:
     type: object
     properties:
-      code:
-        type: integer
-      error:
+      message:
         type: string
-      data:
-        type: object
-        x-nullable: true
 
   Unauthorized:
     type: object
     properties:
-      code:
-        type: integer
-      error:
+      message:
         type: string
-      data:
-        type: object
-        x-nullable: true
 
   Link:
     properties:
@@ -1757,13 +1742,8 @@ definitions:
   NotFound:
     type: object
     properties:
-      code:
-        type: integer
-      error:
+      message:
         type: string
-      data:
-        type: object
-        x-nullable: true
 
   CountResponse:
     type: object
