@@ -8,6 +8,7 @@ schemes:
 produces:
   - application/json
 host: api.clever.com
+basePath: /v3.1
 
 x-samples-languages: [
     "curl",
@@ -41,7 +42,7 @@ responses:
       $ref: "#/definitions/Unauthorized"
 
 security:
-  - oauth: []
+  - bearerAuth: []
 
 paths:
   /courses:
@@ -62,6 +63,9 @@ paths:
       - in: query
         name: count
         type: string
+        description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
         enum:
         - ""
         - "true"
@@ -72,6 +76,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CoursesResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /courses/{id}:
     get:
@@ -88,8 +98,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CourseResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /courses/{id}/district:
     get:
@@ -106,8 +120,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /courses/{id}/resources:
     get:
@@ -133,8 +151,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/ResourcesResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /courses/{id}/schools:
     get:
@@ -160,8 +184,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /courses/{id}/sections:
     get:
@@ -187,8 +217,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /districts:
     get:
@@ -199,6 +235,9 @@ paths:
       - in: query
         name: count
         type: string
+        description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
         enum:
         - ""
         - "true"
@@ -209,6 +248,13 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictsResponse'
+
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /districts/{id}:
     get:
@@ -225,8 +271,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /resources:
     get:
@@ -249,6 +299,13 @@ paths:
           schema:
             $ref: '#/definitions/ResourcesResponse'
 
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '500':
+          $ref: '#/responses/InternalError'
+
   /resources/{id}:
     get:
       tags: ["Resources"]
@@ -264,8 +321,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/ResourceResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /resources/{id}/courses:
     get:
@@ -291,8 +352,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CoursesResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /resources/{id}/sections:
     get:
@@ -318,8 +385,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /resources/{id}/users:
     get:
@@ -351,8 +424,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /schools:
     get:
@@ -372,6 +451,9 @@ paths:
       - in: query
         name: count
         type: string
+        description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
         enum:
         - ""
         - "true"
@@ -382,6 +464,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /schools/{id}:
     get:
@@ -398,8 +486,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /schools/{id}/courses:
     get:
@@ -425,8 +517,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CoursesResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /schools/{id}/district:
     get:
@@ -443,8 +541,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /schools/{id}/sections:
     get:
@@ -470,8 +572,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /schools/{id}/terms:
     get:
@@ -497,8 +605,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/TermsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /schools/{id}/users:
     get:
@@ -537,8 +651,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /sections:
     get:
@@ -558,6 +678,9 @@ paths:
       - in: query
         name: count
         type: string
+        description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
         enum:
         - ""
         - "true"
@@ -568,6 +691,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /sections/{id}:
     get:
@@ -584,8 +713,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /sections/{id}/course:
     get:
@@ -602,8 +735,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/CourseResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /sections/{id}/district:
     get:
@@ -620,8 +757,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /sections/{id}/resources:
     get:
@@ -647,8 +788,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/ResourcesResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /sections/{id}/school:
     get:
@@ -665,8 +812,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /sections/{id}/term:
     get:
@@ -683,8 +834,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/TermResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /sections/{id}/users:
     get:
@@ -716,8 +871,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /terms:
     get:
@@ -737,6 +898,9 @@ paths:
       - in: query
         name: count
         type: string
+        description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
         enum:
         - ""
         - "true"
@@ -747,6 +911,13 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/TermsResponse'
+
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /terms/{id}:
     get:
@@ -763,8 +934,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/TermResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /terms/{id}/district:
     get:
@@ -781,8 +956,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /terms/{id}/sections:
     get:
@@ -808,8 +987,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /terms/{id}/schools:
     get:
@@ -835,8 +1020,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /users:
     get:
@@ -865,6 +1056,9 @@ paths:
       - in: query
         name: count
         type: string
+        description: |
+          If "true", returns a CountResponse ({count, links})
+          instead of the normal list response.
         enum:
         - ""
         - "true"
@@ -875,6 +1069,13 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /users/{id}:
     get:
@@ -891,8 +1092,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UserResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /users/{id}/district:
     get:
@@ -909,8 +1114,12 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/DistrictResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /users/{id}/mycontacts:
     get:
@@ -936,8 +1145,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /users/{id}/mystudents:
     get:
@@ -963,8 +1178,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /users/{id}/myteachers:
     get:
@@ -990,8 +1211,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/UsersResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /users/{id}/resources:
     get:
@@ -1017,8 +1244,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/ResourcesResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /users/{id}/schools:
     get:
@@ -1050,8 +1283,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SchoolsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   /users/{id}/sections:
     get:
@@ -1077,8 +1316,14 @@ paths:
           description: OK Response
           schema:
             $ref: '#/definitions/SectionsResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalError'
 
   # LMS Connect endpoints
   /sections/{section_id}/assignments:
@@ -1435,11 +1680,33 @@ paths:
           $ref: '#/responses/NotFound'
 
 securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    in: header
+    name: Authorization
+    description: |
+      Provide a bearer token in the Authorization header, e.g.
+      `Authorization: Bearer <token>`. Obtain one via the `oauth` or
+      `oauthDistrict` flows below or via the Clever UI.
   oauth:
     type: oauth2
     flow: accessCode
     authorizationUrl: https://clever.com/oauth/authorize
     tokenUrl: https://clever.com/oauth/tokens
+    description: |
+      Redirect the user to authorizationUrl, then exchange the returned
+      code at tokenUrl (via HTTP Basic Auth with your client ID/secret)
+      for an access token. Issues an SSO bearer token, scoped to the
+      signed-in user. Does not provide full Data API/roster access.
+  oauthDistrict:
+    type: oauth2
+    flow: application
+    tokenUrl: https://clever.com/oauth/tokens
+    description: |
+      Authenticate directly against tokenUrl via HTTP Basic Auth with
+      your app's client ID/secret to get an access token. Add a
+      `district=<id>` query param to scope the token to that district.
+      Issues a district-app token in access_code field, scoped to that district's shared data.
 
 definitions:
   BadRequest:
@@ -1478,6 +1745,19 @@ definitions:
       message:
         type: string
 
+  CountResponse:
+    type: object
+    description: |
+      Returned instead of the normal list response when the `count` query
+      parameter is set to "true". 
+    properties:
+      count:
+        type: integer
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/Link'
+
   CoursesResponse:
     type: object
     properties:
@@ -1495,6 +1775,25 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/Course"
+      uri:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/CourseLink'
+
+  CourseLink:
+    properties:
+      rel:
+        enum:
+          - self
+          - district
+          - schools
+          - sections
+        type: string
+      uri:
+        type: string
+    type: object
 
   DistrictsResponse:
     type: object
@@ -1513,6 +1812,22 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/District"
+      uri:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/DistrictLink'
+
+  DistrictLink:
+    properties:
+      rel:
+        enum:
+          - self
+        type: string
+      uri:
+        type: string
+    type: object
 
   ResourcesResponse:
     type: object
@@ -1549,6 +1864,27 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/Section"
+      uri:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/SectionLink'
+
+  SectionLink:
+    properties:
+      rel:
+        enum:
+          - self
+          - district
+          - school
+          - course
+          - term
+          - users
+        type: string
+      uri:
+        type: string
+    type: object
 
   SchoolsResponse:
     type: object
@@ -1567,6 +1903,27 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/School"
+      uri:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/SchoolLink'
+
+  SchoolLink:
+    properties:
+      rel:
+        enum:
+          - self
+          - district
+          - courses
+          - sections
+          - terms
+          - users
+        type: string
+      uri:
+        type: string
+    type: object
 
   TermsResponse:
     type: object
@@ -1585,6 +1942,25 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/Term"
+      uri:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/TermLink'
+
+  TermLink:
+    properties:
+      rel:
+        enum:
+          - self
+          - district
+          - schools
+          - sections
+        type: string
+      uri:
+        type: string
+    type: object
 
   UsersResponse:
     type: object
@@ -1603,6 +1979,31 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/User"
+      uri:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/UserLink'
+
+  UserLink:
+    properties:
+      rel:
+        description: >-
+          The relation this link represents. The user's role determines which enum values
+          are present and valid (e.g., myTeachers only appears for student users, etc.).
+        enum:
+          - self
+          - district
+          - schools
+          - sections
+          - myContacts
+          - myStudents
+          - myTeachers
+        type: string
+      uri:
+        type: string
+    type: object
 
   Course:
     type: object
