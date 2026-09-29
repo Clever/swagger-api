@@ -58,6 +58,10 @@ definitions:
         x-nullable: true
     type: object
   CourseLink:
+    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    example:
+      rel: sections
+      uri: /v3.1/courses/4fee004cca2e43cf2700028b/sections
     properties:
       rel:
         enum:
@@ -254,6 +258,10 @@ definitions:
         x-validation: true
     type: object
   DistrictLink:
+    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    example:
+      rel: self
+      uri: /v3.1/districts/55417deec7f551010000000d
     properties:
       rel:
         enum:
@@ -290,6 +298,10 @@ definitions:
         type: string
     type: object
   Link:
+    description: 'A relative path to the resource identified by `rel`, including the API version prefix. Param by `rel`: next=starting_after, prev=ending_before. Self is same as request.'
+    example:
+      rel: next
+      uri: /v3.1/users?starting_after=55417deec7f551010000000d
     properties:
       rel:
         enum:
@@ -532,6 +544,10 @@ definitions:
         x-validation: true
     type: object
   SchoolLink:
+    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    example:
+      rel: users
+      uri: /v3.1/schools/55417deec7f551010000000d/users
     properties:
       rel:
         enum:
@@ -669,6 +685,10 @@ definitions:
         x-validation: true
     type: object
   SectionLink:
+    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    example:
+      rel: users
+      uri: /v3.1/sections/55417deec7f551010000000d/users
     properties:
       rel:
         enum:
@@ -830,315 +850,315 @@ definitions:
         x-validation: true
       home_language:
         enum:
-        - Arabic
-        - Aymara
-        - Bambara
-        - Queretaro Otomi
-        - Malayalam
-        - Albanian
-        - Armenian
-        - German
-        - Maithili
-        - Nepali
-        - Irish
-        - Yoruba
-        - Lower Sorbian
-        - Mongolian
-        - Malay
-        - Japanese
-        - Croatian
-        - Shona
-        - Tajik
-        - Turkish
-        - Polish
-        - Marshallese
-        - Italian
-        - Kinyarwanda
-        - Samoan
-        - Norwegian
-        - Filipino
-        - Serbian
-        - Sindhi
-        - Hausa
-        - Kurdish (Kurmanji)
-        - Sesotho
-        - Greek
-        - Maori
         - Manipuri
-        - Galician
-        - Dogri
-        - Tongan
-        - Xhosa
-        - Odia
-        - Hungarian
-        - Javanese
-        - Georgian
-        - Marathi
-        - Belarusian
-        - French
-        - Russian
-        - Kyrgyz
-        - Latvian
-        - Gujarati
-        - Mizo
-        - Other
-        - Igbo
-        - Karen
-        - Hindi
-        - Amharic
-        - Kirundi
-        - Bulgarian
-        - Oromo
-        - Tatar
-        - Chichewa
-        - Welsh
-        - Quechua
-        - Hmong
-        - Luxembourgish
-        - Inuktitut
-        - Uzbek
-        - Finnish
-        - Konkani
-        - Uyghur
-        - Sinhala
-        - Swedish
-        - Northern Sotho
-        - Basque
-        - Tahitian
-        - Azerbaijani
-        - Tagalog
-        - Lithuanian
-        - Somali
-        - Urdu
-        - Yiddish
-        - Afrikaans
-        - Indonesian
-        - Burmese
-        - Upper Sorbian
-        - Dari
-        - Swahili
-        - Hebrew
-        - Twi
-        - Tamil
-        - English
-        - Divehi
-        - Lingala
-        - Dutch
-        - Telugu
-        - Assamese
-        - Tibetan
-        - Thai
+        - German
         - Czech
-        - Kannada
-        - Zulu
-        - Inuinnaqtun
-        - Cantonese
-        - Romanian
+        - Twi
+        - Malay
+        - Norwegian
+        - Mizo
+        - Tahitian
+        - Burmese
+        - Mongolian
         - Catalan
-        - Bosnian
-        - Mandarin
-        - Tsonga
-        - Kazakh
-        - Malagasy
-        - Pashto
         - Chuukese
-        - Slovak
-        - Portuguese
-        - Fijian
-        - Chinese
-        - Corsican
+        - Karen
+        - Amharic
+        - Sesotho
+        - Odia
         - Punjabi
-        - Bashkir
-        - Ilocano
-        - Estonian
-        - Korean
-        - Ukrainian
-        - Faroese
         - Ewe
-        - Tigrinya
-        - Khmer
         - Maltese
-        - Turkmen
-        - Setswana
-        - Haitian Creole
-        - Bengali
-        - Vietnamese
-        - Scots Gaelic
-        - Laotian
-        - Macedonian
-        - Guarani
-        - Spanish
-        - Icelandic
-        - Luganda
-        - Yucatec Maya
-        - Slovenian
-        - Sundanese
-        - Danish
-        - Frisian
-        - Cebuano
-        - Kurdish (Sorani)
+        - Albanian
         - Bhojpuri
+        - Vietnamese
+        - Polish
+        - Laotian
+        - Nepali
+        - Luxembourgish
+        - Upper Sorbian
+        - Welsh
+        - Hungarian
+        - Slovenian
+        - Estonian
+        - Tajik
+        - Tatar
+        - Cebuano
+        - Telugu
+        - Ukrainian
+        - Mandarin
+        - Kurdish (Sorani)
+        - Lower Sorbian
+        - Latvian
+        - Tamil
+        - Pashto
+        - English
+        - Armenian
+        - Yiddish
+        - Chinese
+        - Indonesian
+        - Macedonian
+        - Greek
+        - Zulu
+        - Malagasy
+        - Thai
+        - Lingala
+        - Inuinnaqtun
+        - Sindhi
+        - Oromo
+        - Guarani
+        - Khmer
+        - Kirundi
+        - Kyrgyz
+        - Basque
+        - Dogri
+        - Hmong
+        - Other
+        - Serbian
         - Hawaiian
+        - Ilocano
+        - Yucatec Maya
+        - Bengali
         - Krio
-        - Cabo Verdean
+        - Hausa
+        - Italian
+        - Kurdish (Kurmanji)
+        - Georgian
+        - Arabic
+        - Slovak
+        - Uyghur
+        - Chichewa
+        - Aymara
+        - Belarusian
+        - Finnish
+        - Hindi
+        - Corsican
+        - Japanese
+        - Tongan
+        - Dari
+        - Tigrinya
+        - Danish
+        - Divehi
+        - Swahili
+        - Maori
+        - Faroese
+        - Icelandic
+        - Bashkir
+        - Korean
+        - Azerbaijani
         - Farsi
+        - Haitian Creole
+        - Sundanese
+        - French
+        - Javanese
+        - Igbo
+        - Northern Sotho
+        - Afrikaans
+        - Xhosa
+        - Kannada
+        - Bambara
+        - Tsonga
+        - Cantonese
+        - Inuktitut
+        - Croatian
+        - Marshallese
+        - Kazakh
+        - Uzbek
+        - Spanish
+        - Shona
+        - Turkmen
+        - Irish
+        - Assamese
+        - Portuguese
+        - Kinyarwanda
+        - Queretaro Otomi
+        - Cabo Verdean
+        - Tagalog
+        - Russian
+        - Tibetan
+        - Samoan
+        - Gujarati
+        - Fijian
+        - Lithuanian
+        - Sinhala
+        - Romanian
+        - Luganda
+        - Konkani
+        - Yoruba
+        - Maithili
+        - Dutch
+        - Filipino
+        - Marathi
+        - Somali
+        - Bulgarian
+        - Setswana
+        - Bosnian
+        - Quechua
+        - Frisian
+        - Urdu
+        - Swedish
+        - Malayalam
+        - Scots Gaelic
+        - Hebrew
+        - Galician
+        - Turkish
         type: string
         x-nullable: true
         x-validation: true
       home_language_code:
         enum:
-        - mri
-        - fao
-        - ibo
-        - mah
-        - ori
-        - tha
-        - tir
-        - bul
-        - nya
-        - zho
-        - hun
-        - khm
-        - uzb
-        - kar
-        - orm
-        - sna
-        - tso
-        - fil
-        - fin
-        - haw
-        - hin
-        - kaz
-        - mni
-        - mon
-        - srp
-        - som
-        - tgk
-        - tam
-        - cos
-        - hat
-        - knn
-        - mlg
-        - msa
-        - tur
-        - zul
-        - afr
-        - amh
-        - ikt
-        - jav
-        - tat
-        - ben
-        - ewe
-        - guj
-        - mlt
-        - snd
-        - eus
-        - hau
-        - ind
-        - ron
-        - tah
-        - hye
-        - aze
-        - kat
-        - lav
-        - eng
-        - pus
-        - tuk
-        - yor
-        - mya
-        - div
-        - deu
-        - grn
-        - mai
-        - mar
-        - pan
-        - spa
-        - bel
-        - lao
-        - lin
-        - hsb
-        - uig
-        - cym
-        - aym
-        - chk
-        - ces
         - prs
-        - ita
-        - que
-        - slk
-        - sun
-        - bam
-        - bak
-        - dan
-        - glg
-        - lus
-        - otq
-        - vie
-        - hmn
-        - kin
-        - kri
-        - tsn
-        - isl
-        - dgo
-        - fry
-        - lug
-        - ltz
-        - urd
-        - iku
-        - dsb
-        - sin
-        - swe
-        - yid
-        - mal
-        - pol
-        - smo
-        - cpp
-        - nld
-        - tel
-        - fas
         - ilo
         - run
-        - yue
-        - swa
-        - ton
-        - yua
-        - ceb
-        - fra
-        - jpn
-        - ckb
-        - por
-        - xho
-        - cat
-        - est
-        - mkd
-        - gla
-        - bos
-        - tgl
-        - other
-        - asm
-        - bho
-        - heb
-        - kor
-        - lit
-        - rus
-        - slv
-        - bod
-        - ara
-        - hrv
-        - kur
-        - kir
+        - kin
+        - mlg
         - cmn
-        - nep
-        - nso
-        - sot
-        - ell
-        - gle
-        - nob
-        - twi
-        - ukr
+        - mar
+        - yua
+        - ben
+        - mya
+        - iku
+        - swa
         - sqi
+        - hye
+        - bos
+        - ikt
+        - kri
+        - mri
+        - ceb
+        - hun
+        - tir
+        - glg
+        - kat
+        - msa
+        - sot
+        - ara
+        - bho
+        - cpp
+        - mon
+        - que
+        - tur
+        - vie
+        - bak
+        - dan
+        - kir
+        - lit
+        - snd
+        - yid
+        - hmn
+        - nso
+        - pol
+        - sin
+        - aze
+        - zho
+        - hrv
+        - lav
+        - mah
+        - slk
+        - uig
+        - other
+        - cos
+        - fao
+        - ind
+        - ron
+        - srp
+        - tgl
+        - nob
+        - rus
+        - fas
+        - lao
+        - mkd
+        - nep
+        - slv
+        - tel
+        - bod
+        - urd
+        - lug
+        - smo
+        - eus
+        - nya
+        - div
+        - guj
+        - kaz
+        - knn
+        - afr
+        - mni
+        - orm
+        - xho
+        - yor
+        - dgo
+        - est
+        - hat
+        - ori
+        - gla
+        - som
+        - tam
+        - tha
+        - cat
         - fij
+        - grn
+        - hin
+        - chk
+        - mai
+        - lus
+        - sun
+        - ukr
+        - nld
+        - pus
+        - pan
+        - ltz
+        - hsb
+        - fry
+        - heb
+        - twi
+        - eng
+        - kor
+        - sna
+        - tuk
+        - aym
+        - fra
+        - jav
+        - khm
+        - bel
+        - gle
         - kan
+        - tgk
+        - asm
+        - bam
+        - ewe
+        - fil
+        - ckb
+        - dsb
+        - mlt
+        - spa
+        - ces
+        - fin
+        - ita
+        - kar
+        - kur
+        - lin
+        - por
+        - swe
+        - amh
+        - ell
+        - jpn
+        - tso
+        - bul
+        - yue
+        - isl
+        - mal
+        - otq
+        - tah
+        - tat
+        - cym
+        - hau
+        - ibo
+        - uzb
+        - haw
+        - tsn
+        - ton
+        - zul
+        - deu
         type: string
         x-nullable: true
         x-validation: true
@@ -1291,6 +1311,10 @@ definitions:
         x-validation: true
     type: object
   TermLink:
+    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    example:
+      rel: sections
+      uri: /v3.1/terms/4fee004cca2e43cf2700028b/sections
     properties:
       rel:
         enum:
@@ -1352,6 +1376,10 @@ definitions:
         $ref: '#/definitions/Roles'
     type: object
   UserLink:
+    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    example:
+      rel: schools
+      uri: /v3.1/users/55417deec7f551010000000d/schools
     properties:
       rel:
         description: The relation this link represents. The user's role determines which enum values are present and valid (e.g., myTeachers only appears for student users, etc.).
