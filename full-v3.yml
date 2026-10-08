@@ -1728,6 +1728,11 @@ definitions:
         type: string
 
   Link:
+    description: >-
+      A link to a related page of results. `rel` identifies which page this is, and `uri`
+      is the relative path to it (including the API version prefix). `next` corresponds to
+      the `starting_after` parameter, `prev` to `ending_before`, and `self` repeats the
+      current request.
     properties:
       rel:
         enum:
@@ -1738,6 +1743,9 @@ definitions:
       uri:
         type: string
     type: object
+    example:
+      rel: next
+      uri: /v3.1/users?starting_after=55417deec7f551010000000d
 
   NotFound:
     type: object
@@ -1783,6 +1791,7 @@ definitions:
           $ref: '#/definitions/CourseLink'
 
   CourseLink:
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     properties:
       rel:
         enum:
@@ -1794,6 +1803,9 @@ definitions:
       uri:
         type: string
     type: object
+    example:
+      rel: sections
+      uri: /v3.1/courses/4fee004cca2e43cf2700028b/sections
 
   DistrictsResponse:
     type: object
@@ -1820,6 +1832,7 @@ definitions:
           $ref: '#/definitions/DistrictLink'
 
   DistrictLink:
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     properties:
       rel:
         enum:
@@ -1828,6 +1841,9 @@ definitions:
       uri:
         type: string
     type: object
+    example:
+      rel: self
+      uri: /v3.1/districts/55417deec7f551010000000d
 
   ResourcesResponse:
     type: object
@@ -1872,6 +1888,7 @@ definitions:
           $ref: '#/definitions/SectionLink'
 
   SectionLink:
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     properties:
       rel:
         enum:
@@ -1885,6 +1902,9 @@ definitions:
       uri:
         type: string
     type: object
+    example:
+      rel: users
+      uri: /v3.1/sections/55417deec7f551010000000d/users
 
   SchoolsResponse:
     type: object
@@ -1911,6 +1931,7 @@ definitions:
           $ref: '#/definitions/SchoolLink'
 
   SchoolLink:
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     properties:
       rel:
         enum:
@@ -1924,6 +1945,9 @@ definitions:
       uri:
         type: string
     type: object
+    example:
+      rel: users
+      uri: /v3.1/schools/55417deec7f551010000000d/users
 
   TermsResponse:
     type: object
@@ -1950,6 +1974,7 @@ definitions:
           $ref: '#/definitions/TermLink'
 
   TermLink:
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     properties:
       rel:
         enum:
@@ -1961,6 +1986,9 @@ definitions:
       uri:
         type: string
     type: object
+    example:
+      rel: sections
+      uri: /v3.1/terms/4fee004cca2e43cf2700028b/sections
 
   UsersResponse:
     type: object
@@ -1987,6 +2015,7 @@ definitions:
           $ref: '#/definitions/UserLink'
 
   UserLink:
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     properties:
       rel:
         description: >-
@@ -2004,6 +2033,9 @@ definitions:
       uri:
         type: string
     type: object
+    example:
+      rel: schools
+      uri: /v3.1/users/55417deec7f551010000000d/schools
 
   Course:
     type: object

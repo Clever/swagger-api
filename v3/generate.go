@@ -1,6 +1,7 @@
 package v3
 
 import (
+	"bytes"
 	"errors"
 	"io/ioutil"
 	"log"
@@ -122,6 +123,14 @@ func Generate() {
 			}
 		}
 	}
+}
+
+// rewriteVersionedURIs rewrites hardcoded example URIs in the base yml to match the
+// target version. full-v3.yml always writes these examples using the latest minor
+// version (currently v3.1), since that's also its own basePath; this makes sure
+// older generated versions (e.g. v3.0) don't end up with examples pointing at v3.1.
+func rewriteVersionedURIs(b []byte, version string) []byte {
+	return bytes.Replace(b, []byte("/v"+majorVersion+".1/"), []byte("/"+version+"/"), -1)
 }
 
 func isLMSConnectEndpoint(path interface{}) bool {
@@ -305,7 +314,11 @@ func generateDataAPIYml(i map[interface{}]interface{}, version string) ([]byte, 
 		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
 	}
 
-	return yaml.Marshal(m)
+	b, err := yaml.Marshal(m)
+	if err != nil {
+		return nil, err
+	}
+	return rewriteVersionedURIs(b, version), nil
 }
 
 // generateEventsAPIYml generates the events API from the base yml for a specific version. It does
@@ -334,7 +347,11 @@ func generateEventsAPIYml(i map[interface{}]interface{}, version string) ([]byte
 		modifyDefinitions(version, false, name, definition.(map[interface{}]interface{}))
 	}
 
-	return yaml.Marshal(m)
+	b, err := yaml.Marshal(m)
+	if err != nil {
+		return nil, err
+	}
+	return rewriteVersionedURIs(b, version), nil
 }
 
 // generateLMSConnectAPIYml generates the LMS Connect API from the base yml for a specific version. It does
@@ -358,7 +375,11 @@ func generateLMSConnectAPIYml(i map[interface{}]interface{}, version string) ([]
 	// remove Data and Events API specific models from the file
 	deleteNonSpecifiedAPIModels(m, append(lmsConnectModels, sharedModels...))
 
-	return yaml.Marshal(m)
+	b, err := yaml.Marshal(m)
+	if err != nil {
+		return nil, err
+	}
+	return rewriteVersionedURIs(b, version), nil
 }
 
 // generateAttendanceAPIYml generates the Attendance API from the base yml for a specific version. It does
@@ -382,7 +403,11 @@ func generateAttendanceAPIYml(i map[interface{}]interface{}, version string) ([]
 	// remove Data and Events API specific models from the file
 	deleteNonSpecifiedAPIModels(m, append(attendanceModels, sharedModels...))
 
-	return yaml.Marshal(m)
+	b, err := yaml.Marshal(m)
+	if err != nil {
+		return nil, err
+	}
+	return rewriteVersionedURIs(b, version), nil
 }
 
 // generateClientYml generates the yml for the client libraries. It removes things we don't need
@@ -425,5 +450,9 @@ func generateClientYml(i map[interface{}]interface{}, versionStr string) ([]byte
 		modifyDefinitions(versionStr, true, name.(string), definition.(map[interface{}]interface{}))
 	}
 
-	return yaml.Marshal(m)
+	b, err := yaml.Marshal(m)
+	if err != nil {
+		return nil, err
+	}
+	return rewriteVersionedURIs(b, versionStr), nil
 }
