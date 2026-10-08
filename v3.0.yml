@@ -61,7 +61,7 @@ definitions:
     description: A relative path to the resource identified by `rel`, including the API version prefix.
     example:
       rel: sections
-      uri: /v3.1/courses/4fee004cca2e43cf2700028b/sections
+      uri: /v3.0/courses/4fee004cca2e43cf2700028b/sections
     properties:
       rel:
         enum:
@@ -189,7 +189,7 @@ definitions:
     description: A relative path to the resource identified by `rel`, including the API version prefix.
     example:
       rel: self
-      uri: /v3.1/districts/55417deec7f551010000000d
+      uri: /v3.0/districts/55417deec7f551010000000d
     properties:
       rel:
         enum:
@@ -229,7 +229,7 @@ definitions:
     description: 'A relative path to the resource identified by `rel`, including the API version prefix. Param by `rel`: next=starting_after, prev=ending_before. Self is same as request.'
     example:
       rel: next
-      uri: /v3.1/users?starting_after=55417deec7f551010000000d
+      uri: /v3.0/users?starting_after=55417deec7f551010000000d
     properties:
       rel:
         enum:
@@ -458,7 +458,7 @@ definitions:
     description: A relative path to the resource identified by `rel`, including the API version prefix.
     example:
       rel: users
-      uri: /v3.1/schools/55417deec7f551010000000d/users
+      uri: /v3.0/schools/55417deec7f551010000000d/users
     properties:
       rel:
         enum:
@@ -596,7 +596,7 @@ definitions:
     description: A relative path to the resource identified by `rel`, including the API version prefix.
     example:
       rel: users
-      uri: /v3.1/sections/55417deec7f551010000000d/users
+      uri: /v3.0/sections/55417deec7f551010000000d/users
     properties:
       rel:
         enum:
@@ -875,7 +875,7 @@ definitions:
     description: A relative path to the resource identified by `rel`, including the API version prefix.
     example:
       rel: sections
-      uri: /v3.1/terms/4fee004cca2e43cf2700028b/sections
+      uri: /v3.0/terms/4fee004cca2e43cf2700028b/sections
     properties:
       rel:
         enum:
@@ -937,7 +937,7 @@ definitions:
     description: A relative path to the resource identified by `rel`, including the API version prefix.
     example:
       rel: schools
-      uri: /v3.1/users/55417deec7f551010000000d/schools
+      uri: /v3.0/users/55417deec7f551010000000d/schools
     properties:
       rel:
         description: The relation this link represents. The user's role determines which enum values are present and valid (e.g., myTeachers only appears for student users, etc.).
