@@ -58,7 +58,7 @@ definitions:
         x-nullable: true
     type: object
   CourseLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: sections
       uri: /v3.1/courses/4fee004cca2e43cf2700028b/sections
@@ -258,7 +258,7 @@ definitions:
         x-validation: true
     type: object
   DistrictLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: self
       uri: /v3.1/districts/55417deec7f551010000000d
@@ -298,7 +298,7 @@ definitions:
         type: string
     type: object
   Link:
-    description: 'A relative path to the resource identified by `rel`, including the API version prefix. Param by `rel`: next=starting_after, prev=ending_before. Self is same as request.'
+    description: A link to a related page of results. `rel` identifies which page this is, and `uri` is the relative path to it (including the API version prefix). `next` corresponds to the `starting_after` parameter, `prev` to `ending_before`, and `self` repeats the current request.
     example:
       rel: next
       uri: /v3.1/users?starting_after=55417deec7f551010000000d
@@ -544,7 +544,7 @@ definitions:
         x-validation: true
     type: object
   SchoolLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: users
       uri: /v3.1/schools/55417deec7f551010000000d/users
@@ -685,7 +685,7 @@ definitions:
         x-validation: true
     type: object
   SectionLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: users
       uri: /v3.1/sections/55417deec7f551010000000d/users
@@ -850,315 +850,315 @@ definitions:
         x-validation: true
       home_language:
         enum:
-        - Greek
-        - Marathi
-        - Hungarian
-        - Slovenian
-        - Ukrainian
-        - Icelandic
-        - Samoan
-        - Kannada
-        - Tagalog
-        - Uyghur
-        - Bashkir
-        - Konkani
-        - Hebrew
-        - Oromo
-        - Finnish
-        - Basque
-        - Indonesian
-        - Kurdish (Kurmanji)
-        - Sundanese
-        - Swahili
-        - Tongan
-        - Turkish
-        - Yucatec Maya
-        - Dutch
-        - Pashto
         - Bulgarian
-        - Belarusian
-        - Sesotho
-        - Uzbek
-        - Quechua
-        - Hmong
-        - Ilocano
-        - Sindhi
-        - French
-        - Northern Sotho
-        - Italian
-        - Urdu
-        - Yoruba
-        - Kirundi
-        - Kyrgyz
-        - Estonian
-        - Divehi
-        - Laotian
-        - Korean
-        - Cebuano
-        - Danish
-        - Japanese
-        - Kinyarwanda
-        - Zulu
-        - Serbian
-        - Guarani
-        - Irish
-        - Tahitian
-        - Catalan
-        - Maithili
-        - Filipino
-        - Telugu
-        - Bhojpuri
-        - Galician
-        - Arabic
-        - Other
-        - Maltese
-        - Azerbaijani
-        - Albanian
-        - Luganda
-        - Odia
-        - Mizo
-        - Armenian
-        - Tatar
-        - Sinhala
-        - Nepali
-        - Thai
-        - Kurdish (Sorani)
-        - Upper Sorbian
-        - Twi
-        - Manipuri
-        - Russian
-        - Maori
-        - Bambara
-        - Burmese
-        - Assamese
-        - Chichewa
-        - Tibetan
-        - Tamil
-        - Vietnamese
-        - Fijian
-        - Shona
-        - Aymara
-        - Amharic
-        - Haitian Creole
-        - Farsi
-        - Slovak
-        - Lower Sorbian
-        - Gujarati
-        - Chinese
-        - Tigrinya
-        - Mongolian
-        - Somali
-        - Inuinnaqtun
-        - Tajik
-        - Setswana
-        - Polish
-        - Faroese
-        - Lingala
-        - Afrikaans
-        - German
-        - Scots Gaelic
-        - Turkmen
-        - Karen
-        - Czech
-        - Swedish
-        - Macedonian
-        - Lithuanian
-        - Queretaro Otomi
-        - Mandarin
-        - Norwegian
-        - Punjabi
-        - Marshallese
-        - Bengali
-        - Frisian
-        - Khmer
-        - Croatian
-        - Romanian
-        - Xhosa
-        - Malay
-        - Dogri
-        - Hawaiian
-        - Hindi
-        - Georgian
-        - Portuguese
-        - Hausa
-        - English
-        - Ewe
-        - Bosnian
-        - Javanese
-        - Kazakh
-        - Welsh
-        - Luxembourgish
         - Krio
-        - Malagasy
-        - Tsonga
-        - Chuukese
+        - Faroese
+        - Maithili
+        - Maori
+        - Sesotho
+        - Serbian
+        - Aymara
+        - Fijian
+        - Kirundi
+        - Maltese
+        - Slovenian
+        - Vietnamese
         - Corsican
-        - Cabo Verdean
-        - Yiddish
+        - Marshallese
+        - Khmer
+        - Sundanese
+        - Odia
+        - Amharic
+        - Lithuanian
+        - Chinese
+        - Ukrainian
+        - Konkani
+        - Italian
+        - Upper Sorbian
+        - Chichewa
+        - Romanian
+        - Slovak
+        - Kyrgyz
+        - Farsi
+        - Hindi
+        - Pashto
+        - German
+        - Bambara
         - Cantonese
-        - Igbo
-        - Inuktitut
+        - Welsh
+        - Luganda
+        - Swedish
         - Malayalam
+        - Setswana
+        - Ewe
+        - Norwegian
+        - Other
+        - Tamil
+        - Quechua
+        - Afrikaans
+        - Portuguese
+        - Zulu
+        - Japanese
+        - Somali
+        - Oromo
+        - Kinyarwanda
+        - Finnish
+        - Tibetan
+        - Tajik
+        - Azerbaijani
+        - Luxembourgish
+        - Polish
+        - Samoan
         - Latvian
-        - Dari
+        - Thai
+        - Sinhala
+        - Divehi
+        - Russian
+        - Haitian Creole
+        - Basque
+        - Tongan
+        - Javanese
+        - Punjabi
+        - Yiddish
+        - Kannada
+        - Ilocano
+        - Lower Sorbian
+        - Urdu
+        - Uyghur
+        - Hausa
+        - Yucatec Maya
+        - Tatar
+        - Irish
+        - Albanian
+        - Mizo
+        - Assamese
+        - Shona
+        - Filipino
+        - Macedonian
+        - Guarani
         - Spanish
+        - Yoruba
+        - Frisian
+        - Bosnian
+        - English
+        - Swahili
+        - Galician
+        - Northern Sotho
+        - Uzbek
+        - Hawaiian
+        - French
+        - Marathi
+        - Tsonga
+        - Arabic
+        - Xhosa
+        - Laotian
+        - Lingala
+        - Gujarati
+        - Kazakh
+        - Tahitian
+        - Sindhi
+        - Burmese
+        - Kurdish (Kurmanji)
+        - Dogri
+        - Indonesian
+        - Telugu
+        - Scots Gaelic
+        - Danish
+        - Armenian
+        - Chuukese
+        - Bhojpuri
+        - Tagalog
+        - Turkish
+        - Dutch
+        - Twi
+        - Malagasy
+        - Bengali
+        - Nepali
+        - Georgian
+        - Hebrew
+        - Queretaro Otomi
+        - Catalan
+        - Cabo Verdean
+        - Korean
+        - Igbo
+        - Tigrinya
+        - Malay
+        - Belarusian
+        - Turkmen
+        - Inuinnaqtun
+        - Inuktitut
+        - Bashkir
+        - Estonian
+        - Kurdish (Sorani)
+        - Hungarian
+        - Mongolian
+        - Manipuri
+        - Mandarin
+        - Hmong
+        - Croatian
+        - Greek
+        - Cebuano
+        - Czech
+        - Dari
+        - Icelandic
+        - Karen
         type: string
         x-nullable: true
         x-validation: true
       home_language_code:
         enum:
-        - pan
-        - other
-        - fao
-        - kur
-        - rus
-        - gla
-        - swe
-        - aym
-        - ceb
-        - hrv
-        - dan
-        - prs
-        - haw
-        - mri
-        - spa
-        - hye
-        - mkd
-        - ron
-        - uig
-        - xho
-        - lit
-        - mlt
-        - sun
-        - jav
-        - mar
-        - tgk
-        - bod
-        - tuk
-        - gle
-        - lin
-        - tir
-        - amh
-        - yue
-        - hat
-        - bak
-        - hin
-        - isl
-        - ibo
-        - kin
-        - otq
-        - chk
-        - cmn
-        - bho
-        - knn
-        - yor
-        - sqi
         - bam
-        - fra
-        - nso
-        - sot
-        - ton
-        - uzb
-        - cym
-        - fas
-        - ltz
-        - mah
-        - nep
-        - tur
-        - yua
-        - zul
-        - cpp
-        - nld
-        - heb
-        - tsn
-        - tah
-        - mya
-        - lug
-        - orm
-        - slk
-        - tam
-        - tha
-        - hun
-        - iku
-        - kri
-        - ckb
-        - dsb
-        - que
-        - smo
-        - swa
-        - kar
-        - srp
-        - yid
-        - afr
-        - run
-        - kir
-        - pus
-        - ces
-        - est
-        - cat
-        - kat
-        - kaz
-        - mal
-        - por
-        - aze
-        - cos
-        - guj
-        - hau
-        - lav
-        - mai
-        - tat
-        - div
-        - fin
-        - deu
-        - ell
-        - grn
-        - hmn
-        - msa
-        - mon
-        - ara
-        - asm
-        - nya
-        - ita
-        - nob
-        - ori
-        - pol
-        - som
-        - ilo
-        - hsb
-        - urd
-        - eng
-        - dgo
-        - fij
-        - glg
-        - slv
-        - bul
-        - fil
-        - lao
-        - ben
-        - ewe
-        - fry
-        - tel
-        - ukr
-        - bos
-        - kan
-        - bel
-        - kor
-        - mlg
-        - sna
-        - tso
-        - sin
+        - ceb
+        - mni
         - snd
-        - tgl
-        - twi
-        - eus
-        - khm
-        - lus
-        - vie
-        - zho
+        - slk
+        - dan
+        - knn
+        - som
+        - ben
+        - cos
+        - fil
+        - ilo
+        - mal
+        - tat
+        - ces
+        - gle
+        - kin
+        - mkd
+        - tsn
+        - fin
+        - bod
+        - hye
+        - yue
+        - haw
+        - kir
+        - nso
+        - tir
+        - msa
+        - mah
+        - sin
+        - sqi
+        - ara
+        - mya
+        - fra
+        - grn
         - ind
         - ikt
+        - spa
+        - div
+        - fas
+        - fij
+        - hin
+        - khm
+        - lus
+        - nep
+        - sun
+        - cat
+        - chk
+        - fry
+        - iku
+        - run
+        - kur
+        - ori
+        - xho
+        - bos
+        - ewe
+        - kar
+        - cmn
+        - bak
+        - bho
+        - cpp
+        - dsb
+        - tgl
+        - asm
+        - ita
+        - rus
+        - other
+        - amh
+        - dgo
+        - kat
+        - hat
+        - lao
+        - lit
+        - mai
+        - orm
+        - bel
+        - tam
+        - urd
+        - uig
+        - bul
+        - uzb
+        - eng
+        - hmn
+        - kor
+        - lin
+        - cym
+        - prs
+        - hau
+        - swa
+        - twi
+        - hrv
+        - glg
+        - ell
+        - nob
+        - tgk
+        - tel
+        - est
+        - mlg
+        - mlt
+        - que
+        - slv
+        - aze
+        - mri
+        - hsb
+        - kan
+        - lug
+        - pol
+        - smo
+        - zho
+        - ltz
+        - sna
+        - vie
+        - swe
+        - afr
+        - guj
+        - heb
+        - ckb
+        - mar
+        - sot
+        - tur
+        - kri
+        - pus
+        - por
+        - eus
+        - nya
+        - nld
+        - hun
+        - kaz
+        - tah
+        - yid
+        - deu
+        - ibo
+        - lav
+        - mon
+        - ukr
+        - aym
+        - gla
+        - tso
+        - yua
+        - fao
+        - ron
+        - tha
+        - ton
+        - zul
+        - jav
+        - pan
+        - srp
+        - yor
+        - isl
         - jpn
-        - mni
+        - otq
+        - tuk
         type: string
         x-nullable: true
         x-validation: true
@@ -1311,7 +1311,7 @@ definitions:
         x-validation: true
     type: object
   TermLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: sections
       uri: /v3.1/terms/4fee004cca2e43cf2700028b/sections
@@ -1376,7 +1376,7 @@ definitions:
         $ref: '#/definitions/Roles'
     type: object
   UserLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: schools
       uri: /v3.1/users/55417deec7f551010000000d/schools

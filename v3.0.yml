@@ -58,7 +58,7 @@ definitions:
         x-nullable: true
     type: object
   CourseLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: sections
       uri: /v3.0/courses/4fee004cca2e43cf2700028b/sections
@@ -186,7 +186,7 @@ definitions:
         x-validation: true
     type: object
   DistrictLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: self
       uri: /v3.0/districts/55417deec7f551010000000d
@@ -226,7 +226,7 @@ definitions:
         type: string
     type: object
   Link:
-    description: 'A relative path to the resource identified by `rel`, including the API version prefix. Param by `rel`: next=starting_after, prev=ending_before. Self is same as request.'
+    description: A link to a related page of results. `rel` identifies which page this is, and `uri` is the relative path to it (including the API version prefix). `next` corresponds to the `starting_after` parameter, `prev` to `ending_before`, and `self` repeats the current request.
     example:
       rel: next
       uri: /v3.0/users?starting_after=55417deec7f551010000000d
@@ -455,7 +455,7 @@ definitions:
         x-validation: true
     type: object
   SchoolLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: users
       uri: /v3.0/schools/55417deec7f551010000000d/users
@@ -593,7 +593,7 @@ definitions:
         x-validation: true
     type: object
   SectionLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: users
       uri: /v3.0/sections/55417deec7f551010000000d/users
@@ -872,7 +872,7 @@ definitions:
         x-validation: true
     type: object
   TermLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: sections
       uri: /v3.0/terms/4fee004cca2e43cf2700028b/sections
@@ -934,7 +934,7 @@ definitions:
         $ref: '#/definitions/Roles'
     type: object
   UserLink:
-    description: A relative path to the resource identified by `rel`, including the API version prefix.
+    description: A link to a related resource. `rel` identifies the relationship, and `uri` is the relative path to that resource (including the API version prefix).
     example:
       rel: schools
       uri: /v3.0/users/55417deec7f551010000000d/schools
